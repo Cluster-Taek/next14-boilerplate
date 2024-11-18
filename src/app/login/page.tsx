@@ -1,14 +1,9 @@
-import LoginForm from '@/components/login/login-form';
 import { sva } from '@/styled-system/css/sva.mjs';
 
 export default function Login() {
   const loginStyle = loginSva();
 
-  return (
-    <div className={loginStyle.wrapper}>
-      <LoginForm />
-    </div>
-  );
+  return <div className={loginStyle.wrapper}></div>;
 }
 
 const loginSva = sva({
