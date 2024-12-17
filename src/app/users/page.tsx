@@ -1,28 +1,34 @@
 'use client';
 
 import UserCreateForm from './user-create-form';
+import useModals from '@/hooks/use-modals';
 import { useUsers } from '@/lib/user';
 import { sva } from '@/styled-system/css';
 import { Box } from '@/styled-system/jsx';
-import { useState } from 'react';
 
 const Page = () => {
   const pageStyle = PageSva();
-  const [openForm, setOpenForm] = useState(false);
+  const { openModal } = useModals();
 
   const { data: users } = useUsers({
     _page: 1,
     _per_page: 10,
   });
 
+  const handleClickCreateButton = () => {
+    openModal({
+      id: 'user-create-form-modal',
+      component: <UserCreateForm />,
+    });
+  };
+
   return (
     <Box className={pageStyle.wrapper}>
       <Box className={pageStyle.title}>Users</Box>
       <Box>{users?.data.map((user) => <Box key={user.id}>{user.name}</Box>)}</Box>
-      <button className={pageStyle.button} onClick={() => setOpenForm(!openForm)}>
-        {openForm ? 'Close' : 'Create'}
+      <button className={pageStyle.button} onClick={handleClickCreateButton}>
+        Create
       </button>
-      {openForm && <UserCreateForm />}
     </Box>
   );
 };
