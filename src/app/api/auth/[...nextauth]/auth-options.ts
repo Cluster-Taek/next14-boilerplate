@@ -21,7 +21,7 @@ const credentialsProviderOption: CredentialsConfig = {
       // });
 
       // should be replaced with the above code
-      if (credentials?.email === 'test@gmail.com' && credentials?.password === '1234') {
+      if (credentials?.login === 'test@gmail.com' && credentials?.password === '1234') {
         const user = {
           name: 'John Doe',
           accessToken:

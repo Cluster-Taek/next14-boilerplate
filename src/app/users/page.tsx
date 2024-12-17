@@ -1,6 +1,8 @@
 'use client';
 
-import UserCreateForm from './user-create-form';
+import UserCreateFormModal from './user-create-form-modal';
+import Button from '@/components/common/button';
+import { MODAL } from '@/constants/modal-key-constants';
 import useModals from '@/hooks/use-modals';
 import { useUsers } from '@/lib/user';
 import { sva } from '@/styled-system/css';
@@ -17,18 +19,15 @@ const Page = () => {
 
   const handleClickCreateButton = () => {
     openModal({
-      id: 'user-create-form-modal',
-      component: <UserCreateForm />,
+      id: MODAL.USER_CREATE,
+      component: <UserCreateFormModal />,
     });
   };
 
   return (
     <Box className={pageStyle.wrapper}>
-      <Box className={pageStyle.title}>Users</Box>
-      <Box>{users?.data.map((user) => <Box key={user.id}>{user.name}</Box>)}</Box>
-      <button className={pageStyle.button} onClick={handleClickCreateButton}>
-        Create
-      </button>
+      <Box className={pageStyle.list}>{users?.data.map((user) => <Box key={user.id}>{user.name}</Box>)}</Box>
+      <Button onClick={handleClickCreateButton}>Create</Button>
     </Box>
   );
 };
@@ -36,14 +35,21 @@ const Page = () => {
 export default Page;
 
 const PageSva = sva({
-  slots: ['wrapper', 'title', 'form', 'input', 'button', 'error'],
+  slots: ['wrapper', 'list', 'form', 'input', 'error'],
   base: {
     wrapper: {
-      display: 'block',
+      display: 'flex',
+      width: 'full',
+      flexDirection: 'column',
+      alignItems: 'center',
+      justifyContent: 'center',
+      height: 'full',
     },
-    title: {
-      fontSize: '2xl',
-      fontWeight: 'bold',
+    list: {
+      width: 'full',
+      display: 'flex',
+      flexWrap: 'wrap',
+      gap: '4',
     },
     form: {
       width: 'full',
@@ -53,13 +59,6 @@ const PageSva = sva({
       width: 'full',
       padding: '2',
       marginTop: '2',
-    },
-    button: {
-      padding: '2',
-      marginTop: '4',
-      backgroundColor: '#111111',
-      color: 'white',
-      borderRadius: 'md',
     },
     error: {
       color: 'red',

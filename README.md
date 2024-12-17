@@ -10,6 +10,7 @@ This is a [Next.js](https://nextjs.org) boilerplate project bootstrapped with [`
 - [Tanstack Query](https://tanstack.com/query/latest)
 - [React Hook Form](https://react-hook-form.com)
 - [Motion](https://motion.dev)
+- [React Icons](https://react-icons.github.io/react-icons)
 
 ## Getting Started
 
@@ -18,6 +19,7 @@ First, run the development server:
 ```bash
 cp .env.example .env
 yarn install
+yarn prepare
 ```
 
 ```bash

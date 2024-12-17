@@ -1,10 +1,13 @@
 'use client';
 
+import Button from '@/components/common/button';
 import { useAuth } from '@/contexts/auth-provider';
-import { css } from '@/styled-system/css';
+import { sva } from '@/styled-system/css';
 import { signOut } from 'next-auth/react';
+import Link from 'next/link';
 
-export default function Home() {
+const Home = () => {
+  const homeStyle = HomeSva();
   const { session } = useAuth();
 
   const handleLogout = async () => {
@@ -12,11 +15,39 @@ export default function Home() {
   };
 
   return (
-    <div>
-      <div className={css({ fontSize: '2xl', fontWeight: 'bold' })}>Hello {session.user?.name}!</div>
-      <button onClick={handleLogout} className={css({ width: 'full' })}>
-        Logout
-      </button>
+    <div className={homeStyle.wrapper}>
+      <div className={homeStyle.profile}>Hello {session.user?.name}!</div>
+      <Link className={homeStyle.link} href="/users">
+        Go to Users
+      </Link>
+      <Button onClick={handleLogout}>Logout</Button>
     </div>
   );
-}
+};
+
+export default Home;
+
+const HomeSva = sva({
+  slots: ['wrapper', 'profile', 'link'],
+  base: {
+    wrapper: {
+      display: 'flex',
+      width: 'full',
+      flexDirection: 'column',
+      alignItems: 'center',
+      justifyContent: 'center',
+      height: 'full',
+      padding: 4,
+    },
+    profile: {
+      marginLeft: 'auto',
+      fontSize: 'xl',
+    },
+    link: {
+      color: 'primary.01',
+      '&:hover': {
+        color: 'primary.02',
+      },
+    },
+  },
+});

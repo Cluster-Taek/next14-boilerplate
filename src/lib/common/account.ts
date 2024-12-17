@@ -3,7 +3,6 @@ import { fetchApi } from '../base';
 export interface ILoginFormValue {
   login: string;
   password: string;
-  remember: boolean;
 }
 
 export interface INewPasswordFormValue {

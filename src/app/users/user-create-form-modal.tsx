@@ -1,19 +1,18 @@
+import Button from '@/components/common/button';
+import { MODAL } from '@/constants/modal-key-constants';
+import useModals from '@/hooks/use-modals';
 import { IUserCreateFormValue, useCreateUserMutation } from '@/lib/user';
 import { sva } from '@/styled-system/css';
 import { Controller, useForm } from 'react-hook-form';
 
-interface IUserCreateFormProps {
-  children?: React.ReactNode;
-}
-
-const UserCreateForm = ({ children }: IUserCreateFormProps) => {
-  const userCreateFormStyle = UserCreateFormSva();
+const UserCreateFormModal = () => {
+  const userCreateFormStyle = UserCreateFormModalSva();
+  const { closeModal } = useModals();
 
   const {
     handleSubmit: formHandleSubmit,
     formState,
     control,
-    reset,
     setError,
   } = useForm<IUserCreateFormValue>({
     defaultValues: {
@@ -26,7 +25,7 @@ const UserCreateForm = ({ children }: IUserCreateFormProps) => {
   const handleSubmit = formHandleSubmit(async (data) => {
     createUser(data, {
       onSuccess: () => {
-        reset();
+        closeModal(MODAL.USER_CREATE);
       },
       onError: (error) => {
         setError('name', {
@@ -48,33 +47,42 @@ const UserCreateForm = ({ children }: IUserCreateFormProps) => {
         )}
       />
       {formState.errors.name && <div className={userCreateFormStyle.error}>{formState.errors.name.message}</div>}
-      <button type="submit" className={userCreateFormStyle.button}>
-        Submit
-      </button>
+      <Button type="submit">Submit</Button>
     </form>
   );
 };
 
-export default UserCreateForm;
+export default UserCreateFormModal;
 
-const UserCreateFormSva = sva({
+const UserCreateFormModalSva = sva({
   slots: ['wrapper', 'input', 'button', 'error'],
   base: {
     wrapper: {
-      display: 'block',
+      display: 'flex',
+      flexDirection: 'column',
+      alignItems: 'center',
+      borderRadius: 'md',
+      shadow: 'md',
+      padding: '4',
+      width: 'sm',
+      margin: '0 auto',
+      backgroundColor: 'white',
     },
     input: {
       width: 'full',
       padding: '2',
       marginTop: '2',
-      backgroundColor: 'yellow.200',
     },
     button: {
+      width: 'full',
       padding: '2',
-      marginTop: '4',
-      backgroundColor: '#111111',
-      color: 'white',
+      marginY: '2',
       borderRadius: 'md',
+      backgroundColor: 'primary.01',
+      color: 'white',
+      '&:hover': {
+        backgroundColor: 'primary.02',
+      },
     },
     error: {
       color: 'red',
