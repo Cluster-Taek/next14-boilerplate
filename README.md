@@ -2,12 +2,13 @@ This is a [Next.js](https://nextjs.org) boilerplate project bootstrapped with [`
 
 ## Features
 
-- [x] [Next.js 14 (App Router)](https://nextjs.org)
-- [x] [TypeScript](https://www.typescriptlang.org)
-- [x] [Panda CSS](https://panda-css.com)
-- [x] [Auth.js](https://authjs.dev)
-- [x] [JSON Server](https://github.com/typicode/json-server)
-- [x] [Tanstack Query](https://tanstack.com/query/latest)
+- [Next.js 14 (App Router)](https://nextjs.org)
+- [TypeScript](https://www.typescriptlang.org)
+- [Panda CSS](https://panda-css.com)
+- [Auth.js](https://authjs.dev)
+- [JSON Server](https://github.com/typicode/json-server)
+- [Tanstack Query](https://tanstack.com/query/latest)
+- [React Hook Form](https://react-hook-form.com)
 
 ## Getting Started
 
