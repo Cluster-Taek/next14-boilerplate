@@ -3,7 +3,7 @@ import { getSession, signOut } from 'next-auth/react';
 import { redirect } from 'next/navigation';
 
 // eslint-disable-next-line @typescript-eslint/no-explicit-any
-const _fetchApi = async <T = any>(method: string, url: string, body?: Record<string, any>): Promise<T> => {
+const _fetchApi = async <T = object>(method: string, url: string, body?: Record<string, unknown>): Promise<T> => {
   const session = await getSession();
   const response = await axios({
     method,
@@ -26,11 +26,11 @@ const _fetchApi = async <T = any>(method: string, url: string, body?: Record<str
   return response?.data;
 };
 type FetchApi = {
-  post: <T = any>(url: string, body?: Record<string, any>) => Promise<T>;
-  get: <T = any>(url: string, params?: Record<string, any>) => Promise<T>;
-  patch: <T = any>(url: string, body?: Record<string, any>) => Promise<T>;
-  put: <T = any>(url: string, body?: Record<string, any>) => Promise<T>;
-  delete: <T = any>(url: string) => Promise<T>;
+  post: <T = object>(url: string, body?: Record<string, unknown>) => Promise<T>;
+  get: <T = object>(url: string, params?: Record<string, unknown>) => Promise<T>;
+  patch: <T = object>(url: string, body?: Record<string, unknown>) => Promise<T>;
+  put: <T = object>(url: string, body?: Record<string, unknown>) => Promise<T>;
+  delete: <T = object>(url: string) => Promise<T>;
 };
 
 export const fetchApi: FetchApi = {
