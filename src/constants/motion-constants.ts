@@ -3,7 +3,7 @@ import { HTMLMotionProps } from 'framer-motion';
 export type MotionType = 'SLIDE' | 'FADE' | 'POP' | 'DRAWER' | 'DROPDOWN';
 
 type IMotionConstants = {
-  [key in MotionType]: HTMLMotionProps<any>;
+  [key in MotionType]: HTMLMotionProps<'div'>;
 };
 
 export const MOTION: IMotionConstants = {

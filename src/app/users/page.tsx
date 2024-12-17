@@ -1,7 +1,7 @@
 'use client';
 
-import UserCreateFormModal from './user-create-form-modal';
 import Button from '@/components/common/button';
+import UserCreateFormModal from '@/components/user/user-create-form-modal';
 import { MODAL } from '@/constants/modal-key-constants';
 import useModals from '@/hooks/use-modals';
 import { useUsers } from '@/lib/user';
