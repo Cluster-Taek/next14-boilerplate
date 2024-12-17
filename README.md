@@ -1,36 +1,83 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+This is a [Next.js](https://nextjs.org) boilerplate project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+
+## Features
+
+- [Next.js 14 (App Router)](https://nextjs.org)
+- [TypeScript](https://www.typescriptlang.org)
+- [Panda CSS](https://panda-css.com)
+- [Auth.js](https://authjs.dev)
+- [JSON Server](https://github.com/typicode/json-server)
+- [Tanstack Query](https://tanstack.com/query/latest)
+- [React Hook Form](https://react-hook-form.com)
+- [Motion](https://motion.dev)
+- [React Icons](https://react-icons.github.io/react-icons)
 
 ## Getting Started
 
 First, run the development server:
 
 ```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
+cp .env.example .env
+yarn install
+yarn prepare
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+```bash
+yarn dev
+```
+
+(Optional) Run the server to get the data from the json-server:
+
+```bash
+yarn server
+```
+
+| Key                 | Description                          | Example                                                       |
+| ------------------- | ------------------------------------ | ------------------------------------------------------------- |
+| NEXTAUTH_URL        | Service URL (usually domain)         | http://localhost:4000                                         |
+| NEXTAUTH_SECRET     | Random secret key                    | [random secret in web](https://generate-secret.vercel.app/32) |
+| NEXT_PUBLIC_DOMAIN  | Domain                               | http://localhost:4000                                         |
+| NEXT_PUBLIC_API_URL | API URL (json-server url in example) | http://localhost:4001                                         |
+
+Open [http://localhost:4000](http://localhost:4000) with your browser to see the result.
 
 You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
 
 This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
 
-## Learn More
+## Project Structure
 
-To learn more about Next.js, take a look at the following resources:
+Refer to the [Next.js Best Practices](https://nextjs.org/docs/advanced-features/project-structure) for the project structure.
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+## VScode Snippets
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
+#### tsx
 
-## Deploy on Vercel
+```tsx
+import { sva } from '@/styled-system/css';
+import { Box } from '@/styled-system/jsx';
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+interface ITestProps {
+  children?: React.ReactNode;
+}
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+const Test = ({ children }: ITestProps) => {
+  const testStyle = TestSva();
+  return (
+    <Box className={testStyle.wrapper}>
+      <Box>{children}</Box>
+    </Box>
+  );
+};
+
+export default Test;
+
+const TestSva = sva({
+  slots: ['wrapper'],
+  base: {
+    wrapper: {
+      display: 'block',
+    },
+  },
+});
+```

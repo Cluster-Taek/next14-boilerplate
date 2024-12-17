@@ -1,95 +1,42 @@
-import { IError } from '@/types/error';
+import axios from 'axios';
 import { getSession, signOut } from 'next-auth/react';
 import { redirect } from 'next/navigation';
 
 // eslint-disable-next-line @typescript-eslint/no-explicit-any
-export const fetcher = async <T>(url: string, params?: Record<any, any>): Promise<T> => {
+const _fetchApi = async <T = any>(method: string, url: string, body?: Record<string, any>): Promise<T> => {
   const session = await getSession();
-
-  const fetchUrl = new URL(url, process.env.NEXT_PUBLIC_DOMAIN);
-  fetchUrl.search = new URLSearchParams(params).toString();
-
-  const response = await fetch(fetchUrl.toString(), {
-    headers: {
-      'Content-Type': 'application/json',
-      Authorization: `Bearer ${session?.user?.accessToken}`,
-    },
-  });
-
-  if (!response.ok) {
-    if (response.status === 401 && window.location.pathname !== '/login') {
-      await signOut();
-      redirect('/login');
-    }
-    return response.json().then((error: IError) => {
-      throw error;
-    });
-  }
-
-  return response.text().then(function (text) {
-    return text ? JSON.parse(text) : {};
-  });
-};
-
-// eslint-disable-next-line @typescript-eslint/no-explicit-any
-const _fetchApi = async (method: string, url: string, body?: Record<string, any>) => {
-  const session = await getSession();
-
-  const response = await fetch(`${process.env.NEXT_PUBLIC_DOMAIN}${url}`, {
+  const response = await axios({
     method,
+    url: url,
+    data: method !== 'GET' ? body : undefined,
+    params: method === 'GET' ? body : undefined,
     headers: {
       'Content-Type': 'application/json',
       Authorization: `Bearer ${session?.user?.accessToken}`,
     },
-    body: JSON.stringify(body),
-  });
-  if (!response.ok) {
+    withCredentials: true,
+  }).catch(async (error) => {
     if (response.status === 401 && window.location.pathname !== '/login') {
       await signOut();
       redirect('/login');
     }
-    return response.json().then((error: IError) => {
-      throw error;
-    });
-  }
-
-  return response.text().then(function (text) {
-    return text ? JSON.parse(text) : {};
+    throw error;
   });
+
+  return response?.data;
+};
+type FetchApi = {
+  post: <T = any>(url: string, body?: Record<string, any>) => Promise<T>;
+  get: <T = any>(url: string, params?: Record<string, any>) => Promise<T>;
+  patch: <T = any>(url: string, body?: Record<string, any>) => Promise<T>;
+  put: <T = any>(url: string, body?: Record<string, any>) => Promise<T>;
+  delete: <T = any>(url: string) => Promise<T>;
 };
 
-export const fetchApi = {
-  // eslint-disable-next-line @typescript-eslint/no-explicit-any
-  post: (url: string, body?: Record<string, any>) => _fetchApi('POST', url, body),
-  get: (url: string) => _fetchApi('GET', url),
-  // eslint-disable-next-line @typescript-eslint/no-explicit-any
-  patch: (url: string, body?: Record<string, any>) => _fetchApi('PATCH', url, body),
-  // eslint-disable-next-line @typescript-eslint/no-explicit-any
-  put: (url: string, body?: Record<string, any>) => _fetchApi('PUT', url, body),
-  delete: (url: string) => _fetchApi('DELETE', url),
-};
-
-export const uploadApi = async (url: string, body: FormData) => {
-  const session = await getSession();
-
-  const response = await fetch(`${process.env.NEXT_PUBLIC_DOMAIN}${url}`, {
-    method: 'POST',
-    headers: {
-      Authorization: `Bearer ${session?.user?.accessToken}`,
-    },
-    body,
-  });
-  if (!response.ok) {
-    if (response.status === 401 && window.location.pathname !== '/login') {
-      await signOut();
-      redirect('/login');
-    }
-    return response.json().then((error: IError) => {
-      throw error;
-    });
-  }
-
-  return response.text().then(function (text) {
-    return text ? JSON.parse(text) : {};
-  });
+export const fetchApi: FetchApi = {
+  post: (url, body) => _fetchApi('POST', url, body),
+  get: (url, params) => _fetchApi('GET', url, params),
+  patch: (url, body) => _fetchApi('PATCH', url, body),
+  put: (url, body) => _fetchApi('PUT', url, body),
+  delete: (url) => _fetchApi('DELETE', url),
 };

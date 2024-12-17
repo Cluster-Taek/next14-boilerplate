@@ -1,4 +1,5 @@
 import './globals.css';
+import Modal from '@/components/common/modal';
 import CoreProvider from '@/contexts/core-provider';
 import dayjs from 'dayjs';
 import 'dayjs/locale/ko';
@@ -26,7 +27,10 @@ export default function RootLayout({
   return (
     <html lang="en">
       <body className={`${pretendard.className} font-sans`}>
-        <CoreProvider>{children}</CoreProvider>
+        <CoreProvider>
+          {children}
+          <Modal />
+        </CoreProvider>
       </body>
     </html>
   );
