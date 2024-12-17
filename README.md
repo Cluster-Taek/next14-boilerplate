@@ -9,6 +9,7 @@ This is a [Next.js](https://nextjs.org) boilerplate project bootstrapped with [`
 - [JSON Server](https://github.com/typicode/json-server)
 - [Tanstack Query](https://tanstack.com/query/latest)
 - [React Hook Form](https://react-hook-form.com)
+- [Motion](https://motion.dev)
 
 ## Getting Started
 
