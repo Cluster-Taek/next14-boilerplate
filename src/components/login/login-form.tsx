@@ -1,31 +1,52 @@
 'use client';
 
+import Button from '@/components/common/button';
+import { ILoginFormValue } from '@/lib/common/account';
 import { sva } from '@/styled-system/css';
 import { Box } from '@/styled-system/jsx';
 import { signIn } from 'next-auth/react';
 import { useSearchParams } from 'next/navigation';
+import { Controller, useForm } from 'react-hook-form';
 
 const LoginForm = () => {
   const loginFormStyle = LoginFormSva();
   const searchParams = useSearchParams();
+  const {
+    handleSubmit: formHandleSubmit,
+    formState,
+    control,
+  } = useForm<ILoginFormValue>({
+    defaultValues: {
+      login: 'test@gmail.com',
+      password: '1234',
+    },
+  });
 
-  const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
-    e.preventDefault();
-    const formData = new FormData(e.currentTarget);
-    const email = formData.get('email') as string;
-    const password = formData.get('password') as string;
-    await signIn('login-credentials', { email, password, callbackUrl: searchParams.get('callbackUrl') ?? '/' });
-  };
+  const handleSubmit = formHandleSubmit(async (data) => {
+    await signIn('login-credentials', { ...data, callbackUrl: searchParams.get('callbackUrl') ?? '/' });
+  });
 
   return (
     <Box className={loginFormStyle.wrapper}>
       <Box className={loginFormStyle.title}>Login</Box>
       <form className={loginFormStyle.form} onSubmit={handleSubmit}>
-        <input type="text" className={loginFormStyle.input} name="email" defaultValue={'test@gmail.com'} />
-        <input type="password" className={loginFormStyle.input} name="password" defaultValue={'1234'} />
-        <button type="submit" className={loginFormStyle.button}>
-          Submit
-        </button>
+        <Controller
+          control={control}
+          name="login"
+          rules={{ required: 'Email is required' }}
+          render={({ field }) => <input type="text" {...field} className={loginFormStyle.input} placeholder="email" />}
+        />
+        {formState.errors.login && <Box className={loginFormStyle.error}>{formState.errors.login.message}</Box>}
+        <Controller
+          control={control}
+          name="password"
+          rules={{ required: 'Password is required' }}
+          render={({ field }) => (
+            <input type="password" {...field} className={loginFormStyle.input} placeholder="password" />
+          )}
+        />
+        {formState.errors.password && <Box className={loginFormStyle.error}>{formState.errors.password.message}</Box>}
+        <Button type="submit">Submit</Button>
       </form>
       {searchParams.get('error') === 'CredentialsSignin' && (
         <Box>
@@ -39,7 +60,7 @@ const LoginForm = () => {
 export default LoginForm;
 
 const LoginFormSva = sva({
-  slots: ['wrapper', 'title', 'form', 'input', 'button', 'error'],
+  slots: ['wrapper', 'title', 'form', 'input', 'error'],
   base: {
     wrapper: {
       display: 'flex',
@@ -65,14 +86,6 @@ const LoginFormSva = sva({
       padding: '2',
       borderRadius: 'md',
       border: '1',
-    },
-    button: {
-      width: 'full',
-      padding: '2',
-      marginY: '2',
-      borderRadius: 'md',
-      backgroundColor: 'blue.500',
-      color: 'white',
     },
     error: {
       color: 'red.500',

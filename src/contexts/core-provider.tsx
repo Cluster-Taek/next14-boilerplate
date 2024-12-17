@@ -1,4 +1,6 @@
 import AuthProvider from './auth-provider';
+import ModalProvider from './modal-provider';
+import { QueryProvider } from './query-provider';
 import SessionProvider from '@/contexts/session-provider';
 
 interface ICoreProviderProps {
@@ -8,7 +10,11 @@ interface ICoreProviderProps {
 const CoreProvider = ({ children }: ICoreProviderProps) => {
   return (
     <SessionProvider>
-      <AuthProvider>{children}</AuthProvider>
+      <AuthProvider>
+        <QueryProvider>
+          <ModalProvider>{children}</ModalProvider>
+        </QueryProvider>
+      </AuthProvider>
     </SessionProvider>
   );
 };
