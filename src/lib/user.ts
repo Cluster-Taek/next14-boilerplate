@@ -9,7 +9,7 @@ export interface IUsersParams {
   _per_page: number;
 }
 
-export interface IUserCreateFormValue {
+export interface IUserCreateFormValue extends Record<string, unknown> {
   name: string;
 }
 

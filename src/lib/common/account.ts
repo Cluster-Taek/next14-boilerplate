@@ -1,11 +1,11 @@
 import { fetchApi } from '../base';
 
-export interface ILoginFormValue {
+export interface ILoginFormValue extends Record<string, unknown> {
   login: string;
   password: string;
 }
 
-export interface INewPasswordFormValue {
+export interface INewPasswordFormValue extends Record<string, unknown> {
   login: string;
   newPassword: string;
   code: string;
