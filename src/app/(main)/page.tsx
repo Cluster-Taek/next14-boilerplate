@@ -1,7 +1,7 @@
 'use client';
 
-import Button from '@/components/common/button';
 import { useAuth } from '@/contexts/auth-provider';
+import { Button } from '@medusajs/ui';
 import { signOut } from 'next-auth/react';
 import Link from 'next/link';
 

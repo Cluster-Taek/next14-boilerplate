@@ -1,10 +1,10 @@
 'use client';
 
-import Button from '@/components/common/button';
 import UserCreateFormModal from '@/components/user/user-create-form-modal';
 import { MODAL } from '@/constants/modal-key-constants';
 import useModals from '@/hooks/use-modals';
 import { useUsers } from '@/lib/user';
+import { Button } from '@medusajs/ui';
 
 const Page = () => {
   const { openModal } = useModals();

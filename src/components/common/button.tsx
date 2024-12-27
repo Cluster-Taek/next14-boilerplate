@@ -1,3 +1,4 @@
+import { Button as MedusaButton } from '@medusajs/ui';
 import { ButtonHTMLAttributes, DetailedHTMLProps } from 'react';
 
 const Button = ({
@@ -5,9 +6,9 @@ const Button = ({
   ...props
 }: DetailedHTMLProps<ButtonHTMLAttributes<HTMLButtonElement>, HTMLButtonElement>) => {
   return (
-    <button className="w-full p-2 my-2 rounded-md bg-primary-01 text-white hover:bg-primary-02" {...props}>
+    <MedusaButton className="w-full p-2 my-2 rounded-md bg-primary-01 text-white hover:bg-primary-02" {...props}>
       {children}
-    </button>
+    </MedusaButton>
   );
 };
 

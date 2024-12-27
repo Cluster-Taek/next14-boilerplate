@@ -1,7 +1,7 @@
 'use client';
 
-import Button from '@/components/common/button';
 import { ILoginFormValue } from '@/lib/common/account';
+import { Button } from '@medusajs/ui';
 import { signIn } from 'next-auth/react';
 import { useSearchParams } from 'next/navigation';
 import { Controller, useForm } from 'react-hook-form';
