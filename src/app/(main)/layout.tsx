@@ -1,4 +1,5 @@
 import { MainLayout } from '@/components/layout/main-layout';
+import { SidebarProvider } from '@/contexts/sidebar-provider';
 
 interface ILayoutProps {
   children?: React.ReactNode;
@@ -6,10 +7,9 @@ interface ILayoutProps {
 
 const Layout = ({ children }: ILayoutProps) => {
   return (
-    <div className="flex flex-row">
-      <MainLayout />
-      <div>{children}</div>
-    </div>
+    <SidebarProvider>
+      <MainLayout>{children}</MainLayout>
+    </SidebarProvider>
   );
 };
 

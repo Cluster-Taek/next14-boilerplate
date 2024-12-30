@@ -1,11 +1,11 @@
 'use client';
 
 import { INavItem, NavItem } from '../nav-item';
+import { Shell } from '../shell';
 import { Divider } from '@/components/common/divider';
 import { Skeleton } from '@/components/common/skeleton';
 import {
   BuildingStorefront,
-  Buildings,
   CogSixTooth,
   CurrencyDollar,
   EllipsisHorizontal,
@@ -18,13 +18,10 @@ import {
 import { Avatar, DropdownMenu, Text, clx } from '@medusajs/ui';
 import { signOut } from 'next-auth/react';
 import Link from 'next/link';
+import { PropsWithChildren } from 'react';
 
-export const MainLayout = () => {
-  return (
-    <div className="hidden h-screen w-[220px] border-r lg:flex">
-      <MainSidebar />
-    </div>
-  );
+export const MainLayout = ({ children }: PropsWithChildren) => {
+  return <Shell sidebar={<MainSidebar />}>{children}</Shell>;
 };
 
 const MainSidebar = () => {

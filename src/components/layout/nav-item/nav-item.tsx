@@ -30,7 +30,7 @@ const getIsOpen = (to: string, items: NestedItemProps[] | undefined, pathname: s
   return [to, ...(items?.map((i) => i.to) ?? [])].some((p) => pathname.startsWith(p));
 };
 
-export const NavItem = ({ icon, label, to, items, type = 'core', from }: INavItem) => {
+export const NavItem = ({ icon, label, to, items, type = 'core' }: INavItem) => {
   const pathname = usePathname();
   const [open, setOpen] = useState(getIsOpen(to, items, pathname));
 
