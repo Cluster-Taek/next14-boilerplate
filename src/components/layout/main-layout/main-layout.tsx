@@ -5,17 +5,20 @@ import { Shell } from '../shell';
 import { Divider } from '@/components/common/divider';
 import { Skeleton } from '@/components/common/skeleton';
 import {
+  BellAlert,
   BuildingStorefront,
+  Buildings,
+  ChevronDownMini,
   CogSixTooth,
   CurrencyDollar,
   EllipsisHorizontal,
+  Lifebuoy,
+  MinusMini,
   OpenRectArrowOut,
-  ReceiptPercent,
-  ShoppingCart,
-  Tag,
   Users,
 } from '@medusajs/icons';
 import { Avatar, DropdownMenu, Text, clx } from '@medusajs/ui';
+import * as Collapsible from '@radix-ui/react-collapsible';
 import { signOut } from 'next-auth/react';
 import Link from 'next/link';
 import { PropsWithChildren } from 'react';
@@ -36,7 +39,10 @@ const MainSidebar = () => {
         </div>
         <div className="flex flex-col justify-between flex-1">
           <div className="flex flex-col flex-1">
-            <CoreRouteSection />
+            {/* <CoreRouteSection /> */}
+            <NotificationRouteSection />
+            <InfluencerRouteSection />
+            <EventRouteSection />
           </div>
           <UtilitySection />
         </div>
@@ -118,73 +124,161 @@ const Header = () => {
   );
 };
 
-const useCoreRoutes = (): Omit<INavItem, 'pathname'>[] => {
+// const useCoreRoutes = (): Omit<INavItem, 'pathname'>[] => {
+//   return [];
+// };
+
+const useNotificationRoutes = (): Omit<INavItem, 'pathname'>[] => {
   return [
     {
-      icon: <Users />,
-      label: 'Users',
-      to: '/users',
-    },
-    {
-      icon: <ShoppingCart />,
-      label: 'Orders',
-      to: '/orders',
-      items: [
-        // TODO: Enable when domin is introduced
-        // {
-        //   label: t("draftOrders.domain"),
-        //   to: "/draft-orders",
-        // },
-      ],
-    },
-    {
-      icon: <Tag />,
-      label: 'Products',
-      to: '/products',
-      items: [
-        {
-          label: 'Collections',
-          to: '/collections',
-        },
-        {
-          label: 'Categories',
-          to: '/categories',
-        },
-        // TODO: Enable when domin is introduced
-        // {
-        //   label: t("giftCards.domain"),
-        //   to: "/gift-cards",
-        // },
-      ],
-    },
-    {
-      icon: <ReceiptPercent />,
-      label: 'Promotions',
-      to: '/promotions',
-      items: [
-        {
-          label: 'Campaigns',
-          to: '/campaigns',
-        },
-      ],
-    },
-    {
-      icon: <CurrencyDollar />,
-      label: 'Price lists',
-      to: '/price-lists',
+      icon: <BellAlert />,
+      label: '알림',
+      to: '/notifications',
     },
   ];
 };
 
-const CoreRouteSection = () => {
-  const coreRoutes = useCoreRoutes();
+const useInfluencerRoutes = (): Omit<INavItem, 'pathname'>[] => {
+  return [
+    {
+      icon: <Buildings />,
+      label: '인플루언서 찾기',
+      to: '/influencers',
+    },
+    {
+      icon: <Users />,
+      label: '셀러브리티 찾기',
+      to: '/celebrities',
+    },
+  ];
+};
+
+const useEventRoutes = (): Omit<INavItem, 'pathname'>[] => {
+  return [
+    {
+      icon: <Lifebuoy />,
+      label: '이벤트 관리',
+      to: '/events',
+    },
+    {
+      icon: <CurrencyDollar />,
+      label: '정산 관리',
+      to: '/settlements',
+    },
+  ];
+};
+
+// const CoreRouteSection = () => {
+//   const coreRoutes = useCoreRoutes();
+
+//   return (
+//     <nav className="flex flex-col py-3 gap-y-1">
+//       {coreRoutes.map((route) => {
+//         return <NavItem key={route.to} {...route} />;
+//       })}
+//     </nav>
+//   );
+// };
+
+const NotificationRouteSection = () => {
+  const notificationRoutes = useNotificationRoutes();
 
   return (
-    <nav className="flex flex-col py-3 gap-y-1">
-      {coreRoutes.map((route) => {
-        return <NavItem key={route.to} {...route} />;
-      })}
-    </nav>
+    <div>
+      <div className="flex flex-col py-3 gap-y-1">
+        <Collapsible.Root defaultOpen>
+          <div className="px-4">
+            <Collapsible.Trigger asChild className="group/trigger">
+              <button className="flex items-center justify-between w-full px-2 text-ui-fg-subtle">
+                <Text size="xsmall" weight="plus" leading="compact">
+                  알림
+                </Text>
+                <div className="text-ui-fg-muted">
+                  <ChevronDownMini className="group-data-[state=open]/trigger:hidden" />
+                  <MinusMini className="group-data-[state=closed]/trigger:hidden" />
+                </div>
+              </button>
+            </Collapsible.Trigger>
+          </div>
+          <Collapsible.Content>
+            <nav className="flex flex-col py-3 gap-y-1">
+              {notificationRoutes.map((route) => {
+                return <NavItem key={route.to} {...route} />;
+              })}
+            </nav>
+          </Collapsible.Content>
+        </Collapsible.Root>
+      </div>
+    </div>
+  );
+};
+
+const InfluencerRouteSection = () => {
+  const influencerRoutes = useInfluencerRoutes();
+
+  return (
+    <div>
+      <div className="flex flex-col py-[5px] gap-y-1">
+        <Collapsible.Root defaultOpen>
+          <div className="px-4">
+            <Collapsible.Trigger asChild className="group/trigger">
+              <button className="flex items-center justify-between w-full px-2 text-ui-fg-subtle">
+                <Text size="xsmall" weight="plus" leading="compact">
+                  인플루언서
+                </Text>
+                <div className="text-ui-fg-muted">
+                  <ChevronDownMini className="group-data-[state=open]/trigger:hidden" />
+                  <MinusMini className="group-data-[state=closed]/trigger:hidden" />
+                </div>
+              </button>
+            </Collapsible.Trigger>
+          </div>
+          <Collapsible.Content>
+            <nav className="flex flex-col py-[5px] gap-y-1">
+              {influencerRoutes.map((route) => {
+                return <NavItem key={route.to} {...route} />;
+              })}
+            </nav>
+          </Collapsible.Content>
+        </Collapsible.Root>
+      </div>
+    </div>
+  );
+};
+
+const EventRouteSection = () => {
+  const eventRoutes = useEventRoutes();
+
+  return (
+    <div>
+      <div className="flex flex-col py-3 gap-y-1">
+        <Collapsible.Root defaultOpen>
+          <div className="px-4">
+            <Collapsible.Trigger asChild className="group/trigger">
+              <button className="flex items-center justify-between w-full px-2 text-ui-fg-subtle">
+                <Text size="xsmall" weight="plus" leading="compact">
+                  이벤트
+                </Text>
+                <div className="text-ui-fg-muted">
+                  <ChevronDownMini className="group-data-[state=open]/trigger:hidden" />
+                  <MinusMini className="group-data-[state=closed]/trigger:hidden" />
+                </div>
+              </button>
+            </Collapsible.Trigger>
+          </div>
+          <Collapsible.Content>
+            <nav className="flex flex-col py-3 gap-y-1">
+              {eventRoutes.map((route) => {
+                return <NavItem key={route.to} {...route} />;
+              })}
+            </nav>
+          </Collapsible.Content>
+        </Collapsible.Root>
+      </div>
+      <div className="px-3">
+        <Divider variant="dashed" />
+      </div>
+    </div>
   );
 };
 

@@ -12,6 +12,7 @@
   },
   "dependencies": {
     "@medusajs/ui": "^4.0.2",
+    "@radix-ui/react-collapsible": "^1.1.2",
     "@tanstack/react-query": "^5.62.7",
     "@uiw/react-json-view": "^2.0.0-alpha.30",
     "axios": "^1.7.9",
