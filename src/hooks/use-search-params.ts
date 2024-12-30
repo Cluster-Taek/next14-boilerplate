@@ -26,7 +26,7 @@ export const useSearchParams = () => {
         router.push(url);
       }
     },
-    []
+    [router, pathname, searchParams]
   );
 
   const resetSearchParams = useCallback(() => {

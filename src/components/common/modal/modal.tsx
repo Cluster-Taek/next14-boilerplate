@@ -6,7 +6,7 @@ import useModals from '@/hooks/use-modals';
 import { motion } from 'motion/react';
 import { useContext, useEffect } from 'react';
 
-const Modal = () => {
+export const Modal = () => {
   const { openedModals } = useContext(ModalContext);
   const { closeModal } = useModals();
 
@@ -37,5 +37,3 @@ const Modal = () => {
     </>
   );
 };
-
-export default Modal;

@@ -1,6 +1,6 @@
 'use client';
 
-import Spinner from '@/components/common/spinner';
+import { Spinner } from '@/components/common/spinner';
 import { Session } from 'next-auth';
 import { useSession } from 'next-auth/react';
 import { usePathname, useRouter } from 'next/navigation';

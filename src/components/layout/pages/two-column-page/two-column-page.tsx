@@ -1,8 +1,8 @@
-import { JsonViewSection } from '../../../common/json-view-section';
-import { MetadataSection } from '../../../common/metadata-section';
 import { PageProps } from '../types';
+import { JsonViewSection } from '@/components/common/json-view-section';
+import { MetadataSection } from '@/components/common/metadata-section';
 import { clx } from '@medusajs/ui';
-import { Children, ComponentPropsWithoutRef, ComponentType } from 'react';
+import { Children, ComponentPropsWithoutRef } from 'react';
 
 const Root = <TData,>({
   children,
@@ -19,8 +19,6 @@ const Root = <TData,>({
    */
   showMetadata = false,
 }: PageProps<TData>) => {
-  const widgetProps = { data };
-
   if (showJSON && !data) {
     if (process.env.NODE_ENV === 'development') {
       console.warn('`showJSON` is true but no data is provided. To display JSON, provide data prop.');
