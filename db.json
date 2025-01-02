@@ -8,5 +8,39 @@
       "id": 2,
       "name": "Jane Doe"
     }
+  ],
+  "influencers": [
+    {
+      "id": "1",
+      "snsId": "@johndoe",
+      "name": "John Doe",
+      "type": "INFLUENCER",
+      "category": "Fitness",
+      "gender": "M",
+      "followers": 150000,
+      "birthDate": "1990-01-15T00:00:00Z",
+      "project": "Summer Body Campaign",
+      "memo": "Focuses on fitness tips and workout routines.",
+      "amount": 5000,
+      "createdAt": "2024-12-30T12:00:00+00:00",
+      "updatedAt": "2024-12-31T15:30:00+00:00",
+      "createdBy": "admin"
+    },
+    {
+      "id": "2",
+      "snsId": "@janedoe",
+      "name": "Jane Doe",
+      "type": "CELEBRITY",
+      "category": "Fashion",
+      "gender": "F",
+      "followers": 1200000,
+      "birthDate": "1985-05-20T00:00:00Z",
+      "project": "Luxury Winter Collection",
+      "memo": "Promotes high-end fashion and lifestyle products.",
+      "amount": 20000,
+      "createdAt": "2024-12-29T09:00:00+00:00",
+      "updatedAt": "2024-12-31T18:00:00+00:00",
+      "createdBy": "editor"
+    }
   ]
 }
