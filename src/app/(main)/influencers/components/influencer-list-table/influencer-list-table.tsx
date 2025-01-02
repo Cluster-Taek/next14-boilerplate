@@ -1,6 +1,7 @@
 'use client';
 
 import { Table } from '@/components/common/table';
+import useExcel from '@/hooks/use-excel';
 import { useDeleteInfluencerMutation, useInfluencers } from '@/lib/influencer';
 import { Gender, IInfluencer } from '@/types/influencer';
 import { numberToKorean } from '@/utils/utils';
@@ -15,6 +16,7 @@ const PAGE_SIZE = 10;
 export const InfluencerListTable = () => {
   const router = useRouter();
   const dialog = usePrompt();
+  const { getSheet } = useExcel();
   const [currentPage, setCurrentPage] = useState(0);
   const { data, isError, error } = useInfluencers({
     _page: 1,
@@ -55,6 +57,17 @@ export const InfluencerListTable = () => {
     }
   };
 
+  const handleClickDownload = async () => {
+    const influencers = data?.data ?? [];
+
+    await getSheet({
+      data: influencers,
+      fileName: '인플루언서 목록.xlsx',
+      sheetName: '인플루언서 목록',
+      rowWidth: [20, 20, 20, 20, 20, 20, 20, 20],
+    });
+  };
+
   return (
     <Container className="divide-y p-0 w-full">
       <div className="flex items-center justify-between px-6 py-4">
@@ -70,7 +83,7 @@ export const InfluencerListTable = () => {
             <CloudArrowUp />
             리스트 업로드
           </Button>
-          <Button size="small" variant="secondary">
+          <Button size="small" variant="secondary" onClick={handleClickDownload}>
             <CloudArrowDown />
             리스트 다운로드
           </Button>
