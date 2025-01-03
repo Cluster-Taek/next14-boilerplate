@@ -1,10 +1,9 @@
 import { PageProps } from '../types';
 import { JsonViewSection } from '@/components/common/json-view-section';
 import { MetadataSection } from '@/components/common/metadata-section';
-import { clx } from '@medusajs/ui';
-import { Children, ComponentPropsWithoutRef } from 'react';
+import { Children } from 'react';
 
-const Root = <TData,>({
+export const TwoColumnPage = <TData,>({
   children,
   /**
    * Widgets to be rendered in the main content area and sidebar.
@@ -41,23 +40,23 @@ const Root = <TData,>({
     throw new Error('TwoColumnPage expects exactly two children');
   }
 
-  const [main, sidebar] = childrenArray;
+  const [sidebar, main] = childrenArray;
   const showExtraData = showJSON || showMetadata;
 
   return (
-    <div className="flex w-full flex-col gap-y-3">
-      <div className="flex w-full flex-col items-start gap-x-4 gap-y-3 xl:grid xl:grid-cols-[minmax(0,_1fr)_440px]">
-        <div className="flex w-full min-w-0 flex-col gap-y-3">
-          {main}
+    <div className="flex flex-col w-full gap-y-3">
+      <div className="flex w-full flex-col items-start gap-x-4 gap-y-3 xl:grid xl:grid-cols-[400px_minmax(0,_1fr)]">
+        <div className="flex flex-col w-full min-w-0 gap-y-3">
+          {sidebar}
           {showExtraData && (
-            <div className="hidden flex-col gap-y-3 xl:flex">
+            <div className="flex-col hidden gap-y-3 xl:flex">
               {showMetadata && <MetadataSection data={data!} />}
               {showJSON && <JsonViewSection data={data!} />}
             </div>
           )}
         </div>
-        <div className="flex w-full flex-col gap-y-3 xl:mt-0">
-          {sidebar}
+        <div className="flex flex-col w-full gap-y-3 xl:mt-0">
+          {main}
           {showExtraData && (
             <div className="flex flex-col gap-y-3 xl:hidden">
               {showMetadata && <MetadataSection data={data!} />}
@@ -69,21 +68,3 @@ const Root = <TData,>({
     </div>
   );
 };
-
-const Main = ({ children, className, ...props }: ComponentPropsWithoutRef<'div'>) => {
-  return (
-    <div className={clx('flex w-full flex-col gap-y-3', className)} {...props}>
-      {children}
-    </div>
-  );
-};
-
-const Sidebar = ({ children, className, ...props }: ComponentPropsWithoutRef<'div'>) => {
-  return (
-    <div className={clx('flex w-full max-w-[100%] flex-col gap-y-3 xl:mt-0 xl:max-w-[440px]', className)} {...props}>
-      {children}
-    </div>
-  );
-};
-
-export const TwoColumnPage = Object.assign(Root, { Main, Sidebar });

@@ -1,3 +1,5 @@
+'use client';
+
 import { ArrowUpRightOnBox, Check, SquareTwoStack, TriangleDownMini, XMarkMini } from '@medusajs/icons';
 import { Badge, Container, Drawer, Heading, IconButton, Kbd } from '@medusajs/ui';
 import Primitive from '@uiw/react-json-view';
@@ -26,7 +28,7 @@ export const JsonViewSection = ({ data }: JsonViewSectionProps) => {
           </IconButton>
         </Drawer.Trigger>
         <Drawer.Content className="bg-ui-contrast-bg-base text-ui-code-fg-subtle !shadow-elevation-commandbar overflow-hidden border border-none max-md:inset-x-2 max-md:max-w-[calc(100%-16px)]">
-          <div className="bg-ui-code-bg-base flex items-center justify-between px-6 py-4">
+          <div className="flex items-center justify-between px-6 py-4 bg-ui-code-bg-base">
             <div className="flex items-center gap-x-4">
               <Drawer.Title asChild>
                 <Heading className="text-ui-contrast-fg-primary">{numberOfKeys} keys</Heading>
@@ -50,7 +52,7 @@ export const JsonViewSection = ({ data }: JsonViewSectionProps) => {
           </div>
           <Drawer.Body className="flex flex-1 flex-col overflow-hidden px-[5px] py-0 pb-[5px]">
             <div className="bg-ui-contrast-bg-subtle flex-1 overflow-auto rounded-b-[4px] rounded-t-lg p-3">
-              <Suspense fallback={<div className="flex size-full flex-col"></div>}>
+              <Suspense fallback={<div className="flex flex-col size-full"></div>}>
                 <Primitive
                   value={data}
                   displayDataTypes={false}
@@ -84,7 +86,7 @@ export const JsonViewSection = ({ data }: JsonViewSectionProps) => {
                   <Primitive.CountInfo
                     render={(_props, { value }) => {
                       return (
-                        <span className="text-ui-contrast-fg-secondary ml-2">
+                        <span className="ml-2 text-ui-contrast-fg-secondary">
                           {Object.keys(value as object).length}{' '}
                           {Object.keys(value as object).length === 1 ? 'item' : 'items'}
                         </span>

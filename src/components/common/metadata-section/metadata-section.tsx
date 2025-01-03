@@ -1,3 +1,5 @@
+'use client';
+
 import { ArrowUpRightOnBox } from '@medusajs/icons';
 import { Badge, Container, Heading, IconButton } from '@medusajs/ui';
 import Link from 'next/link';

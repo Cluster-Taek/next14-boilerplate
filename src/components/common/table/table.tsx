@@ -2,6 +2,7 @@ import { ExclamationCircle } from '@medusajs/icons';
 import { Checkbox, Table as UiTable } from '@medusajs/ui';
 import { useEffect, useMemo, useState } from 'react';
 
+// eslint-disable-next-line
 interface ObjectWithId extends Object {
   id: React.Key;
 }
@@ -11,13 +12,14 @@ interface TableProps<T extends ObjectWithId> {
     label?: string;
     width?: string;
     align?: 'left' | 'right' | 'center';
-    render?: (value: T[keyof T], item: T) => React.ReactNode;
+    // eslint-disable-next-line @typescript-eslint/no-explicit-any
+    render?: (value: any, item: T) => React.ReactNode;
   }[];
   data: T[];
-  pageSize: number;
-  count: number;
-  currentPage: number;
-  setCurrentPage: (value: number) => void;
+  pageSize?: number;
+  count?: number;
+  currentPage?: number;
+  setCurrentPage?: (value: number) => void;
   onClickRow?: (item: T) => void;
   selectable?: boolean;
   defaultSelected?: T[];
@@ -27,9 +29,9 @@ interface TableProps<T extends ObjectWithId> {
 export const Table = <T extends ObjectWithId>({
   columns,
   data,
-  pageSize,
-  count,
-  currentPage,
+  pageSize = 10,
+  count = data.length,
+  currentPage = 0,
   setCurrentPage,
   onClickRow,
   selectable,
@@ -37,26 +39,28 @@ export const Table = <T extends ObjectWithId>({
   onSelectChange,
 }: TableProps<T>) => {
   const [selected, setSelected] = useState<T[]>([]);
+
   const pageCount = useMemo(() => {
     return Math.ceil(count / pageSize);
-  }, [data, pageSize]);
+  }, [count, pageSize]);
 
   const canNextPage = useMemo(() => {
     return currentPage < pageCount - 1;
   }, [currentPage, pageCount]);
+
   const canPreviousPage = useMemo(() => {
     return currentPage - 1 >= 0;
   }, [currentPage]);
 
   const nextPage = () => {
     if (canNextPage) {
-      setCurrentPage(currentPage + 1);
+      setCurrentPage?.(currentPage + 1);
     }
   };
 
   const previousPage = () => {
     if (canPreviousPage) {
-      setCurrentPage(currentPage - 1);
+      setCurrentPage?.(currentPage - 1);
     }
   };
 
@@ -66,7 +70,7 @@ export const Table = <T extends ObjectWithId>({
 
   useEffect(() => {
     onSelectChange?.(selected);
-  }, [selected]);
+  }, [selected, onSelectChange]);
 
   return (
     <div className="flex h-full flex-col overflow-hidden !border-t-0">
@@ -134,7 +138,7 @@ export const Table = <T extends ObjectWithId>({
                     }}
                   >
                     <>
-                      {column.render && column.render(item[column.key] as any, item)}
+                      {column.render && column.render(item[column.key] as unknown, item)}
                       {!column.render && <>{item[column.key] as string}</>}
                     </>
                   </UiTable.Cell>

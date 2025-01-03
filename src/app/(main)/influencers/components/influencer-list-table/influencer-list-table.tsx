@@ -3,6 +3,7 @@
 import { Table } from '@/components/common/table';
 import useExcel from '@/hooks/use-excel';
 import { useDeleteInfluencerMutation, useInfluencers } from '@/lib/influencer';
+import { ISODateString } from '@/types/common';
 import { Gender, IInfluencer } from '@/types/influencer';
 import { numberToKorean } from '@/utils/utils';
 import { Check, CloudArrowDown, CloudArrowUp } from '@medusajs/icons';
@@ -69,7 +70,7 @@ export const InfluencerListTable = () => {
   };
 
   return (
-    <Container className="divide-y p-0 w-full">
+    <Container className="w-full p-0 divide-y">
       <div className="flex items-center justify-between px-6 py-4">
         <Text className="text-ui-fg-subtle" size="small">
           총 {data?.items}명의 인플루언서를 찾았습니다.
@@ -98,7 +99,7 @@ export const InfluencerListTable = () => {
           {
             key: 'category',
             label: '카테고리',
-            render: (value: any) => {
+            render: (value: string) => {
               return (
                 <Badge size="2xsmall" color="purple">
                   {value}
@@ -109,43 +110,40 @@ export const InfluencerListTable = () => {
           {
             key: 'gender',
             label: '성별',
-            render: (value: any) => {
+            render: (value: Gender) => {
               return getGender(value);
             },
           },
           {
             key: 'birthDate',
             label: '연령대',
-            render: (value: any) => {
+            render: (value: ISODateString) => {
               return getAgeGeneration(value);
             },
           },
           {
             key: 'followers',
             label: '팔로워 수',
-            render: (value: any) => {
+            render: (value: number) => {
               return numberToKorean(value);
             },
           },
           {
             key: 'project',
             label: '프로젝트',
-            render: (value: any) => {
-              return value;
-            },
           },
           {
             key: 'amount',
             label: '원고료',
-            render: (value: any) => {
+            render: (value: number) => {
               return `${numberToKorean(value)}원`;
             },
           },
           {
             key: 'id',
-            render: (_value: any, item: IInfluencer) => {
+            render: (_value: React.Key, item: IInfluencer) => {
               return (
-                <div className="flex flex-row justify-end gap-3 w-full">
+                <div className="flex flex-row justify-end w-full gap-3">
                   <Button size="small" variant="secondary" onClick={(e) => handleClickEdit(e, item.id)}>
                     수정
                   </Button>

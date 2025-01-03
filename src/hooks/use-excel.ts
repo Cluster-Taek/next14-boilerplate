@@ -2,6 +2,7 @@ import * as Excel from 'exceljs';
 import { saveAs } from 'file-saver';
 
 interface IGetSheetProps {
+  // eslint-disable-next-line
   data: Object[];
   fileName?: string;
   sheetName?: string;
@@ -42,7 +43,7 @@ const useExcel = () => {
     data.forEach((row) => {
       const dataRow = sheet.addRow(Object.values(row));
       dataRow.height = 20;
-      dataRow.eachCell((cell, colNum) => {
+      dataRow.eachCell((cell) => {
         cell.alignment = { vertical: 'middle', horizontal: 'center' };
         cell.font = { size: 12 };
       });
