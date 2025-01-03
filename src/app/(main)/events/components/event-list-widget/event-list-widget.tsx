@@ -1,7 +1,7 @@
 'use client';
 
 import { Table } from '@/components/common/table';
-import { useEvents } from '@/lib/\bevent';
+import { useEvents } from '@/lib/event';
 import { ISODateString } from '@/types/common';
 import { IEvent } from '@/types/event';
 import { Plus } from '@medusajs/icons';
