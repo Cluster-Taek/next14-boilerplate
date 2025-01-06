@@ -1,3 +1,5 @@
+'use client';
+
 import { Text, clx } from '@medusajs/ui';
 import * as Collapsible from '@radix-ui/react-collapsible';
 import Link from 'next/link';
@@ -74,7 +76,7 @@ export const NavItem = ({ icon, label, to, items, type = 'core' }: INavItem) => 
         )}
       >
         {type !== 'setting' && (
-          <div className="flex size-6 items-center justify-center">
+          <div className="flex items-center justify-center size-6">
             <Icon icon={icon} type={type} />
           </div>
         )}
@@ -90,7 +92,7 @@ export const NavItem = ({ icon, label, to, items, type = 'core' }: INavItem) => 
               { 'pl-2': isSetting }
             )}
           >
-            <div className="flex size-6 items-center justify-center">
+            <div className="flex items-center justify-center size-6">
               <Icon icon={icon} type={type} />
             </div>
             <Text size="small" weight="plus" leading="compact">
@@ -100,7 +102,7 @@ export const NavItem = ({ icon, label, to, items, type = 'core' }: INavItem) => 
           <Collapsible.Content>
             <div className="flex flex-col gap-y-0.5 pb-2 pt-0.5">
               <ul className="flex flex-col gap-y-0.5">
-                <li className="flex w-full items-center gap-x-1 lg:hidden">
+                <li className="flex items-center w-full gap-x-1 lg:hidden">
                   <Link
                     href={to}
                     className={clx(
@@ -121,7 +123,7 @@ export const NavItem = ({ icon, label, to, items, type = 'core' }: INavItem) => 
                 </li>
                 {items.map((item) => {
                   return (
-                    <li key={item.to} className="flex h-7 items-center">
+                    <li key={item.to} className="flex items-center h-7">
                       <Link
                         href={`${to}${item.to}`}
                         className={clx(

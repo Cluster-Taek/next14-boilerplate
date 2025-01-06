@@ -1,3 +1,5 @@
+'use client';
+
 import { SidebarContext } from './sidebar-context';
 import { useContext } from 'react';
 
