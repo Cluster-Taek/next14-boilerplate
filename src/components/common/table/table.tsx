@@ -22,6 +22,7 @@ interface TableProps<T extends ObjectWithId> {
   setCurrentPage?: (value: number) => void;
   onClickRow?: (item: T) => void;
   selectable?: boolean;
+  pagination?: boolean;
   defaultSelected?: T[];
   onSelectChange?: (selected: T[]) => void;
 }
@@ -35,6 +36,7 @@ export const Table = <T extends ObjectWithId>({
   setCurrentPage,
   onClickRow,
   selectable,
+  pagination = true,
   defaultSelected,
   onSelectChange,
 }: TableProps<T>) => {
@@ -159,16 +161,18 @@ export const Table = <T extends ObjectWithId>({
           </div>
         </div>
       )}
-      <UiTable.Pagination
-        count={count}
-        pageSize={pageSize}
-        pageIndex={currentPage}
-        pageCount={pageCount}
-        canPreviousPage={canPreviousPage}
-        canNextPage={canNextPage}
-        previousPage={previousPage}
-        nextPage={nextPage}
-      />
+      {pagination && (
+        <UiTable.Pagination
+          count={count}
+          pageSize={pageSize}
+          pageIndex={currentPage}
+          pageCount={pageCount}
+          canPreviousPage={canPreviousPage}
+          canNextPage={canNextPage}
+          previousPage={previousPage}
+          nextPage={nextPage}
+        />
+      )}
     </div>
   );
 };
