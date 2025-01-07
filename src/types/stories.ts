@@ -1,6 +1,6 @@
-export type ISODateString = string;
+import { ISODateString } from './common';
 
-export interface IFile {
+export interface IStory {
   id: React.Key;
   title: string;
   thumbnail?: string;

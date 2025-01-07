@@ -1,5 +1,6 @@
 import { ISODateString } from './common';
 import { IInfluencer } from './influencer';
+import { IStory } from './stories';
 
 export interface IEvent {
   id: React.Key;
@@ -16,4 +17,5 @@ export interface IEvent {
   createdBy: string;
   memo: string;
   influencers: IInfluencer[];
+  stories: IStory[];
 }

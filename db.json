@@ -139,6 +139,48 @@
           "updatedAt": "2025-01-01T12:00:00Z",
           "createdBy": "user-1"
         }
+      ],
+      "stories": [
+        {
+          "id": "story-1",
+          "title": "Behind the Scenes",
+          "thumbnail": "https://picsum.photos/200/300?random=1",
+          "url": "https://picsum.photos/200/300?random=1",
+          "createdAt": "2025-01-01T12:00:00Z",
+          "createdBy": "style_kim"
+        },
+        {
+          "id": "story-2",
+          "title": "Fashion Trends",
+          "thumbnail": "https://picsum.photos/200/300?random=2",
+          "url": "https://picsum.photos/200/300?random=2",
+          "createdAt": "2025-01-01T12:00:00Z",
+          "createdBy": "trend_jessy"
+        },
+        {
+          "id": "story-3",
+          "title": "Model Showcase",
+          "thumbnail": "https://picsum.photos/200/300?random=3",
+          "url": "https://picsum.photos/200/300?random=3",
+          "createdAt": "2025-01-01T12:00:00Z",
+          "createdBy": "style_kim"
+        },
+        {
+          "id": "story-4",
+          "title": "Fashion Influencers",
+          "thumbnail": "https://picsum.photos/200/300?random=4",
+          "url": "https://picsum.photos/200/300?random=4",
+          "createdAt": "2025-01-01T12:00:00Z",
+          "createdBy": "style_yuki"
+        },
+        {
+          "id": "story-5",
+          "title": "Spring Collection",
+          "thumbnail": "https://picsum.photos/200/300?random=5",
+          "url": "https://picsum.photos/200/300?random=5",
+          "createdAt": "2025-01-01T12:00:00Z",
+          "createdBy": "style_kim"
+        }
       ]
     },
     {
