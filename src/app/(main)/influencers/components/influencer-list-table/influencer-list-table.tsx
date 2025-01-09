@@ -9,12 +9,14 @@ import { numberToKorean } from '@/utils/utils';
 import { Check, CloudArrowDown, CloudArrowUp } from '@medusajs/icons';
 import { Badge, Button, Container, Text, usePrompt } from '@medusajs/ui';
 import dayjs from 'dayjs';
-import { useRouter } from 'next/navigation';
-import { useState } from 'react';
+import { usePathname, useRouter } from 'next/navigation';
+import { useMemo, useState } from 'react';
 
 const PAGE_SIZE = 10;
 
 export const InfluencerListTable = () => {
+  const pathname = usePathname();
+  const title = useMemo(() => (pathname === '/influencers' ? '인플루언서' : '셀러브리티'), [pathname]);
   const router = useRouter();
   const dialog = usePrompt();
   const { getSheet } = useExcel();
@@ -48,8 +50,8 @@ export const InfluencerListTable = () => {
   const handleClickDelete = async (e: React.MouseEvent, id: React.Key) => {
     e.stopPropagation();
     const confirmedDelete = await dialog({
-      title: '인플루언서 삭제',
-      description: '해당 인플루언서를 삭제하시겠습니까?',
+      title: `${title} 삭제`,
+      description: `해당 ${title}를 삭제하시겠습니까?`,
       confirmText: '삭제',
       cancelText: '취소',
     });
@@ -58,13 +60,17 @@ export const InfluencerListTable = () => {
     }
   };
 
+  const handleClickUpload = () => {
+    console.log('upload');
+  };
+
   const handleClickDownload = async () => {
     const influencers = data?.data ?? [];
 
     await getSheet({
       data: influencers,
-      fileName: '인플루언서 목록.xlsx',
-      sheetName: '인플루언서 목록',
+      fileName: `${title} 목록.xlsx`,
+      sheetName: `${title} 목록`,
       rowWidth: [20, 20, 20, 20, 20, 20, 20, 20],
     });
   };
@@ -73,7 +79,7 @@ export const InfluencerListTable = () => {
     <Container className="w-full p-0 divide-y">
       <div className="flex items-center justify-between px-6 py-4">
         <Text className="text-ui-fg-subtle" size="small">
-          총 {data?.items}명의 인플루언서를 찾았습니다.
+          총 {data?.items}명의 {title}를 찾았습니다.
         </Text>
         <div className="flex flex-row justify-end gap-2">
           <Button size="small" variant="secondary">
@@ -160,6 +166,7 @@ export const InfluencerListTable = () => {
         count={data?.items ?? 0}
         currentPage={currentPage}
         setCurrentPage={setCurrentPage}
+        onClickRow={(item) => router.push(`${pathname}/${item.id}/edit`)}
       />
     </Container>
   );

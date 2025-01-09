@@ -4,7 +4,7 @@ import type { NextRequest } from 'next/server';
 
 export async function middleware(request: NextRequest): Promise<NextResponse> {
   if (request.nextUrl.pathname === '/') {
-    return NextResponse.redirect(`${request.nextUrl.origin}/notifications`);
+    return NextResponse.redirect(`${request.nextUrl.origin}/influencers`);
   }
 
   return NextResponse.next();
