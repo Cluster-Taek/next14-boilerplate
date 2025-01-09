@@ -32,8 +32,8 @@ export const MainSidebar = () => {
           </div>
         </div>
         <div className="flex flex-col justify-between flex-1">
-          <div className="flex flex-col flex-1">
-            <NotificationRouteSection />
+          <div className="flex flex-col flex-1 py-3">
+            {/* <NotificationRouteSection /> */}
             <InfluencerRouteSection />
             <EventRouteSection />
           </div>
@@ -117,26 +117,26 @@ const Header = () => {
   );
 };
 
-const useNotificationRoutes = (): Omit<INavItem, 'pathname'>[] => {
-  return [
-    {
-      icon: <BellAlert />,
-      label: '알림',
-      to: '/notifications',
-    },
-  ];
-};
+// const useNotificationRoutes = (): Omit<INavItem, 'pathname'>[] => {
+//   return [
+//     {
+//       icon: <BellAlert />,
+//       label: '알림',
+//       to: '/notifications',
+//     },
+//   ];
+// };
 
 const useInfluencerRoutes = (): Omit<INavItem, 'pathname'>[] => {
   return [
     {
       icon: <Buildings />,
-      label: '인플루언서 찾기',
+      label: '인플루언서',
       to: '/influencers',
     },
     {
       icon: <Users />,
-      label: '셀러브리티 찾기',
+      label: '셀러브리티',
       to: '/celebrities',
     },
   ];
@@ -169,38 +169,38 @@ const useEventRoutes = (): Omit<INavItem, 'pathname'>[] => {
 //   );
 // };
 
-const NotificationRouteSection = () => {
-  const notificationRoutes = useNotificationRoutes();
+// const NotificationRouteSection = () => {
+//   const notificationRoutes = useNotificationRoutes();
 
-  return (
-    <div>
-      <div className="flex flex-col py-3 gap-y-1">
-        <Collapsible.Root defaultOpen>
-          <div className="px-4">
-            <Collapsible.Trigger asChild className="group/trigger">
-              <button className="flex items-center justify-between w-full px-2 text-ui-fg-subtle">
-                <Text size="xsmall" weight="plus" leading="compact">
-                  알림
-                </Text>
-                <div className="text-ui-fg-muted">
-                  <ChevronDownMini className="group-data-[state=open]/trigger:hidden" />
-                  <MinusMini className="group-data-[state=closed]/trigger:hidden" />
-                </div>
-              </button>
-            </Collapsible.Trigger>
-          </div>
-          <Collapsible.Content>
-            <nav className="flex flex-col py-3 gap-y-1">
-              {notificationRoutes.map((route) => {
-                return <NavItem key={route.to} {...route} />;
-              })}
-            </nav>
-          </Collapsible.Content>
-        </Collapsible.Root>
-      </div>
-    </div>
-  );
-};
+//   return (
+//     <div>
+//       <div className="flex flex-col py-3 gap-y-1">
+//         <Collapsible.Root defaultOpen>
+//           <div className="px-4">
+//             <Collapsible.Trigger asChild className="group/trigger">
+//               <button className="flex items-center justify-between w-full px-2 text-ui-fg-subtle">
+//                 <Text size="xsmall" weight="plus" leading="compact">
+//                   알림
+//                 </Text>
+//                 <div className="text-ui-fg-muted">
+//                   <ChevronDownMini className="group-data-[state=open]/trigger:hidden" />
+//                   <MinusMini className="group-data-[state=closed]/trigger:hidden" />
+//                 </div>
+//               </button>
+//             </Collapsible.Trigger>
+//           </div>
+//           <Collapsible.Content>
+//             <nav className="flex flex-col py-3 gap-y-1">
+//               {notificationRoutes.map((route) => {
+//                 return <NavItem key={route.to} {...route} />;
+//               })}
+//             </nav>
+//           </Collapsible.Content>
+//         </Collapsible.Root>
+//       </div>
+//     </div>
+//   );
+// };
 
 const InfluencerRouteSection = () => {
   const influencerRoutes = useInfluencerRoutes();
