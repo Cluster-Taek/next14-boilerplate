@@ -27,3 +27,21 @@ export const useDeleteEventStoryMutation = (eventId?: string) => {
     },
   });
 };
+
+export const useBulkDeleteEventStoriesMutation = (eventId?: string) => {
+  const queryClient = useQueryClient();
+  return useMutation({
+    mutationFn: async (storyIds: React.Key[]) =>
+      await Promise.all(
+        storyIds?.map(async (storyId) => {
+          await fetchApi.delete(`/api/events/${eventId}/stories/${storyId}`);
+        })
+      ),
+    onSuccess: async () => {
+      await queryClient.invalidateQueries({
+        queryKey: [`/api/events/${eventId}/stories`],
+        refetchType: 'all',
+      });
+    },
+  });
+};
