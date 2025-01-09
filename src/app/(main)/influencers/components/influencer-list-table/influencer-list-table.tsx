@@ -160,9 +160,6 @@ export const InfluencerListTable = () => {
         count={data?.items ?? 0}
         currentPage={currentPage}
         setCurrentPage={setCurrentPage}
-        onClickRow={(item) => {
-          router.push(`/influencers/${item.id}`);
-        }}
       />
     </Container>
   );

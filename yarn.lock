@@ -1267,7 +1267,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@radix-ui/react-dialog@npm:^1.1.2":
+"@radix-ui/react-dialog@npm:^1.1.2, @radix-ui/react-dialog@npm:^1.1.4":
   version: 1.1.4
   resolution: "@radix-ui/react-dialog@npm:1.1.4"
   dependencies:
@@ -8097,6 +8097,7 @@ __metadata:
     "@radix-ui/react-accordion": "npm:^1.2.2"
     "@radix-ui/react-collapsible": "npm:^1.1.2"
     "@radix-ui/react-context-menu": "npm:^2.2.4"
+    "@radix-ui/react-dialog": "npm:^1.1.4"
     "@tanstack/react-query": "npm:^5.62.7"
     "@tanstack/react-query-devtools": "npm:^5.62.7"
     "@trivago/prettier-plugin-sort-imports": "npm:^4.3.0"

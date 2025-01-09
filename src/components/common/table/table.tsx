@@ -134,6 +134,7 @@ export const Table = <T extends ObjectWithId>({
                     ${column.align === 'left' && 'text-left'}
                     ${column.align === 'right' && 'text-right'}
                     ${column.align === 'center' && 'text-center'}
+                    truncate max-w-[200px]
                   `}
                     style={{
                       width: column.width ?? 'auto',

@@ -11,9 +11,7 @@ export interface IInfluencersParams {
   gender?: string;
 }
 
-export interface IInfluencerCreateFormValue extends Record<string, unknown> {
-  name: string;
-}
+export interface IInfluencerFormValue extends Omit<IInfluencer, 'id'>, Record<string, unknown> {}
 
 export const useInfluencers = (params: IInfluencersParams) => {
   return useQuery<IPageable<IInfluencer>>({
@@ -21,16 +19,17 @@ export const useInfluencers = (params: IInfluencersParams) => {
   });
 };
 
-export const useInfluencer = (id: string) => {
+export const useInfluencer = (id?: string) => {
   return useQuery<IInfluencer>({
     queryKey: [`/api/influencers/${id}`],
+    enabled: !!id,
   });
 };
 
 export const useCreateInfluencerMutation = () => {
   const queryClient = useQueryClient();
   return useMutation({
-    mutationFn: async (data: IInfluencerCreateFormValue) => await fetchApi.post(`/api/influencers`, data),
+    mutationFn: async (data: IInfluencerFormValue) => await fetchApi.post(`/api/influencers`, data),
     onSuccess: async () => {
       await queryClient.invalidateQueries({
         queryKey: ['/api/influencers'],
@@ -53,15 +52,22 @@ export const useDeleteInfluencerMutation = () => {
   });
 };
 
-export const useUpdateInfluencerMutation = () => {
+export const useUpdateInfluencerMutation = (id?: string) => {
   const queryClient = useQueryClient();
   return useMutation({
-    mutationFn: async (data: IInfluencerCreateFormValue) => await fetchApi.put(`/api/influencers/${data.id}`, data),
+    mutationFn: async (data: IInfluencerFormValue) =>
+      await fetchApi.put(`/api/influencers/${data.id}`, { id, ...data }),
     onSuccess: async () => {
-      await queryClient.invalidateQueries({
-        queryKey: ['/api/influencers'],
-        refetchType: 'all',
-      });
+      await Promise.all([
+        await queryClient.invalidateQueries({
+          queryKey: ['/api/influencers'],
+          refetchType: 'all',
+        }),
+        await queryClient.invalidateQueries({
+          queryKey: [`/api/influencers/${id}`],
+          refetchType: 'all',
+        }),
+      ]);
     },
   });
 };

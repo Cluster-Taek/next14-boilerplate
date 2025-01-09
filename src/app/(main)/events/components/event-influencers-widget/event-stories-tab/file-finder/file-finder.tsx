@@ -75,9 +75,7 @@ export const FileFinder = ({ files }: IFileFinderProps) => {
                 <TriangleRightMini />
                 <Text size="small">휴지통</Text>
               </Accordion.Trigger>
-              <Accordion.Content>
-                Yes. It's unstyled by default, giving you freedom over the look and feel.
-              </Accordion.Content>
+              <Accordion.Content>TEST</Accordion.Content>
             </Accordion.Item>
           </Accordion.Root>
         </div>
