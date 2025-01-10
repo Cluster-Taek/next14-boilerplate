@@ -1,8 +1,14 @@
 'use client';
 
 import { Table } from '@/components/common/table';
+import { UploadButton } from '@/components/common/upload-button';
 import useExcel from '@/hooks/use-excel';
-import { useDeleteInfluencerMutation, useInfluencers } from '@/lib/influencer';
+import {
+  IInfluencerFormValue,
+  useBulkCreateInfluencerMutation,
+  useDeleteInfluencerMutation,
+  useInfluencers,
+} from '@/lib/influencer';
 import { ISODateString } from '@/types/common';
 import { Gender, IInfluencer } from '@/types/influencer';
 import { numberToKorean } from '@/utils/utils';
@@ -19,13 +25,14 @@ export const InfluencerListTable = () => {
   const title = useMemo(() => (pathname === '/influencers' ? '인플루언서' : '셀러브리티'), [pathname]);
   const router = useRouter();
   const dialog = usePrompt();
-  const { getSheet } = useExcel();
+  const { getSheet, sheetToJSON } = useExcel();
   const [currentPage, setCurrentPage] = useState(0);
   const { data, isError, error } = useInfluencers({
     _page: 1,
     _per_page: PAGE_SIZE,
   });
 
+  const { mutate: bulkCreateInfluencer } = useBulkCreateInfluencerMutation();
   const { mutate: deleteInfluencer } = useDeleteInfluencerMutation();
 
   if (isError) {
@@ -60,8 +67,11 @@ export const InfluencerListTable = () => {
     }
   };
 
-  const handleClickUpload = () => {
-    console.log('upload');
+  const onChangeUpload = async (e: React.ChangeEvent<HTMLInputElement>) => {
+    const file = e.target.files?.[0];
+    if (!file) return;
+    const data = await sheetToJSON(file);
+    bulkCreateInfluencer(data as IInfluencerFormValue[]);
   };
 
   const handleClickDownload = async () => {
@@ -86,10 +96,10 @@ export const InfluencerListTable = () => {
             <Check />
             선택한 인원보기
           </Button>
-          <Button size="small" variant="secondary">
+          <UploadButton size="small" variant="secondary" onChange={onChangeUpload} accept=".xlsx">
             <CloudArrowUp />
             리스트 업로드
-          </Button>
+          </UploadButton>
           <Button size="small" variant="secondary" onClick={handleClickDownload}>
             <CloudArrowDown />
             리스트 다운로드

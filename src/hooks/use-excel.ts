@@ -58,7 +58,51 @@ const useExcel = () => {
     saveAs(blob, fileName);
   };
 
+  const sheetToJSON = async (file: File) => {
+    const wb = new Excel.Workbook();
+    const reader = new FileReader();
+
+    const promise = new Promise((resolve, reject) => {
+      reader.onload = (e) => {
+        const data = e.target?.result as ArrayBuffer;
+        if (!data) {
+          reject(new Error('Failed to read file'));
+          return;
+        }
+        wb.xlsx.load(data).then(() => {
+          const sheet = wb.getWorksheet(1);
+          if (!sheet) {
+            reject(new Error('Failed to load sheet'));
+            return;
+          }
+          const rows = sheet.getSheetValues();
+          const headers = rows[1];
+          const headerLength = headers?.length ?? 0;
+          if (!headers) return reject(new Error('Failed to load headers'));
+          const result = rows.slice(2).map((row) => {
+            // eslint-disable-next-line
+            const obj = {} as any;
+            for (let i = 2; i < (headerLength as unknown as number); i++) {
+              // @ts-expect-error: 타입 이슈로 인해 상단에서 검증
+              const key = headers.at(i) as string;
+              // @ts-expect-error: 타입 이슈로 인해 상단에서 검증
+              obj[key] = row[i];
+            }
+            return obj;
+          });
+
+          resolve(result);
+        });
+      };
+      reader.onerror = reject;
+    });
+
+    reader.readAsArrayBuffer(file);
+    return promise;
+  };
+
   return {
+    sheetToJSON,
     getSheet,
   };
 };

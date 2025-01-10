@@ -39,6 +39,20 @@ export const useCreateInfluencerMutation = () => {
   });
 };
 
+export const useBulkCreateInfluencerMutation = () => {
+  const queryClient = useQueryClient();
+  return useMutation({
+    mutationFn: async (data: IInfluencerFormValue[]) =>
+      await Promise.all(data.map(async (d) => await fetchApi.post(`/api/influencers`, d))),
+    onSuccess: async () => {
+      await queryClient.invalidateQueries({
+        queryKey: ['/api/influencers'],
+        refetchType: 'all',
+      });
+    },
+  });
+};
+
 export const useDeleteInfluencerMutation = () => {
   const queryClient = useQueryClient();
   return useMutation({

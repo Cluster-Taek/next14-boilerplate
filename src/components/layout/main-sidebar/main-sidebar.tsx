@@ -4,7 +4,6 @@ import { INavItem, NavItem } from '../nav-item';
 import { Divider } from '@/components/common/divider';
 import { Skeleton } from '@/components/common/skeleton';
 import {
-  BellAlert,
   BuildingStorefront,
   Buildings,
   ChevronDownMini,
