@@ -35,9 +35,6 @@ export const EventListWidget = () => {
             <Plus />
             <Text>새 이벤트 추가</Text>
           </Button>
-          <Button size="small" variant="secondary">
-            <Text>편집</Text>
-          </Button>
         </div>
         <Input size="small" placeholder="Search" id="search-input" type="search" />
       </div>
