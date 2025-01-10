@@ -6,7 +6,7 @@ import { Button, Text, usePrompt } from '@medusajs/ui';
 import * as Accordion from '@radix-ui/react-accordion';
 import axios from 'axios';
 import { saveAs } from 'file-saver';
-import { useCallback, useEffect, useRef, useState } from 'react';
+import { useCallback, useEffect, useMemo, useRef, useState } from 'react';
 import Selecto from 'react-selecto';
 
 interface IFileFinderProps {
@@ -21,12 +21,16 @@ export const FileFinder = ({ files }: IFileFinderProps) => {
 
   const { mutate: deleteEventStories } = useBulkDeleteEventStoriesMutation();
 
-  const folders = files.reduce((acc, file) => {
-    if (!acc.includes(file.createdBy)) {
-      return [...acc, file.createdBy];
-    }
-    return acc;
-  }, [] as string[]);
+  const folders = useMemo(
+    () =>
+      files.reduce((acc, file) => {
+        if (!acc.includes(file.createdBy)) {
+          return [...acc, file.createdBy];
+        }
+        return acc;
+      }, [] as string[]),
+    [files]
+  );
 
   const handleSaveImage = useCallback(async () => {
     selectedFiles.forEach(async (item) => {
@@ -111,31 +115,31 @@ export const FileFinder = ({ files }: IFileFinderProps) => {
             </Accordion.Item> */}
           </Accordion.Root>
         </div>
-        <Selecto
-          // The container to add a selection element
-          container={selectContainerRef.current}
-          dragContainer={selectContainerRef.current}
-          // Targets to select. You can register a queryselector or an Element.
-          selectableTargets={['.file-item']}
-          // Whether to select by click (default: true)
-          selectByClick={true}
-          // Whether to select from the target inside (default: true)
-          selectFromInside={true}
-          // After the select, whether to select the next target with the selected target (deselected if the target is selected again).
-          continueSelect={false}
-          // Determines which key to continue selecting the next target via keydown and keyup.
-          toggleContinueSelect={'shift'}
-          // The container for keydown and keyup events
-          keyContainer={window}
-          // The rate at which the target overlaps the drag area to be selected. (default: 100)
-          hitRate={10}
-          onSelect={(e) => {
-            setSelectedFiles(
-              e.selected.map((el) => files.find((file) => file.id === el.getAttribute('data-id'))) as IFile[]
-            );
-          }}
-        />
         <div ref={selectContainerRef} className="flex flex-col w-full gap-3 p-6 ">
+          <Selecto
+            // The container to add a selection element
+            container={selectContainerRef.current}
+            dragContainer={selectContainerRef.current}
+            // Targets to select. You can register a queryselector or an Element.
+            selectableTargets={['.file-item']}
+            // Whether to select by click (default: true)
+            selectByClick={true}
+            // Whether to select from the target inside (default: true)
+            selectFromInside={true}
+            // After the select, whether to select the next target with the selected target (deselected if the target is selected again).
+            continueSelect={false}
+            // Determines which key to continue selecting the next target via keydown and keyup.
+            toggleContinueSelect={'shift'}
+            // The container for keydown and keyup events
+            keyContainer={window}
+            // The rate at which the target overlaps the drag area to be selected. (default: 100)
+            hitRate={10}
+            onSelect={(e) => {
+              setSelectedFiles(
+                e.selected.map((el) => files.find((file) => file.id === el.getAttribute('data-id'))) as IFile[]
+              );
+            }}
+          />
           <Text size="large">파일</Text>
           <div className="grid w-full grid-cols-4 gap-4">
             {files
