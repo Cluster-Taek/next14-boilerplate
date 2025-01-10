@@ -1,5 +1,5 @@
 import { ExclamationCircle, Eye } from '@medusajs/icons';
-import { Checkbox, DropdownMenu, IconButton, Label, Table as UiTable } from '@medusajs/ui';
+import { Checkbox, DropdownMenu, Table as UiTable } from '@medusajs/ui';
 import { useCallback, useEffect, useMemo, useState } from 'react';
 
 // eslint-disable-next-line

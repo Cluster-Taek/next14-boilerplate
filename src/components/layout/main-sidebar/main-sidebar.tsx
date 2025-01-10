@@ -7,8 +7,7 @@ import {
   BuildingStorefront,
   Buildings,
   ChevronDownMini,
-  CogSixTooth,
-  CurrencyDollar,
+  CogSixTooth, // CurrencyDollar,
   EllipsisHorizontal,
   Lifebuoy,
   MinusMini,
@@ -148,11 +147,11 @@ const useEventRoutes = (): Omit<INavItem, 'pathname'>[] => {
       label: '이벤트 관리',
       to: '/events',
     },
-    {
-      icon: <CurrencyDollar />,
-      label: '정산 관리',
-      to: '/settlements',
-    },
+    // {
+    //   icon: <CurrencyDollar />,
+    //   label: '정산 관리',
+    //   to: '/settlements',
+    // },
   ];
 };
 

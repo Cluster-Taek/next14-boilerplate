@@ -70,7 +70,7 @@ export const EventFormDrawer = ({ id }: IEventFormDrawerProps) => {
         <FormProvider {...form}>
           <form onSubmit={handleSubmit} className="flex flex-col h-full overflow-hidden">
             <Drawer.Header>
-              <Drawer.Title>데이터 수정</Drawer.Title>
+              <Drawer.Title>데이터 {id ? '수정' : '추가'}</Drawer.Title>
             </Drawer.Header>
             <Drawer.Body>
               <div className="mx-auto flex w-full max-w-[720px] flex-col gap-y-4 px-2 py-4">

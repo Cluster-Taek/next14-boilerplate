@@ -7,7 +7,7 @@ import { useEvent } from '@/lib/event';
 import { IInfluencerFormValue, useBulkCreateInfluencerMutation } from '@/lib/influencer';
 import { Gender, IInfluencer } from '@/types/influencer';
 import { numberToKorean } from '@/utils/utils';
-import { CloudArrowDown, CloudArrowUp, CogSixTooth, Envelope } from '@medusajs/icons';
+import { CloudArrowDown, CloudArrowUp, Envelope } from '@medusajs/icons';
 import { Badge, Button, Text, usePrompt } from '@medusajs/ui';
 import { useState } from 'react';
 
@@ -69,10 +69,6 @@ export const EventInfluencersListTab = ({ eventId }: IEventInfluencersListTabPro
           총 {event?.influencers?.length ?? 0}명의 인플루언서를 찾았습니다.
         </Text>
         <div className="flex flex-row justify-end gap-2">
-          <Button size="small" variant="secondary">
-            <CogSixTooth />
-            카테고리 수정
-          </Button>
           <UploadButton size="small" variant="secondary" onChange={onChangeUpload} accept=".xlsx">
             <CloudArrowUp />
             리스트 업로드
