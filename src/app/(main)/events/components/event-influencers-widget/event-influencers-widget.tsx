@@ -11,7 +11,7 @@ interface IEventInfluencersWidgetProps {
 export const EventInfluencersWidget = ({ id }: IEventInfluencersWidgetProps) => {
   return (
     <Container className="p-0 divide-y">
-      <Tabs className="w-full" defaultValue="story">
+      <Tabs className="w-full" defaultValue="influencers">
         <div className="flex flex-row justify-between px-6 py-4 border-b">
           <Tabs.List>
             <Tabs.Trigger value="influencers">인플루언서</Tabs.Trigger>

@@ -133,6 +133,7 @@ export const EventInfluencersListTab = ({ eventId }: IEventInfluencersListTabPro
         ]}
         data={event?.influencers ?? []}
         selectable
+        columnsVisibility
         onSelectChange={(selected) => setSelected(selected)}
         pagination={false}
       />

@@ -1,6 +1,6 @@
-import { ExclamationCircle } from '@medusajs/icons';
-import { Checkbox, Table as UiTable } from '@medusajs/ui';
-import { useEffect, useMemo, useState } from 'react';
+import { ExclamationCircle, Eye } from '@medusajs/icons';
+import { Checkbox, DropdownMenu, IconButton, Label, Table as UiTable } from '@medusajs/ui';
+import { useCallback, useEffect, useMemo, useState } from 'react';
 
 // eslint-disable-next-line
 interface ObjectWithId extends Object {
@@ -23,6 +23,7 @@ interface TableProps<T extends ObjectWithId> {
   onClickRow?: (item: T) => void;
   selectable?: boolean;
   pagination?: boolean;
+  columnsVisibility?: boolean;
   defaultSelected?: T[];
   onSelectChange?: (selected: T[]) => void;
 }
@@ -37,10 +38,18 @@ export const Table = <T extends ObjectWithId>({
   onClickRow,
   selectable,
   pagination = true,
+  columnsVisibility,
   defaultSelected,
   onSelectChange,
 }: TableProps<T>) => {
   const [selected, setSelected] = useState<T[]>([]);
+  const [visibleColumns, setVisibleColumns] = useState(columns);
+
+  const fileteredColumns = useMemo(() => {
+    return columns.filter((column) => visibleColumns.some((vc) => vc.key === column.key));
+  }, [columns, visibleColumns]);
+
+  console.log('fileteredColumns', fileteredColumns);
 
   const pageCount = useMemo(() => {
     return Math.ceil(count / pageSize);
@@ -65,6 +74,20 @@ export const Table = <T extends ObjectWithId>({
       setCurrentPage?.(currentPage - 1);
     }
   };
+
+  const handleVisibleColumnsChange = useCallback(
+    (key: keyof T) => {
+      if (visibleColumns.some((vc) => vc.key === key)) {
+        setVisibleColumns(visibleColumns.filter((vc) => vc.key !== key));
+      } else {
+        const column = columns.find((c) => c.key === key);
+        if (column) {
+          setVisibleColumns([...visibleColumns, column]);
+        }
+      }
+    },
+    [visibleColumns, columns]
+  );
 
   useEffect(() => {
     setSelected(defaultSelected ?? []);
@@ -98,9 +121,41 @@ export const Table = <T extends ObjectWithId>({
                 />
               </UiTable.HeaderCell>
             )}
-            {columns.map((column, index) => (
-              <UiTable.HeaderCell key={index}>{column.label}</UiTable.HeaderCell>
-            ))}
+            {fileteredColumns
+              .filter((column) => column.label)
+              .map((column, index) => (
+                <UiTable.HeaderCell key={index}>{column.label}</UiTable.HeaderCell>
+              ))}
+            {columnsVisibility && (
+              <UiTable.HeaderCell
+                style={{
+                  width: '40px',
+                }}
+              >
+                <DropdownMenu>
+                  <DropdownMenu.Trigger asChild>
+                    {/* <IconButton> */}
+                    <div className="flex justify-center">
+                      <Eye className="cursor-pointer" />
+                    </div>
+                    {/* </IconButton> */}
+                  </DropdownMenu.Trigger>
+                  <DropdownMenu.Content>
+                    {columns
+                      .filter((item) => item.label)
+                      .map((column, index) => (
+                        <DropdownMenu.CheckboxItem
+                          key={index}
+                          checked={visibleColumns.some((vc) => vc.key === column.key)}
+                          onCheckedChange={() => handleVisibleColumnsChange(column.key)}
+                        >
+                          {column.label}
+                        </DropdownMenu.CheckboxItem>
+                      ))}
+                  </DropdownMenu.Content>
+                </DropdownMenu>
+              </UiTable.HeaderCell>
+            )}
           </UiTable.Row>
         </UiTable.Header>
         <UiTable.Body>
@@ -127,7 +182,7 @@ export const Table = <T extends ObjectWithId>({
                     />
                   </UiTable.Cell>
                 )}
-                {columns.map((column, index) => (
+                {fileteredColumns.map((column, index) => (
                   <UiTable.Cell
                     key={`${rowIndex}-${index}`}
                     className={`
