@@ -1,12 +1,12 @@
 import { FileItem } from '../file-item';
 import { useBulkDeleteEventStoriesMutation } from '@/lib/stories';
 import { IFile } from '@/types/common';
-import { ArrowDownTray, Trash, TriangleDownMini, TriangleRightMini } from '@medusajs/icons';
+import { ArrowDownTray, EllipseMiniSolid, Trash, TriangleDownMini } from '@medusajs/icons';
 import { Button, Text, usePrompt } from '@medusajs/ui';
 import * as Accordion from '@radix-ui/react-accordion';
 import axios from 'axios';
 import { saveAs } from 'file-saver';
-import { useCallback, useRef, useState } from 'react';
+import { useCallback, useEffect, useRef, useState } from 'react';
 import Selecto from 'react-selecto';
 
 interface IFileFinderProps {
@@ -54,6 +54,12 @@ export const FileFinder = ({ files }: IFileFinderProps) => {
     }
   }, [dialog, deleteEventStories, selectedFiles]);
 
+  useEffect(() => {
+    if (folders.length > 0) {
+      setSelectedFolder(folders[0]);
+    }
+  }, [folders]);
+
   return (
     <>
       <div className="flex flex-row items-center justify-end gap-2 px-6 py-4">
@@ -81,19 +87,19 @@ export const FileFinder = ({ files }: IFileFinderProps) => {
                 {folders.map((folder) => (
                   <div
                     key={folder}
-                    className={`flex flex-row items-center gap-2 px-4 py-3 cursor-pointer ${
+                    className={`flex flex-row items-center gap-2 px-6 py-3 cursor-pointer ${
                       selectedFolder === folder ? 'bg-ui-bg-base-pressed' : 'bg-ui-bg-base'
                     }`}
                     onClick={() => setSelectedFolder(folder)}
                   >
-                    <TriangleRightMini />
+                    <EllipseMiniSolid />
                     <Text size="small">{folder}</Text>
                   </div>
                 ))}
               </Accordion.Content>
             </Accordion.Item>
 
-            <Accordion.Item
+            {/* <Accordion.Item
               className="w-full overflow-hidden border divide-y rounded-lg bg-ui-bg-component border-ui-border-base"
               value="item-2"
             >
@@ -102,7 +108,7 @@ export const FileFinder = ({ files }: IFileFinderProps) => {
                 <Text size="small">휴지통</Text>
               </Accordion.Trigger>
               <Accordion.Content>TEST</Accordion.Content>
-            </Accordion.Item>
+            </Accordion.Item> */}
           </Accordion.Root>
         </div>
         <Selecto
