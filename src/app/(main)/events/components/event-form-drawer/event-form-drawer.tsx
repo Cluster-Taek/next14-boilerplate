@@ -2,13 +2,11 @@
 
 import { IEventFormValue, useCreateEventMutation, useEvent, useUpdateEventMutation } from '@/lib/event';
 import { getOnlyNumber } from '@/utils/utils';
-import { Button, DatePicker, Drawer, Input, Label, Select, Textarea } from '@medusajs/ui';
+import { Button, DatePicker, Drawer, Input, Label, Textarea } from '@medusajs/ui';
 import dayjs from 'dayjs';
 import { useRouter } from 'next/navigation';
 import { useEffect } from 'react';
 import { Controller, FormProvider, useForm } from 'react-hook-form';
-
-const categories = ['Beauty', 'Fashion', 'Food', 'Travel', 'Lifestyle'];
 
 interface IEventFormDrawerProps {
   id?: string;

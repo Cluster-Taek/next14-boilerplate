@@ -7,7 +7,7 @@ import { useEvent } from '@/lib/event';
 import { IInfluencerFormValue, useBulkCreateInfluencerMutation } from '@/lib/influencer';
 import { Gender, IInfluencer } from '@/types/influencer';
 import { numberToKorean } from '@/utils/utils';
-import { Check, CloudArrowDown, CloudArrowUp, CogSixTooth, Envelope } from '@medusajs/icons';
+import { CloudArrowDown, CloudArrowUp, CogSixTooth, Envelope } from '@medusajs/icons';
 import { Badge, Button, Text, usePrompt } from '@medusajs/ui';
 import { useState } from 'react';
 
