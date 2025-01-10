@@ -1,7 +1,8 @@
 import { FileItem } from '../file-item';
+import { UploadButton } from '@/components/common/upload-button';
 import { useBulkDeleteEventStoriesMutation } from '@/lib/stories';
 import { IFile } from '@/types/common';
-import { ArrowDownTray, EllipseMiniSolid, Trash, TriangleDownMini } from '@medusajs/icons';
+import { ArrowDownTray, ArrowUpTray, EllipseMiniSolid, Trash, TriangleDownMini } from '@medusajs/icons';
 import { Button, Text, usePrompt } from '@medusajs/ui';
 import * as Accordion from '@radix-ui/react-accordion';
 import axios from 'axios';
@@ -31,6 +32,11 @@ export const FileFinder = ({ files }: IFileFinderProps) => {
       }, [] as string[]),
     [files]
   );
+
+  const onChangeUpload = useCallback(async (e: React.ChangeEvent<HTMLInputElement>) => {
+    const file = e.target.files?.[0];
+    console.log(file);
+  }, []);
 
   const handleSaveImage = useCallback(async () => {
     selectedFiles.forEach(async (item) => {
@@ -67,6 +73,10 @@ export const FileFinder = ({ files }: IFileFinderProps) => {
   return (
     <>
       <div className="flex flex-row items-center justify-end gap-2 px-6 py-4">
+        <UploadButton size="small" variant="secondary" onChange={onChangeUpload}>
+          <ArrowUpTray />
+          업로드
+        </UploadButton>
         <Button size="small" variant="secondary" onClick={handleSaveImage}>
           <ArrowDownTray />
           다운로드
