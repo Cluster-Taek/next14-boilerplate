@@ -2,8 +2,9 @@
 
 import { NoRecords } from '@/components/common/empty-table-content';
 import { useEvent } from '@/lib/event';
-import { Container, Heading, Table, Text } from '@medusajs/ui';
+import { Button, Container, Heading, Table, Text } from '@medusajs/ui';
 import dayjs from 'dayjs';
+import Link from 'next/link';
 
 interface IEventInfoWidgetProps {
   id?: string;
@@ -14,18 +15,25 @@ export const EventInfoWidget = ({ id }: IEventInfoWidgetProps) => {
     <Container className="p-0 divide-y">
       {data ? (
         <>
-          <div className="flex flex-col justify-between px-6 py-4">
-            <Text size="small" className="text-ui-fg-subtle">
-              {data.description}
-            </Text>
-            <Heading level="h1" className="text-ui-fg-base">
-              {data.title}
-            </Heading>
+          <div className="flex flex-row items-center justify-between px-6 py-4">
+            <div className="flex flex-col justify-between">
+              <Text size="small" className="text-ui-fg-subtle">
+                {data.description}
+              </Text>
+              <Heading level="h1" className="text-ui-fg-base">
+                {data.title}
+              </Heading>
+            </div>
+            <Link href={`/events/${id}/edit`}>
+              <Button size="small" className="h-fit" variant="primary">
+                편집
+              </Button>
+            </Link>
           </div>
           <Table>
             <Table.Row className="[&_td:nth-child(1)]:w-[20%] [&_td:nth-child(2)]:w-[30%] [&_td:nth-child(3)]:w-[20%] [&_td:nth-child(4)]:w-[30%]">
               <Table.Cell>이벤트 유형</Table.Cell>
-              <Table.Cell>{data.eventType.join(', ')}</Table.Cell>
+              <Table.Cell>{data.eventType?.join(', ')}</Table.Cell>
             </Table.Row>
             <Table.Row>
               <Table.Cell>이벤트 기간</Table.Cell>

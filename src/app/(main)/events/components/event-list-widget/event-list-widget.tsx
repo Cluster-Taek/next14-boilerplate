@@ -7,6 +7,7 @@ import { IEvent } from '@/types/event';
 import { Plus } from '@medusajs/icons';
 import { Button, Container, Heading, Input, Tabs, Text } from '@medusajs/ui';
 import dayjs from 'dayjs';
+import Link from 'next/link';
 import { useRouter } from 'next/navigation';
 import { useState } from 'react';
 
@@ -31,10 +32,12 @@ export const EventListWidget = () => {
       </div>
       <div className="flex items-center justify-between gap-3 px-6 py-4">
         <div className="flex items-center flex-shrink-0 gap-3">
-          <Button size="small" variant="primary">
-            <Plus />
-            <Text>새 이벤트 추가</Text>
-          </Button>
+          <Link href="/events/create">
+            <Button size="small" variant="primary">
+              <Plus />
+              <Text>새 이벤트 추가</Text>
+            </Button>
+          </Link>
         </div>
         <Input size="small" placeholder="Search" id="search-input" type="search" />
       </div>

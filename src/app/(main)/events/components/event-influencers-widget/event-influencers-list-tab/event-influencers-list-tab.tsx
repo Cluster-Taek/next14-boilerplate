@@ -66,7 +66,7 @@ export const EventInfluencersListTab = ({ eventId }: IEventInfluencersListTabPro
     <div className="w-full p-0 divide-y">
       <div className="flex items-center justify-between px-6 py-4">
         <Text className="text-ui-fg-subtle" size="small">
-          총 {event?.influencers.length ?? 0}명의 인플루언서를 찾았습니다.
+          총 {event?.influencers?.length ?? 0}명의 인플루언서를 찾았습니다.
         </Text>
         <div className="flex flex-row justify-end gap-2">
           <Button size="small" variant="secondary">

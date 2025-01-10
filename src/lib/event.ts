@@ -10,9 +10,7 @@ export interface IEventsParams {
   processing?: boolean;
 }
 
-export interface IEventCreateFormValue extends Record<string, unknown> {
-  name: string;
-}
+export interface IEventFormValue extends Omit<IEvent, 'id'>, Record<string, unknown> {}
 
 export const useEvents = (params: IEventsParams) => {
   return useQuery<IPageable<IEvent>>({
@@ -30,7 +28,7 @@ export const useEvent = (id?: string) => {
 export const useCreateEventMutation = () => {
   const queryClient = useQueryClient();
   return useMutation({
-    mutationFn: async (data: IEventCreateFormValue) => await fetchApi.post(`/api/events`, data),
+    mutationFn: async (data: IEventFormValue) => await fetchApi.post(`/api/events`, data),
     onSuccess: async () => {
       await queryClient.invalidateQueries({
         queryKey: ['/api/events'],
@@ -53,15 +51,21 @@ export const useDeleteEventMutation = () => {
   });
 };
 
-export const useUpdateEventMutation = () => {
+export const useUpdateEventMutation = (id?: React.Key) => {
   const queryClient = useQueryClient();
   return useMutation({
-    mutationFn: async (data: IEventCreateFormValue) => await fetchApi.put(`/api/events/${data.id}`, data),
+    mutationFn: async (data: IEventFormValue) => await fetchApi.put(`/api/events/${id}`, data),
     onSuccess: async () => {
-      await queryClient.invalidateQueries({
-        queryKey: ['/api/events'],
-        refetchType: 'all',
-      });
+      await Promise.all([
+        await queryClient.invalidateQueries({
+          queryKey: ['/api/events'],
+          refetchType: 'all',
+        }),
+        await queryClient.invalidateQueries({
+          queryKey: [`/api/events/${id}`],
+          refetchType: 'all',
+        }),
+      ]);
     },
   });
 };
