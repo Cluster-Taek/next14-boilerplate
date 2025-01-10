@@ -14,23 +14,12 @@ export const EventInfluencersWidget = ({ id }: IEventInfluencersWidgetProps) => 
       <Tabs className="w-full" defaultValue="story">
         <div className="flex flex-row justify-between px-6 py-4 border-b">
           <Tabs.List>
-            <Tabs.Trigger value="search">인원 검색</Tabs.Trigger>
-            <Tabs.Trigger value="influencers">인원 관리</Tabs.Trigger>
+            <Tabs.Trigger value="influencers">인플루언서</Tabs.Trigger>
             <Tabs.Trigger value="story">스토리</Tabs.Trigger>
             <Tabs.Trigger value="settlements">정산</Tabs.Trigger>
           </Tabs.List>
           {/* <div>BUTTON AREA</div> */}
         </div>
-        <Tabs.Content value="search">
-          {id ? (
-            <EventInfluencersListTab eventId={id} />
-          ) : (
-            <NoRecords title="이벤트 정보가 없습니다." message="이벤트 정보를 선택 혹은 생성해주세요." />
-          )}
-          <div className="flex justify-between px-6 py-4">
-            <Input type="search" placeholder="계정검색" />
-          </div>
-        </Tabs.Content>
         <Tabs.Content value="influencers">
           {id ? (
             <EventInfluencersListTab eventId={id} />
