@@ -3,6 +3,7 @@
 import { Table } from '@/components/common/table';
 import { UploadButton } from '@/components/common/upload-button';
 import useExcel from '@/hooks/use-excel';
+import useInfluencersExcel from '@/hooks/use-influencers-excel';
 import { useEvent } from '@/lib/event';
 import { IInfluencerFormValue, useBulkCreateInfluencerMutation } from '@/lib/influencer';
 import { Gender, IInfluencer } from '@/types/influencer';
@@ -19,7 +20,7 @@ export const EventInfluencersListTab = ({ eventId }: IEventInfluencersListTabPro
   const dialog = usePrompt();
   const [selected, setSelected] = useState<IInfluencer[]>([]);
   const { data: event } = useEvent(eventId);
-  const { getSheet, sheetToJSON } = useExcel();
+  const { convertExcelToInfluencers, convertInfluencersToExcel } = useInfluencersExcel();
 
   const { mutate: bulkCreateInfluencer } = useBulkCreateInfluencerMutation();
 
@@ -43,19 +44,12 @@ export const EventInfluencersListTab = ({ eventId }: IEventInfluencersListTabPro
   const onChangeUpload = async (e: React.ChangeEvent<HTMLInputElement>) => {
     const file = e.target.files?.[0];
     if (!file) return;
-    const data = await sheetToJSON(file);
+    const data = await convertExcelToInfluencers(file);
     bulkCreateInfluencer(data as IInfluencerFormValue[]);
   };
 
   const handleClickDownload = async () => {
-    const influencers = event?.influencers ?? [];
-
-    await getSheet({
-      data: influencers,
-      fileName: '인플루언서 목록.xlsx',
-      sheetName: '인플루언서 목록',
-      rowWidth: [20, 20, 20, 20, 20, 20, 20, 20],
-    });
+    await convertInfluencersToExcel(event?.influencers ?? [], '인플루언서 목록');
   };
 
   const handleClickMessage = async () => {
