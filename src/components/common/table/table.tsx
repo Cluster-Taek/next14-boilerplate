@@ -117,7 +117,7 @@ export const Table = <T extends ObjectWithId>({
                 <DropdownMenu.Trigger asChild>
                   <Button size="small" variant="secondary">
                     <CogSixTooth />
-                    카테고리 설정
+                    필드
                   </Button>
                 </DropdownMenu.Trigger>
                 <DropdownMenu.Content>
