@@ -10,5 +10,4 @@ yarn-error.log*
 node_modules/
 
 ## Env
-.env
 .env.local
