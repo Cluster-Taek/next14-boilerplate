@@ -12,8 +12,8 @@ import {
 } from '@/lib/influencer';
 import { Gender, IInfluencer } from '@/types/influencer';
 import { numberToKorean } from '@/utils/utils';
-import { Check, CloudArrowDown, CloudArrowUp } from '@medusajs/icons';
-import { Badge, Button, Container, Text, usePrompt } from '@medusajs/ui';
+import { CloudArrowDown, CloudArrowUp } from '@medusajs/icons';
+import { Badge, Button, Container, usePrompt } from '@medusajs/ui';
 import { usePathname, useRouter } from 'next/navigation';
 import { useMemo, useState } from 'react';
 
@@ -124,26 +124,20 @@ export const InfluencerListTable = () => {
 
   return (
     <Container className="w-full p-0 divide-y">
-      <div className="flex items-center justify-between px-6 py-4">
-        <Text className="text-ui-fg-subtle" size="small">
-          총 {data?.items}명의 {title}를 찾았습니다.
-        </Text>
-        <div className="flex flex-row justify-end gap-2">
-          <Button size="small" variant="secondary">
-            <Check />
-            선택한 인원보기
-          </Button>
-          <UploadButton size="small" variant="secondary" onChange={onChangeUpload} accept=".xlsx">
-            <CloudArrowUp />
-            리스트 업로드
-          </UploadButton>
-          <Button size="small" variant="secondary" onClick={handleClickDownload}>
-            <CloudArrowDown />
-            리스트 다운로드
-          </Button>
-        </div>
-      </div>
       <Table<IInfluencer>
+        title={`총 ${data?.items}명의 ${title}를 찾았습니다.`}
+        actions={
+          <>
+            <UploadButton size="small" variant="secondary" onChange={onChangeUpload} accept=".xlsx">
+              <CloudArrowUp />
+              리스트 업로드
+            </UploadButton>
+            <Button size="small" variant="secondary" onClick={handleClickDownload}>
+              <CloudArrowDown />
+              리스트 다운로드
+            </Button>
+          </>
+        }
         columns={[
           {
             key: 'region',

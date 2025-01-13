@@ -46,7 +46,7 @@ const useExcel = () => {
     });
 
     // 데이터 생성
-    data.forEach((row, index) => {
+    data.forEach((row) => {
       const dataRow = sheet.addRow(Object.values(row));
       dataRow.height = 20;
       dataRow.eachCell((cell) => {

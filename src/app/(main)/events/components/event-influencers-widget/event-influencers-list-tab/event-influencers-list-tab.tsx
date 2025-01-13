@@ -63,12 +63,10 @@ export const EventInfluencersListTab = ({ eventId }: IEventInfluencersListTabPro
   };
 
   return (
-    <div className="w-full p-0 divide-y">
-      <div className="flex items-center justify-between px-6 py-4">
-        <Text className="text-ui-fg-subtle" size="small">
-          총 {event?.influencers?.length ?? 0}명의 인플루언서를 찾았습니다.
-        </Text>
-        <div className="flex flex-row justify-end gap-2">
+    <Table<IInfluencer>
+      title={`총 ${event?.influencers?.length ?? 0}명의 인플루언서를 찾았습니다.`}
+      actions={
+        <>
           <UploadButton size="small" variant="secondary" onChange={onChangeUpload} accept=".xlsx">
             <CloudArrowUp />
             리스트 업로드
@@ -81,58 +79,56 @@ export const EventInfluencersListTab = ({ eventId }: IEventInfluencersListTabPro
             <Envelope />
             메시지 보내기
           </Button>
-        </div>
-      </div>
-      <Table<IInfluencer>
-        columns={[
-          {
-            key: 'channelName',
-            label: '계정',
+        </>
+      }
+      columns={[
+        {
+          key: 'channelName',
+          label: '계정',
+        },
+        {
+          key: 'category',
+          label: '카테고리',
+          render: (value: string) => {
+            return (
+              <Badge size="2xsmall" color="purple">
+                {value}
+              </Badge>
+            );
           },
-          {
-            key: 'category',
-            label: '카테고리',
-            render: (value: string) => {
-              return (
-                <Badge size="2xsmall" color="purple">
-                  {value}
-                </Badge>
-              );
-            },
+        },
+        {
+          key: 'followerCount',
+          label: '팔로워 수',
+          render: (value: number) => {
+            return numberToKorean(value);
           },
-          {
-            key: 'followerCount',
-            label: '팔로워 수',
-            render: (value: number) => {
-              return numberToKorean(value);
-            },
+        },
+        {
+          key: 'gender',
+          label: '성별',
+          render: (value: Gender) => {
+            return getGender(value);
           },
-          {
-            key: 'gender',
-            label: '성별',
-            render: (value: Gender) => {
-              return getGender(value);
-            },
+        },
+        {
+          key: 'id',
+          render: (_value: React.Key, item: IInfluencer) => {
+            return (
+              <div className="flex flex-row justify-end w-full gap-3">
+                <Button size="small" variant="secondary" onClick={(e) => handleClickDelete(e, item.id)}>
+                  삭제
+                </Button>
+              </div>
+            );
           },
-          {
-            key: 'id',
-            render: (_value: React.Key, item: IInfluencer) => {
-              return (
-                <div className="flex flex-row justify-end w-full gap-3">
-                  <Button size="small" variant="secondary" onClick={(e) => handleClickDelete(e, item.id)}>
-                    삭제
-                  </Button>
-                </div>
-              );
-            },
-          },
-        ]}
-        data={event?.influencers ?? []}
-        selectable
-        columnsVisibility
-        onSelectChange={(selected) => setSelected(selected)}
-        pagination={false}
-      />
-    </div>
+        },
+      ]}
+      data={event?.influencers ?? []}
+      selectable
+      columnsVisibility
+      onSelectChange={(selected) => setSelected(selected)}
+      pagination={false}
+    />
   );
 };

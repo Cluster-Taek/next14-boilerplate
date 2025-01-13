@@ -57,6 +57,7 @@ export const isEmpty = (value: unknown) => {
   return false;
 };
 
+// eslint-disable-next-line @typescript-eslint/no-explicit-any
 export const mapKeysUsingHeaderMap = (data: any[], headerMap: Record<string, string>) => {
   return data.map((item) => {
     return Object.fromEntries(Object.entries(item).map(([key, value]) => [headerMap[key] || key, value]));
