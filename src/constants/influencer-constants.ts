@@ -16,3 +16,20 @@ export const TARGET_OPTIONS = [
   '아이돌',
   '배우',
 ];
+
+export const INFLUENCER_HEADER_MAP = {
+  지역: 'region',
+  연령대: 'ageGroup',
+  프로젝트: 'projectType',
+  카테고리: 'category',
+  타겟: 'target',
+  성별: 'gender',
+  직업: 'profession',
+  '이름 / 채널명': 'channelName',
+  'SNS URL': 'snsUrl',
+  '팔로워 수': 'followerCount',
+  'Blog URL': 'blogUrl',
+  '일일 방문자 수': 'dailyVisitorCount',
+  '포스팅 비용': 'postingCost',
+  연락처: 'contact',
+};

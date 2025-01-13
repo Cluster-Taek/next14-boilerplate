@@ -8,6 +8,7 @@ interface IGetSheetProps {
   sheetName?: string;
   headers?: string[];
   rowWidth?: number | number[];
+  headerIndex?: number;
 }
 
 const useExcel = () => {
@@ -17,20 +18,25 @@ const useExcel = () => {
     sheetName = 'SheetJS',
     headers,
     rowWidth,
+    headerIndex = 1,
   }: IGetSheetProps) => {
     const wb = new Excel.Workbook();
     const sheet = wb.addWorksheet(sheetName);
+
+    for (let i = 0; i < headerIndex - 1; i++) {
+      sheet.addRow({});
+    }
 
     // 헤더 생성
     const headerRow = sheet.addRow(headers ?? Object.keys(data[0]));
     headerRow.height = 25;
     headerRow.eachCell((cell, colNum) => {
-      cell.font = { bold: true, size: 14 };
+      cell.font = { bold: true, size: 9, color: { argb: 'FFFFFF' } };
       cell.alignment = { vertical: 'middle', horizontal: 'center' };
       cell.fill = {
         type: 'pattern',
         pattern: 'solid',
-        fgColor: { argb: 'FFEEEEEE' },
+        fgColor: { argb: '00000000' },
       };
       if (typeof rowWidth === 'number') {
         sheet.getColumn(colNum).width = rowWidth ?? 20;
@@ -40,12 +46,12 @@ const useExcel = () => {
     });
 
     // 데이터 생성
-    data.forEach((row) => {
+    data.forEach((row, index) => {
       const dataRow = sheet.addRow(Object.values(row));
       dataRow.height = 20;
       dataRow.eachCell((cell) => {
         cell.alignment = { vertical: 'middle', horizontal: 'center' };
-        cell.font = { size: 12 };
+        cell.font = { size: 9 };
       });
     });
 
@@ -58,7 +64,15 @@ const useExcel = () => {
     saveAs(blob, fileName);
   };
 
-  const sheetToJSON = async (file: File) => {
+  const sheetToJSON = async (
+    file: File,
+    option?: {
+      headerMap?: Record<string, string>;
+      headerIndex?: number;
+      rowStart?: number;
+      columnStart?: number;
+    }
+  ) => {
     const wb = new Excel.Workbook();
     const reader = new FileReader();
 
@@ -76,17 +90,18 @@ const useExcel = () => {
             return;
           }
           const rows = sheet.getSheetValues();
-          const headers = rows[1];
+          const headers = rows[option?.headerIndex ?? 1];
           const headerLength = headers?.length ?? 0;
           if (!headers) return reject(new Error('Failed to load headers'));
-          const result = rows.slice(2).map((row) => {
+          const result = rows.slice(option?.rowStart ?? 2).map((row) => {
             // eslint-disable-next-line
             const obj = {} as any;
-            for (let i = 2; i < (headerLength as unknown as number); i++) {
+            for (let i = option?.columnStart ?? 2; i < (headerLength as unknown as number); i++) {
               // @ts-expect-error: 타입 이슈로 인해 상단에서 검증
               const key = headers.at(i) as string;
+              const mappedKey = option?.headerMap?.[key.trim()] ?? key;
               // @ts-expect-error: 타입 이슈로 인해 상단에서 검증
-              obj[key] = row[i];
+              obj[mappedKey] = row[i]?.text ?? row[i];
             }
             return obj;
           });

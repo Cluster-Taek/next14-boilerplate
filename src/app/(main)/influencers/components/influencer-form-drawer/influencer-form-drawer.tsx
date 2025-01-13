@@ -5,7 +5,7 @@ import {
   PROJECT_OPTIONS,
   REGION_OPTIONS,
   TARGET_OPTIONS,
-} from '@/constants/influencer-option-constants';
+} from '@/constants/influencer-constants';
 import { REGEX } from '@/constants/regex-constants';
 import {
   IInfluencerFormValue,

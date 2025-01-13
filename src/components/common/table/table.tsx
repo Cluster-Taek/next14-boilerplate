@@ -96,7 +96,7 @@ export const Table = <T extends ObjectWithId>({
   }, [selected, onSelectChange]);
 
   return (
-    <div className="flex h-full flex-col overflow-hidden !border-t-0">
+    <div className="flex h-full flex-col w-full overflow-auto !border-t-0">
       <UiTable>
         <UiTable.Header>
           <UiTable.Row>
@@ -195,7 +195,7 @@ export const Table = <T extends ObjectWithId>({
                   >
                     <>
                       {column.render && column.render(item[column.key] as unknown, item)}
-                      {!column.render && <>{item[column.key] as string}</>}
+                      {!column.render && <>{(item[column.key] as string) ?? '-'}</>}
                     </>
                   </UiTable.Cell>
                 ))}
