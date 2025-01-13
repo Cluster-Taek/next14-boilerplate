@@ -49,8 +49,6 @@ export const Table = <T extends ObjectWithId>({
     return columns.filter((column) => visibleColumns.some((vc) => vc.key === column.key));
   }, [columns, visibleColumns]);
 
-  console.log('fileteredColumns', fileteredColumns);
-
   const pageCount = useMemo(() => {
     return Math.ceil(count / pageSize);
   }, [count, pageSize]);

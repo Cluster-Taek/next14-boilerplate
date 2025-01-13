@@ -86,7 +86,7 @@ export const EventInfluencersListTab = ({ eventId }: IEventInfluencersListTabPro
       <Table<IInfluencer>
         columns={[
           {
-            key: 'snsId',
+            key: 'channelName',
             label: '계정',
           },
           {
@@ -101,7 +101,7 @@ export const EventInfluencersListTab = ({ eventId }: IEventInfluencersListTabPro
             },
           },
           {
-            key: 'followers',
+            key: 'followerCount',
             label: '팔로워 수',
             render: (value: number) => {
               return numberToKorean(value);

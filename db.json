@@ -12,41 +12,66 @@
   "influencers": [
     {
       "id": "1",
-      "snsId": "@johndoe",
-      "name": "John Doe",
-      "type": "INFLUENCER",
-      "category": "Fitness",
-      "gender": "M",
-      "followers": 150000,
-      "birthDate": "1990-01-15T00:00:00Z",
-      "project": "Summer Body Campaign",
-      "memo": "Focuses on fitness tips and workout routines.",
-      "amount": 5000,
-      "createdAt": "2024-12-30T12:00:00+00:00",
-      "updatedAt": "2024-12-31T15:30:00+00:00",
-      "createdBy": "admin"
+      "region": "서울",
+      "ageGroup": "20대",
+      "projectType": "이벤트",
+      "category": "인플루언서",
+      "target": "뷰티",
+      "gender": "F",
+      "profession": "메이크업 아티스트",
+      "channelName": "BeautyWithHana",
+      "snsUrl": "https://www.instagram.com/BeautyWithHana",
+      "followerCount": 120000,
+      "blogUrl": "https://www.beautywithhana.kr",
+      "dailyVisitorCount": 5000,
+      "postingCost": 400,
+      "contact": "hana@beautywithhana.kr",
+      "type": "INFLUENCER"
     },
     {
       "id": "2",
-      "snsId": "@janedoe",
-      "name": "Jane Doe",
-      "type": "CELEBRITY",
-      "category": "Fashion",
-      "gender": "F",
-      "followers": 1200000,
-      "birthDate": "1985-05-20T00:00:00Z",
-      "project": "Luxury Winter Collection",
-      "memo": "Promotes high-end fashion and lifestyle products.",
-      "amount": 20000,
-      "createdAt": "2024-12-29T09:00:00+00:00",
-      "updatedAt": "2024-12-31T18:00:00+00:00",
-      "createdBy": "editor"
+      "region": "경기",
+      "ageGroup": "30대",
+      "projectType": "시딩",
+      "category": "유튜버",
+      "target": "F&B",
+      "gender": "M",
+      "profession": "푸드 크리에이터",
+      "channelName": "TastyJourneyWithMin",
+      "snsUrl": "https://www.youtube.com/TastyJourneyWithMin",
+      "followerCount": 200000,
+      "blogUrl": "https://www.tastyjourney.com",
+      "dailyVisitorCount": 8000,
+      "postingCost": 700,
+      "contact": "min@tastyjourney.com",
+      "type": "INFLUENCER"
+    },
+    {
+      "id": "3",
+      "region": "제주",
+      "ageGroup": "40대",
+      "projectType": "이벤트",
+      "category": "스타일리스트",
+      "target": "공간",
+      "gender": "M",
+      "profession": "인테리어 스타일리스트",
+      "channelName": "IslandSpacesByJae",
+      "snsUrl": "https://www.instagram.com/IslandSpacesByJae",
+      "followerCount": 50000,
+      "blogUrl": "https://www.islandspacesbyjae.com",
+      "dailyVisitorCount": 2000,
+      "postingCost": 300,
+      "contact": "jae@islandspacesbyjae.com",
+      "type": "CELEBRITY"
     }
   ],
   "events": [
     {
       "id": "event-1",
-      "eventType": ["Promotion", "Campaign"],
+      "eventType": [
+        "Promotion",
+        "Campaign"
+      ],
       "title": "Spring Fashion Week 2025",
       "description": "Showcasing the latest trends for Spring 2025.",
       "startDate": "2025-03-15T10:00:00Z",
@@ -185,7 +210,9 @@
     },
     {
       "id": "event-2",
-      "eventType": ["Product Launch"],
+      "eventType": [
+        "Product Launch"
+      ],
       "title": "EcoSmart Product Line Introduction",
       "description": "Introducing the EcoSmart sustainable products.",
       "startDate": "2025-04-10T09:00:00Z",
@@ -282,7 +309,10 @@
     },
     {
       "id": "event-3",
-      "eventType": ["Webinar", "Education"],
+      "eventType": [
+        "Webinar",
+        "Education"
+      ],
       "title": "Tech Future Trends 2025",
       "description": "Exploring future trends in technology and innovation.",
       "startDate": "2025-05-01T12:00:00Z",
@@ -363,7 +393,9 @@
     },
     {
       "id": "event-4",
-      "eventType": ["Charity"],
+      "eventType": [
+        "Charity"
+      ],
       "title": "Health Awareness Campaign 2025",
       "description": "Promoting health and wellness initiatives.",
       "startDate": "2025-06-10T09:00:00Z",
@@ -460,7 +492,10 @@
     },
     {
       "id": "event-5",
-      "eventType": ["Entertainment", "Festival"],
+      "eventType": [
+        "Entertainment",
+        "Festival"
+      ],
       "title": "Summer Music Fest 2025",
       "description": "Annual music festival featuring top artists.",
       "startDate": "2025-07-20T15:00:00Z",

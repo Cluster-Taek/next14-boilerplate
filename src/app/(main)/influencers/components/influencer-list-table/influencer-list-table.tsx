@@ -9,12 +9,10 @@ import {
   useDeleteInfluencerMutation,
   useInfluencers,
 } from '@/lib/influencer';
-import { ISODateString } from '@/types/common';
 import { Gender, IInfluencer } from '@/types/influencer';
 import { numberToKorean } from '@/utils/utils';
 import { Check, CloudArrowDown, CloudArrowUp } from '@medusajs/icons';
 import { Badge, Button, Container, Text, usePrompt } from '@medusajs/ui';
-import dayjs from 'dayjs';
 import { usePathname, useRouter } from 'next/navigation';
 import { useMemo, useState } from 'react';
 
@@ -38,12 +36,6 @@ export const InfluencerListTable = () => {
   if (isError) {
     throw error;
   }
-
-  const getAgeGeneration = (birthDate: string) => {
-    const age = dayjs().diff(dayjs(birthDate), 'y');
-    const generation = Math.floor(age / 10) * 10;
-    return `${generation}대`;
-  };
 
   const getGender = (gender: Gender) => {
     return gender === 'F' ? '여' : '남';
@@ -109,8 +101,16 @@ export const InfluencerListTable = () => {
       <Table<IInfluencer>
         columns={[
           {
-            key: 'snsId',
-            label: '계정',
+            key: 'region',
+            label: '지역',
+          },
+          {
+            key: 'ageGroup',
+            label: '연령대',
+          },
+          {
+            key: 'projectType',
+            label: '프로젝트 유형',
           },
           {
             key: 'category',
@@ -124,6 +124,10 @@ export const InfluencerListTable = () => {
             },
           },
           {
+            key: 'target',
+            label: '대상 산업/분야',
+          },
+          {
             key: 'gender',
             label: '성별',
             render: (value: Gender) => {
@@ -131,29 +135,59 @@ export const InfluencerListTable = () => {
             },
           },
           {
-            key: 'birthDate',
-            label: '연령대',
-            render: (value: ISODateString) => {
-              return getAgeGeneration(value);
+            key: 'profession',
+            label: '직업',
+          },
+          {
+            key: 'channelName',
+            label: '이름/채널명',
+          },
+          {
+            key: 'snsUrl',
+            label: 'SNS URL',
+            render: (value: string) => {
+              return (
+                <a href={value} target="_blank" rel="noreferrer" className="text-blue-500">
+                  {value}
+                </a>
+              );
             },
           },
           {
-            key: 'followers',
+            key: 'followerCount',
             label: '팔로워 수',
             render: (value: number) => {
               return numberToKorean(value);
             },
           },
           {
-            key: 'project',
-            label: '프로젝트',
+            key: 'blogUrl',
+            label: '블로그 URL',
+            render: (value: string) => {
+              return (
+                <a href={value} target="_blank" rel="noreferrer" className="text-blue-500">
+                  {value}
+                </a>
+              );
+            },
           },
           {
-            key: 'amount',
-            label: '원고료',
+            key: 'dailyVisitorCount',
+            label: '일일 방문자 수',
+            render: (value: number) => {
+              return numberToKorean(value);
+            },
+          },
+          {
+            key: 'postingCost',
+            label: '포스팅 비용',
             render: (value: number) => {
               return `${numberToKorean(value)}원`;
             },
+          },
+          {
+            key: 'contact',
+            label: '연락처',
           },
           {
             key: 'id',
@@ -177,6 +211,7 @@ export const InfluencerListTable = () => {
         currentPage={currentPage}
         setCurrentPage={setCurrentPage}
         onClickRow={(item) => router.push(`${pathname}/${item.id}/edit`)}
+        columnsVisibility
       />
     </Container>
   );
