@@ -2,8 +2,6 @@
 
 import { Table } from '@/components/common/table';
 import { UploadButton } from '@/components/common/upload-button';
-import { INFLUENCER_HEADER_MAP } from '@/constants/influencer-constants';
-import useExcel from '@/hooks/use-excel';
 import useInfluencersExcel from '@/hooks/use-influencers-excel';
 import {
   IInfluencerFormValue,

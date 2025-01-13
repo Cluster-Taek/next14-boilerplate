@@ -2,14 +2,13 @@
 
 import { Table } from '@/components/common/table';
 import { UploadButton } from '@/components/common/upload-button';
-import useExcel from '@/hooks/use-excel';
 import useInfluencersExcel from '@/hooks/use-influencers-excel';
 import { useEvent } from '@/lib/event';
 import { IInfluencerFormValue, useBulkCreateInfluencerMutation } from '@/lib/influencer';
 import { Gender, IInfluencer } from '@/types/influencer';
 import { numberToKorean } from '@/utils/utils';
 import { CloudArrowDown, CloudArrowUp, Envelope } from '@medusajs/icons';
-import { Badge, Button, Text, usePrompt } from '@medusajs/ui';
+import { Badge, Button, usePrompt } from '@medusajs/ui';
 import { useState } from 'react';
 
 interface IEventInfluencersListTabProps {

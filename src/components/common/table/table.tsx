@@ -1,5 +1,5 @@
 import { CogSixTooth, ExclamationCircle } from '@medusajs/icons';
-import { Button, Checkbox, Container, DropdownMenu, Text, Table as UiTable } from '@medusajs/ui';
+import { Button, Checkbox, DropdownMenu, Text, Table as UiTable } from '@medusajs/ui';
 import { useCallback, useEffect, useMemo, useState } from 'react';
 
 // eslint-disable-next-line
