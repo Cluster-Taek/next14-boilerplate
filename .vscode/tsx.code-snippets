@@ -1,0 +1,20 @@
+{
+  "React Component From Filename": {
+    "scope": "typescriptreact",
+    "prefix": "tsx",
+    "body": [
+      "interface I${TM_FILENAME_BASE/(\\w+)(-)?/${1:/capitalize}/g}Props {",
+      "  children?: React.ReactNode;",
+      "}",
+      "",
+      "export const ${TM_FILENAME_BASE/(\\w+)(-)?/${1:/capitalize}/g} = ({ children }: I${TM_FILENAME_BASE/(\\w+)(-)?/${1:/capitalize}/g}Props) => {",
+      "  return (",
+      "    <div className=\"block\">",
+      "      <div>{children}</div>",
+      "    </div>",
+      "  );",
+      "};",
+      "",
+    ],
+  },
+}

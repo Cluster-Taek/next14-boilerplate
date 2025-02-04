@@ -1,0 +1,14 @@
+{
+  "users": [
+    {
+      "id": "1",
+      "name": "John Doe",
+      "region": "서울"
+    },
+    {
+      "id": "2",
+      "name": "Jane Doe",
+      "region": "경기"
+    }
+  ]
+}
