@@ -2,8 +2,10 @@ import axios from 'axios';
 import { getSession, signOut } from 'next-auth/react';
 import { redirect } from 'next/navigation';
 
+type Body = Record<string, unknown> | Record<string, unknown>[];
+
 // eslint-disable-next-line @typescript-eslint/no-explicit-any
-const _fetchApi = async <T = object>(method: string, url: string, body?: Record<string, unknown>): Promise<T> => {
+const _fetchApi = async <T = object>(method: string, url: string, body?: Body): Promise<T> => {
   const session = await getSession();
   const response = await axios({
     method,
@@ -26,10 +28,10 @@ const _fetchApi = async <T = object>(method: string, url: string, body?: Record<
   return response?.data;
 };
 type FetchApi = {
-  post: <T = object>(url: string, body?: Record<string, unknown>) => Promise<T>;
+  post: <T = object>(url: string, body?: Body) => Promise<T>;
   get: <T = object>(url: string, params?: Record<string, unknown>) => Promise<T>;
-  patch: <T = object>(url: string, body?: Record<string, unknown>) => Promise<T>;
-  put: <T = object>(url: string, body?: Record<string, unknown>) => Promise<T>;
+  patch: <T = object>(url: string, body?: Body) => Promise<T>;
+  put: <T = object>(url: string, body?: Body) => Promise<T>;
   delete: <T = object>(url: string) => Promise<T>;
 };
 
