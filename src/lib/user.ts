@@ -1,6 +1,6 @@
 import { fetchApi } from './base';
-import { IPageable } from '@/types/pageable';
-import { IUser } from '@/types/user';
+import { type IPageable } from '@/types/pageable';
+import { type IUser } from '@/types/user';
 import { useMutation, useQuery, useQueryClient } from '@tanstack/react-query';
 
 export interface IUsersParams {

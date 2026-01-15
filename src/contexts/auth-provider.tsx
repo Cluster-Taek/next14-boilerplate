@@ -1,10 +1,10 @@
 'use client';
 
 import Spinner from '@/components/common/spinner';
-import { Session } from 'next-auth';
+import { type Session } from 'next-auth';
 import { useSession } from 'next-auth/react';
 import { usePathname, useRouter } from 'next/navigation';
-import React, { PropsWithChildren, createContext, useContext, useEffect } from 'react';
+import React, { type PropsWithChildren, createContext, useContext, useEffect } from 'react';
 
 interface IAuthContext {
   initialized: boolean;

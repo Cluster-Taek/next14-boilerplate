@@ -3,8 +3,8 @@
 /**
  * name, email, image 외에 추가 속성을 정의
  */
-import { UserType } from './account';
-import { DefaultSession } from 'next-auth';
+import { type UserType } from './account';
+import { type DefaultSession } from 'next-auth';
 
 declare module 'next-auth' {
   interface User {

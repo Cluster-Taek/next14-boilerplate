@@ -6,7 +6,7 @@ const Spinner = () => {
   const spinnerStyle = SpinnerSva();
   return (
     <Box className={spinnerStyle.wrapper}>
-      <BarLoader color={'#000'} loading={true} />
+      <BarLoader color="#000" loading={true} />
     </Box>
   );
 };

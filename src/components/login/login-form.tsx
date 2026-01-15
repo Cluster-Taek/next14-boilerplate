@@ -1,7 +1,7 @@
 'use client';
 
 import Button from '@/components/common/button';
-import { ILoginFormValue } from '@/lib/common/account';
+import { type ILoginFormValue } from '@/lib/common/account';
 import { sva } from '@/styled-system/css';
 import { Box } from '@/styled-system/jsx';
 import { signIn } from 'next-auth/react';

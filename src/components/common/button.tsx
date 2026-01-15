@@ -1,10 +1,10 @@
 import { sva } from '@/styled-system/css';
-import { ButtonHTMLAttributes, DetailedHTMLProps } from 'react';
+import { type ButtonHTMLAttributes } from 'react';
 
 const Button = ({
   children,
   ...props
-}: DetailedHTMLProps<ButtonHTMLAttributes<HTMLButtonElement>, HTMLButtonElement>) => {
+}: ButtonHTMLAttributes<HTMLButtonElement>) => {
   const buttonStyle = ButtonSva();
   return (
     <button className={buttonStyle.wrapper} {...props}>

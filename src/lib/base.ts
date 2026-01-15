@@ -4,12 +4,12 @@ import { redirect } from 'next/navigation';
 
 type Body = Record<string, unknown> | Record<string, unknown>[];
 
-// eslint-disable-next-line @typescript-eslint/no-explicit-any
+ 
 const _fetchApi = async <T = object>(method: string, url: string, body?: Body): Promise<T> => {
   const session = await getSession();
   const response = await axios({
     method,
-    url: url,
+    url,
     data: method !== 'GET' ? body : undefined,
     params: method === 'GET' ? body : undefined,
     headers: {

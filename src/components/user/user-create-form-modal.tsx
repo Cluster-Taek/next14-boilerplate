@@ -1,7 +1,7 @@
 import Button from '@/components/common/button';
 import { MODAL } from '@/constants/modal-key-constants';
 import useModals from '@/hooks/use-modals';
-import { IUserCreateFormValue, useCreateUserMutation } from '@/lib/user';
+import { type IUserCreateFormValue, useCreateUserMutation } from '@/lib/user';
 import { sva } from '@/styled-system/css';
 import { Controller, useForm } from 'react-hook-form';
 
