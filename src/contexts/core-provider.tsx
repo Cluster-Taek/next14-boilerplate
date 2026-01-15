@@ -1,5 +1,4 @@
 import AuthProvider from './auth-provider';
-import ModalProvider from './modal-provider';
 import { QueryProvider } from './query-provider';
 import SessionProvider from '@/contexts/session-provider';
 
@@ -11,9 +10,7 @@ const CoreProvider = ({ children }: ICoreProviderProps) => {
   return (
     <SessionProvider>
       <AuthProvider>
-        <QueryProvider>
-          <ModalProvider>{children}</ModalProvider>
-        </QueryProvider>
+        <QueryProvider>{children}</QueryProvider>
       </AuthProvider>
     </SessionProvider>
   );

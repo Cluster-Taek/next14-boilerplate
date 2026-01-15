@@ -1,16 +1,15 @@
 'use client';
 
 import Button from '@/components/common/button';
-import UserCreateFormModal from '@/components/user/user-create-form-modal';
 import { MODAL } from '@/constants/modal-key-constants';
-import useModals from '@/hooks/use-modals';
+import { useModalStore } from '@/stores/modal-store';
 import { useUsers } from '@/lib/user';
 import { sva } from '@/styled-system/css';
 import { Box } from '@/styled-system/jsx';
 
 const Page = () => {
   const pageStyle = PageSva();
-  const { openModal } = useModals();
+  const { openModal } = useModalStore();
 
   const { data: users } = useUsers({
     _page: 1,
@@ -18,10 +17,7 @@ const Page = () => {
   });
 
   const handleClickCreateButton = () => {
-    openModal({
-      id: MODAL.USER_CREATE,
-      component: <UserCreateFormModal />,
-    });
+    openModal(MODAL.USER_CREATE);
   };
 
   return (
