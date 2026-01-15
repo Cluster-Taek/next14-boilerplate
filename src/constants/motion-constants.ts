@@ -1,4 +1,4 @@
-import { HTMLMotionProps } from 'framer-motion';
+import { type HTMLMotionProps } from 'motion/react';
 
 export type MotionType = 'SLIDE' | 'FADE' | 'POP' | 'DRAWER' | 'DROPDOWN';
 
