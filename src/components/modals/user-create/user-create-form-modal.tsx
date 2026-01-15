@@ -1,13 +1,16 @@
+'use client';
+
 import Button from '@/components/common/button';
-import { MODAL } from '@/constants/modal-key-constants';
-import useModals from '@/hooks/use-modals';
 import { type IUserCreateFormValue, useCreateUserMutation } from '@/lib/user';
 import { sva } from '@/styled-system/css';
 import { Controller, useForm } from 'react-hook-form';
 
-const UserCreateFormModal = () => {
+interface UserCreateFormModalProps {
+  onClose: () => void;
+}
+
+const UserCreateFormModal = ({ onClose }: UserCreateFormModalProps) => {
   const userCreateFormStyle = UserCreateFormModalSva();
-  const { closeModal } = useModals();
 
   const {
     handleSubmit: formHandleSubmit,
@@ -25,7 +28,7 @@ const UserCreateFormModal = () => {
   const handleSubmit = formHandleSubmit(async (data) => {
     createUser(data, {
       onSuccess: () => {
-        closeModal(MODAL.USER_CREATE);
+        onClose();
       },
       onError: (error) => {
         setError('name', {

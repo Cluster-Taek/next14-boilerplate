@@ -1,32 +1,32 @@
 'use client';
 
 import { MOTION } from '@/constants/motion-constants';
-import { ModalContext } from '@/contexts/modal-provider';
-import useModals from '@/hooks/use-modals';
+import { MODAL_COMPONENTS } from './modal-registry';
+import { useModalStore } from '@/stores/modal-store';
 import { sva } from '@/styled-system/css';
 import { Box } from '@/styled-system/jsx';
 import { motion } from 'motion/react';
-import { useContext, useEffect } from 'react';
 
 const Modal = () => {
   const modalStyle = ModalSva();
-  const { openedModals } = useContext(ModalContext);
-  const { closeModal } = useModals();
-
-  useEffect(() => {
-    document.body.style.overflow = openedModals.length > 0 ? 'hidden' : 'auto';
-  }, [openedModals]);
+  const { openedModalIds, modalPropsMap, closeModal } = useModalStore();
 
   return (
     <>
-      {openedModals.map((modal, index) => {
-        const { id, component } = modal;
+      {openedModalIds.map((modalId, index) => {
+        const ModalComponent = MODAL_COMPONENTS[modalId];
+        const modalProps = modalPropsMap[modalId];
+
+        if (!ModalComponent) {
+          console.error(`Modal component not found for ID: ${modalId}`);
+          return null;
+        }
 
         return (
-          <Box className={modalStyle.wrapper} key={index}>
-            <Box className={modalStyle.dimmed} onClick={() => closeModal(id)} />
+          <Box className={modalStyle.wrapper} key={`${modalId}-${index}`}>
+            <Box className={modalStyle.dimmed} onClick={() => closeModal(modalId)} />
             <motion.div className={modalStyle.modal} {...MOTION.POP}>
-              {component}
+              <ModalComponent onClose={() => closeModal(modalId)} {...(modalProps || {})} />
             </motion.div>
           </Box>
         );

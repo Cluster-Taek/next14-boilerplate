@@ -1,5 +1,5 @@
 import './globals.css';
-import Modal from '@/components/common/modal';
+import { Modal } from '@/components/common/modal';
 import CoreProvider from '@/contexts/core-provider';
 import dayjs from 'dayjs';
 import 'dayjs/locale/ko';
