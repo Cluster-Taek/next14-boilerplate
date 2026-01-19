@@ -14,7 +14,12 @@
     "type-check": "tsc --noEmit",
     "fsd": "steiger ./src",
     "pre-commit": "lint-staged && pnpm type-check && pnpm fsd",
-    "server": "npx json-server --watch db.json --port 4001"
+    "server": "npx json-server --watch db.json --port 4001",
+    "cli:dev": "cd cli && pnpm dev",
+    "cli:build": "cd cli && pnpm build",
+    "cli:test": "cd cli && node dist/index.js test-project",
+    "cli:link": "cd cli && npm link",
+    "cli:publish": "cd cli && pnpm publish --access public"
   },
   "dependencies": {
     "@hookform/resolvers": "^5.2.2",

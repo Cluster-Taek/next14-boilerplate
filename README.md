@@ -1,9 +1,24 @@
-This is a [Next.js](https://nextjs.org) boilerplate project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+This is a [Next.js](https://nextjs.org) boilerplate project with Feature-Sliced Design architecture.
+
+## Quick Start
+
+The easiest way to create a new project with this boilerplate:
+
+```bash
+npx create-next-fsd my-app
+cd my-app
+pnpm dev
+```
+
+Open [http://localhost:3000](http://localhost:3000) to see your app.
+
+For more CLI options, see [CLI documentation](./cli/README.md).
 
 ## Features
 
 - [Next.js 14 (App Router)](https://nextjs.org)
 - [TypeScript](https://www.typescriptlang.org)
+- [Feature-Sliced Design](https://feature-sliced.design) - Architectural methodology
 - [Panda CSS](https://panda-css.com)
 - [Auth.js](https://authjs.dev)
 - [JSON Server](https://github.com/typicode/json-server)
@@ -12,7 +27,9 @@ This is a [Next.js](https://nextjs.org) boilerplate project bootstrapped with [`
 - [Motion](https://motion.dev)
 - [React Icons](https://react-icons.github.io/react-icons)
 
-## Getting Started
+## Manual Setup
+
+If you want to clone this repository directly instead of using the CLI:
 
 First, run the development server:
 

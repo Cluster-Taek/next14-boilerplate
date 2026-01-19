@@ -1,0 +1,50 @@
+{
+  "name": "create-next-fsd",
+  "version": "1.0.0",
+  "description": "CLI tool to scaffold Next.js projects with Feature-Sliced Design architecture",
+  "type": "module",
+  "author": "Cluster-Taek",
+  "license": "MIT",
+  "keywords": [
+    "nextjs",
+    "next",
+    "feature-sliced-design",
+    "fsd",
+    "boilerplate",
+    "cli",
+    "scaffold",
+    "template"
+  ],
+  "bin": {
+    "create-next-fsd": "./dist/index.js"
+  },
+  "files": [
+    "dist",
+    "README.md"
+  ],
+  "engines": {
+    "node": ">=20.9.0"
+  },
+  "scripts": {
+    "dev": "tsc --watch",
+    "build": "rm -rf dist && tsc && chmod +x dist/index.js",
+    "prepublishOnly": "pnpm build"
+  },
+  "dependencies": {
+    "chalk": "^5.3.0",
+    "commander": "^12.1.0",
+    "execa": "^9.5.2",
+    "fs-extra": "^11.2.0",
+    "inquirer": "^9.3.8",
+    "ora": "^8.1.1",
+    "tiged": "^2.12.7",
+    "validate-npm-package-name": "^6.0.0"
+  },
+  "devDependencies": {
+    "@types/fs-extra": "^11.0.4",
+    "@types/inquirer": "^9.0.7",
+    "@types/node": "^22.10.5",
+    "@types/validate-npm-package-name": "^4.0.2",
+    "typescript": "^5.7.3"
+  }
+}
