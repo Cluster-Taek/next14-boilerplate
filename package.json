@@ -3,11 +3,17 @@
   "version": "0.1.0",
   "private": true,
   "scripts": {
-    "prepare": "panda codegen",
+    "prepare": "panda codegen && husky",
     "dev": "PORT=4000 next dev",
     "build": "next build",
     "start": "PORT=4000 next start",
     "lint": "next lint",
+    "lint:fix": "next lint --fix",
+    "format": "prettier --write \"**/*.{ts,tsx,js,jsx,json,md,yml,yaml}\"",
+    "format:check": "prettier --check \"**/*.{ts,tsx,js,jsx,json,md,yml,yaml}\"",
+    "type-check": "tsc --noEmit",
+    "fsd": "steiger ./src",
+    "pre-commit": "lint-staged && pnpm type-check && pnpm fsd",
     "server": "npx json-server --watch db.json --port 4001"
   },
   "dependencies": {
@@ -28,6 +34,8 @@
     "zustand": "^5.0.10"
   },
   "devDependencies": {
+    "@commitlint/cli": "^20.3.1",
+    "@commitlint/config-conventional": "^20.3.1",
     "@eslint/eslintrc": "^3.1.0",
     "@eslint/js": "^9.14.0",
     "@feature-sliced/steiger-plugin": "^0.5.7",
@@ -48,7 +56,9 @@
     "eslint-plugin-prettier": "^5.2.1",
     "eslint-plugin-react": "^7.37.5",
     "eslint-plugin-react-hooks": "^7.0.1",
+    "husky": "^9.1.7",
     "json-server": "^1.0.0-beta.3",
+    "lint-staged": "^16.2.7",
     "prettier": "^3.3.3",
     "steiger": "^0.5.11",
     "typescript": "^5",
@@ -63,5 +73,18 @@
     "node": ">=20.9.0",
     "npm": ">=10.0.0"
   },
-  "packageManager": "pnpm@9.15.4"
+  "packageManager": "pnpm@9.15.4",
+  "lint-staged": {
+    "*.{ts,tsx}": [
+      "eslint --fix",
+      "prettier --write"
+    ],
+    "*.{js,jsx,mjs,cjs}": [
+      "eslint --fix",
+      "prettier --write"
+    ],
+    "*.{json,md,yml,yaml}": [
+      "prettier --write"
+    ]
+  }
 }
