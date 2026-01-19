@@ -4,9 +4,9 @@
   "private": true,
   "scripts": {
     "prepare": "panda codegen && husky",
-    "dev": "PORT=4000 next dev",
+    "dev": "PORT=3000 next dev",
     "build": "next build",
-    "start": "PORT=4000 next start",
+    "start": "PORT=3000 next start",
     "lint": "next lint",
     "lint:fix": "next lint --fix",
     "format": "prettier --write \"**/*.{ts,tsx,js,jsx,json,md,yml,yaml}\"",
