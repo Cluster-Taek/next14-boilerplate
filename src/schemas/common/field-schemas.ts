@@ -1,5 +1,5 @@
 import { z } from 'zod';
-import { REGEX } from '@/constants/regex-constants';
+import { REGEX } from '@/shared/config/regex';
 import { VALIDATION_MESSAGES } from './validation-messages';
 
 /**
