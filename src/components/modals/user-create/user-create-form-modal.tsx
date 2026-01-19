@@ -1,9 +1,11 @@
 'use client';
 
 import Button from '@/components/common/button';
-import { type IUserCreateFormValue, useCreateUserMutation } from '@/lib/user';
+import { useCreateUserMutation } from '@/lib/user';
 import { sva } from '@/styled-system/css';
 import { Controller, useForm } from 'react-hook-form';
+import { zodResolver } from '@hookform/resolvers/zod';
+import { userCreateFormSchema, type UserCreateFormValues } from '@/schemas';
 
 interface UserCreateFormModalProps {
   onClose: () => void;
@@ -17,7 +19,8 @@ const UserCreateFormModal = ({ onClose }: UserCreateFormModalProps) => {
     formState,
     control,
     setError,
-  } = useForm<IUserCreateFormValue>({
+  } = useForm<UserCreateFormValues>({
+    resolver: zodResolver(userCreateFormSchema),
     defaultValues: {
       name: '',
     },
@@ -44,7 +47,6 @@ const UserCreateFormModal = ({ onClose }: UserCreateFormModalProps) => {
       <Controller
         control={control}
         name="name"
-        rules={{ required: 'Name is required' }}
         render={({ field }) => (
           <input type="text" {...field} className={userCreateFormStyle.input} placeholder="name" />
         )}

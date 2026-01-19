@@ -1,12 +1,13 @@
 'use client';
 
 import Button from '@/components/common/button';
-import { type ILoginFormValue } from '@/lib/common/account';
 import { sva } from '@/styled-system/css';
 import { Box } from '@/styled-system/jsx';
 import { signIn } from 'next-auth/react';
 import { useSearchParams } from 'next/navigation';
 import { Controller, useForm } from 'react-hook-form';
+import { zodResolver } from '@hookform/resolvers/zod';
+import { loginFormSchema, type LoginFormValues } from '@/schemas';
 
 const LoginForm = () => {
   const loginFormStyle = LoginFormSva();
@@ -15,7 +16,8 @@ const LoginForm = () => {
     handleSubmit: formHandleSubmit,
     formState,
     control,
-  } = useForm<ILoginFormValue>({
+  } = useForm<LoginFormValues>({
+    resolver: zodResolver(loginFormSchema),
     defaultValues: {
       login: 'test@gmail.com',
       password: '1234',
@@ -33,14 +35,12 @@ const LoginForm = () => {
         <Controller
           control={control}
           name="login"
-          rules={{ required: 'Email is required' }}
           render={({ field }) => <input type="text" {...field} className={loginFormStyle.input} placeholder="email" />}
         />
         {formState.errors.login && <Box className={loginFormStyle.error}>{formState.errors.login.message}</Box>}
         <Controller
           control={control}
           name="password"
-          rules={{ required: 'Password is required' }}
           render={({ field }) => (
             <input type="password" {...field} className={loginFormStyle.input} placeholder="password" />
           )}

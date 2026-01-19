@@ -1,9 +1,5 @@
 import { fetchApi } from '../base';
-
-export interface ILoginFormValue extends Record<string, unknown> {
-  login: string;
-  password: string;
-}
+import type { LoginFormValues } from '@/schemas';
 
 export interface INewPasswordFormValue extends Record<string, unknown> {
   login: string;
@@ -24,7 +20,7 @@ export interface ILoginResponse {
   refreshToken: string;
 }
 
-export const login: (value: ILoginFormValue) => Promise<ILoginResponse> = async (value) => {
+export const login: (value: LoginFormValues) => Promise<ILoginResponse> = async (value) => {
   return fetchApi.post(`/api/account/login`, value);
 };
 
