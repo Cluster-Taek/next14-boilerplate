@@ -1,11 +1,10 @@
 /**
  * @see https://nextjs.org/docs/app/api-reference/config/eslint
  */
-
-import { defineConfig, globalIgnores } from 'eslint/config';
 import nextVitals from 'eslint-config-next/core-web-vitals';
 import nextTs from 'eslint-config-next/typescript';
 import prettier from 'eslint-config-prettier';
+import { defineConfig, globalIgnores } from 'eslint/config';
 
 const eslintConfig = defineConfig([
   // Next.js 공식 설정 (React, Hooks, Next.js 규칙 포함)
@@ -57,6 +56,9 @@ const eslintConfig = defineConfig([
         require: 'readonly',
       },
     },
+    rules: {
+      '@typescript-eslint/no-require-imports': 'off',
+    },
   },
 
   // 무시할 파일
@@ -68,6 +70,8 @@ const eslintConfig = defineConfig([
     'styled-system/**',
     '.pnpm-store/**',
     'next-env.d.ts',
+    'commitlint.config.mjs',
+    'cli/**',
   ]),
 ]);
 
