@@ -16,10 +16,12 @@ For more CLI options, see [CLI documentation](./cli/README.md).
 
 ## Features
 
-- [Next.js 14 (App Router)](https://nextjs.org)
+- [Next.js 16 (App Router)](https://nextjs.org)
+- [React 19](https://react.dev)
 - [TypeScript](https://www.typescriptlang.org)
 - [Feature-Sliced Design](https://feature-sliced.design) - Architectural methodology
-- [Panda CSS](https://panda-css.com)
+- [Tailwind CSS v4](https://tailwindcss.com)
+- [Zustand](https://zustand-demo.pmnd.rs) - State management
 - [Auth.js](https://authjs.dev)
 - [JSON Server](https://github.com/typicode/json-server)
 - [Tanstack Query](https://tanstack.com/query/latest)
@@ -35,28 +37,28 @@ First, run the development server:
 
 ```bash
 cp .env.example .env
-yarn install
-yarn prepare
+pnpm install
+pnpm prepare
 ```
 
 ```bash
-yarn dev
+pnpm dev
 ```
 
 (Optional) Run the server to get the data from the json-server:
 
 ```bash
-yarn server
+pnpm server
 ```
 
 | Key                 | Description                          | Example                                                       |
 | ------------------- | ------------------------------------ | ------------------------------------------------------------- |
-| NEXTAUTH_URL        | Service URL (usually domain)         | http://localhost:4000                                         |
+| NEXTAUTH_URL        | Service URL (usually domain)         | http://localhost:3000                                         |
 | NEXTAUTH_SECRET     | Random secret key                    | [random secret in web](https://generate-secret.vercel.app/32) |
-| NEXT_PUBLIC_DOMAIN  | Domain                               | http://localhost:4000                                         |
+| NEXT_PUBLIC_DOMAIN  | Domain                               | http://localhost:3000                                         |
 | NEXT_PUBLIC_API_URL | API URL (json-server url in example) | http://localhost:4001                                         |
 
-Open [http://localhost:4000](http://localhost:4000) with your browser to see the result.
+Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
 
 You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
 
@@ -64,37 +66,34 @@ This project uses [`next/font`](https://nextjs.org/docs/app/building-your-applic
 
 ## Project Structure
 
-Refer to the [Next.js Best Practices](https://nextjs.org/docs/advanced-features/project-structure) for the project structure.
+This project follows the [Feature-Sliced Design](https://feature-sliced.design) methodology. The structure is organized into layers:
 
-## VScode Snippets
+- `app/` - Next.js App Router pages
+- `src/app/` - Application layer (providers, layouts)
+- `src/entities/` - Business entities
+- `src/features/` - User features and interactions
+- `src/shared/` - Reusable shared code
+- `src/widgets/` - Large composite components
 
-#### tsx
+Refer to the [Feature-Sliced Design documentation](https://feature-sliced.design/docs/get-started/overview) for more details on the architecture.
 
-```tsx
-import { sva } from '@/styled-system/css';
-import { Box } from '@/styled-system/jsx';
+## Development Tools
 
-interface ITestProps {
-  children?: React.ReactNode;
-}
+This project includes several development tools:
 
-const Test = ({ children }: ITestProps) => {
-  const testStyle = TestSva();
-  return (
-    <Box className={testStyle.wrapper}>
-      <Box>{children}</Box>
-    </Box>
-  );
-};
+- **ESLint** - Code linting with Next.js and React best practices
+- **Prettier** - Code formatting with import sorting
+- **TypeScript** - Type checking
+- **Husky** - Git hooks for pre-commit checks
+- **lint-staged** - Run linters on staged files
+- **Commitlint** - Conventional commit message linting
+- **Steiger** - FSD architecture linting
 
-export default Test;
+Run checks manually:
 
-const TestSva = sva({
-  slots: ['wrapper'],
-  base: {
-    wrapper: {
-      display: 'block',
-    },
-  },
-});
+```bash
+pnpm lint        # Run ESLint
+pnpm format      # Format code with Prettier
+pnpm type-check  # Run TypeScript type checking
+pnpm fsd         # Check FSD architecture compliance
 ```
