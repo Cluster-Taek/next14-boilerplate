@@ -1,25 +1,9 @@
-import { sva } from '@/styled-system/css';
-import { Box } from '@/styled-system/jsx';
 import { BarLoader } from 'react-spinners';
 
 export const Spinner = () => {
-  const spinnerStyle = SpinnerSva();
   return (
-    <Box className={spinnerStyle.wrapper}>
+    <div className="flex w-full h-screen justify-center items-center">
       <BarLoader color="#000" loading={true} />
-    </Box>
+    </div>
   );
 };
-
-const SpinnerSva = sva({
-  slots: ['wrapper'],
-  base: {
-    wrapper: {
-      display: 'flex',
-      width: 'full',
-      height: '100vh',
-      justifyContent: 'center',
-      alignItems: 'center',
-    },
-  },
-});

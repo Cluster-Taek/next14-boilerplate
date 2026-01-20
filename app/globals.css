@@ -1,1 +1,8 @@
-@layer reset, base, tokens, recipes, utilities;
+@import 'tailwindcss';
+
+@theme {
+  --color-primary-black: #1f1f1f;
+  --color-primary-white: #ffffff;
+  --color-primary-01: #0096aa;
+  --color-primary-02: #007c8c;
+}

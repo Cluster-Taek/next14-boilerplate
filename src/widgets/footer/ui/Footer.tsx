@@ -1,5 +1,3 @@
-import { sva } from '@/styled-system/css';
-import { Box } from '@/styled-system/jsx';
 import Link from 'next/link';
 
 /**
@@ -11,22 +9,19 @@ import Link from 'next/link';
  * - Features, Entities, Shared 조합 가능
  */
 export const Footer = () => {
-  const footerStyle = FooterSva();
   const currentYear = new Date().getFullYear();
 
   return (
-    <Box className={footerStyle.wrapper}>
-      <Box className={footerStyle.container}>
-        <Box className={footerStyle.copyright}>
-          © {currentYear} Next.js Boilerplate. All rights reserved.
-        </Box>
+    <div className="w-full border-t border-gray-200 bg-gray-50 mt-auto">
+      <div className="max-w-[1200px] mx-auto p-6 flex flex-col md:flex-row justify-between items-center gap-4">
+        <div className="text-sm text-gray-600">© {currentYear} Next.js Boilerplate. All rights reserved.</div>
 
-        <Box className={footerStyle.links}>
+        <div className="flex gap-6">
           <Link
             href="https://nextjs.org"
             target="_blank"
             rel="noopener noreferrer"
-            className={footerStyle.link}
+            className="text-sm text-gray-600 transition-colors hover:text-primary-01"
           >
             Next.js
           </Link>
@@ -34,7 +29,7 @@ export const Footer = () => {
             href="https://feature-sliced.design"
             target="_blank"
             rel="noopener noreferrer"
-            className={footerStyle.link}
+            className="text-sm text-gray-600 transition-colors hover:text-primary-01"
           >
             Feature-Sliced Design
           </Link>
@@ -42,51 +37,12 @@ export const Footer = () => {
             href="https://github.com"
             target="_blank"
             rel="noopener noreferrer"
-            className={footerStyle.link}
+            className="text-sm text-gray-600 transition-colors hover:text-primary-01"
           >
             GitHub
           </Link>
-        </Box>
-      </Box>
-    </Box>
+        </div>
+      </div>
+    </div>
   );
 };
-
-const FooterSva = sva({
-  slots: ['wrapper', 'container', 'copyright', 'links', 'link'],
-  base: {
-    wrapper: {
-      width: 'full',
-      borderTop: '1px solid',
-      borderColor: 'gray.200',
-      backgroundColor: 'gray.50',
-      marginTop: 'auto',
-    },
-    container: {
-      maxWidth: '1200px',
-      margin: '0 auto',
-      padding: '6',
-      display: 'flex',
-      flexDirection: { base: 'column', md: 'row' },
-      justifyContent: 'space-between',
-      alignItems: 'center',
-      gap: '4',
-    },
-    copyright: {
-      fontSize: 'sm',
-      color: 'gray.600',
-    },
-    links: {
-      display: 'flex',
-      gap: '6',
-    },
-    link: {
-      fontSize: 'sm',
-      color: 'gray.600',
-      transition: 'color 0.2s',
-      _hover: {
-        color: 'primary.01',
-      },
-    },
-  },
-});

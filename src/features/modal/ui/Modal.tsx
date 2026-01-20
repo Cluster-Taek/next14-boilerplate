@@ -1,18 +1,15 @@
 'use client';
 
-import { MOTION } from '@/shared/config';
-import { useModalStore } from '../model/useModalStore';
-import { sva } from '@/styled-system/css';
-import { Box } from '@/styled-system/jsx';
-import { motion } from 'motion/react';
 import type { ModalComponent } from '../model/types';
+import { useModalStore } from '../model/useModalStore';
+import { MOTION } from '@/shared/config';
+import { motion } from 'motion/react';
 
 interface ModalProps {
   components: Record<string, ModalComponent>;
 }
 
 export const Modal = ({ components }: ModalProps) => {
-  const modalStyle = ModalSva();
   const { openedModalIds, modalPropsMap, closeModal } = useModalStore();
 
   return (
@@ -27,45 +24,20 @@ export const Modal = ({ components }: ModalProps) => {
         }
 
         return (
-          <Box className={modalStyle.wrapper} key={`${modalId}-${index}`}>
-            <Box className={modalStyle.dimmed} onClick={() => closeModal(modalId)} />
-            <motion.div className={modalStyle.modal} {...MOTION.POP}>
+          <div
+            className="fixed left-0 top-0 z-10 flex h-screen w-screen items-center justify-center overflow-hidden"
+            key={`${modalId}-${index}`}
+          >
+            <div
+              className="fixed top-0 left-0 w-screen h-screen overflow-hidden bg-black opacity-48"
+              onClick={() => closeModal(modalId)}
+            />
+            <motion.div className="relative" {...MOTION.POP}>
               <ModalComponent onClose={() => closeModal(modalId)} {...(modalProps || {})} />
             </motion.div>
-          </Box>
+          </div>
         );
       })}
     </>
   );
 };
-
-const ModalSva = sva({
-  slots: ['wrapper', 'dimmed', 'modal'],
-  base: {
-    wrapper: {
-      position: 'fixed',
-      left: 0,
-      top: 0,
-      zIndex: 10,
-      display: 'flex',
-      height: '100dvh',
-      width: '100vw',
-      alignItems: 'center',
-      justifyContent: 'center',
-      overflow: 'hidden',
-    },
-    dimmed: {
-      position: 'fixed',
-      top: 0,
-      left: 0,
-      width: '100dvw',
-      height: '100dvh',
-      overflow: 'hidden',
-      backgroundColor: 'black',
-      opacity: 0.48,
-    },
-    modal: {
-      position: 'relative',
-    },
-  },
-});

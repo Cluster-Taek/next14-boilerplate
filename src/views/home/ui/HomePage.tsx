@@ -1,13 +1,11 @@
 'use client';
 
-import { Button } from '@/shared/ui/button';
 import { useAuth } from '@/features/auth';
-import { sva } from '@/styled-system/css';
+import { Button } from '@/shared/ui/button';
 import { signOut } from 'next-auth/react';
 import Link from 'next/link';
 
 export const HomePage = () => {
-  const homeStyle = HomeSva();
   const { session } = useAuth();
 
   const handleLogout = async () => {
@@ -15,37 +13,12 @@ export const HomePage = () => {
   };
 
   return (
-    <div className={homeStyle.wrapper}>
-      <div className={homeStyle.profile}>Hello {session.user?.name}!</div>
-      <Link className={homeStyle.link} href="/users">
+    <div className="flex w-full flex-col items-center justify-center h-full p-4">
+      <div className="ml-auto text-xl">Hello {session.user?.name}!</div>
+      <Link className="text-primary-01 hover:text-primary-02" href="/users">
         Go to Users
       </Link>
       <Button onClick={handleLogout}>Logout</Button>
     </div>
   );
 };
-
-const HomeSva = sva({
-  slots: ['wrapper', 'profile', 'link'],
-  base: {
-    wrapper: {
-      display: 'flex',
-      width: 'full',
-      flexDirection: 'column',
-      alignItems: 'center',
-      justifyContent: 'center',
-      height: 'full',
-      padding: 4,
-    },
-    profile: {
-      marginLeft: 'auto',
-      fontSize: 'xl',
-    },
-    link: {
-      color: 'primary.01',
-      '&:hover': {
-        color: 'primary.02',
-      },
-    },
-  },
-});

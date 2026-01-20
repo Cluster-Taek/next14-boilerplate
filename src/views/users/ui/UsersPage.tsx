@@ -1,13 +1,10 @@
 'use client';
 
-import { Button } from '@/shared/ui/button';
-import { MODAL, useModalStore } from '@/features/modal';
 import { useUsers } from '@/entities/user';
-import { sva } from '@/styled-system/css';
-import { Box } from '@/styled-system/jsx';
+import { MODAL, useModalStore } from '@/features/modal';
+import { Button } from '@/shared/ui/button';
 
 export const UsersPage = () => {
-  const pageStyle = PageSva();
   const { openModal } = useModalStore();
 
   const { data: users } = useUsers({
@@ -20,42 +17,13 @@ export const UsersPage = () => {
   };
 
   return (
-    <Box className={pageStyle.wrapper}>
-      <Box className={pageStyle.list}>{users?.data.map((user) => <Box key={user.id}>{user.name}</Box>)}</Box>
+    <div className="flex w-full flex-col items-center justify-center h-full">
+      <div className="w-full flex flex-wrap gap-4">
+        {users?.data.map((user) => (
+          <div key={user.id}>{user.name}</div>
+        ))}
+      </div>
       <Button onClick={handleClickCreateButton}>Create</Button>
-    </Box>
+    </div>
   );
 };
-
-const PageSva = sva({
-  slots: ['wrapper', 'list', 'form', 'input', 'error'],
-  base: {
-    wrapper: {
-      display: 'flex',
-      width: 'full',
-      flexDirection: 'column',
-      alignItems: 'center',
-      justifyContent: 'center',
-      height: 'full',
-    },
-    list: {
-      width: 'full',
-      display: 'flex',
-      flexWrap: 'wrap',
-      gap: '4',
-    },
-    form: {
-      width: 'full',
-      marginTop: '4',
-    },
-    input: {
-      width: 'full',
-      padding: '2',
-      marginTop: '2',
-    },
-    error: {
-      color: 'red',
-      marginTop: '2',
-    },
-  },
-});

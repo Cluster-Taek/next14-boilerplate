@@ -1,16 +1,13 @@
 'use client';
 
+import { type LoginFormValues, loginFormSchema } from '@/schemas';
 import { Button } from '@/shared/ui/button';
-import { sva } from '@/styled-system/css';
-import { Box } from '@/styled-system/jsx';
+import { zodResolver } from '@hookform/resolvers/zod';
 import { signIn } from 'next-auth/react';
 import { useSearchParams } from 'next/navigation';
 import { Controller, useForm } from 'react-hook-form';
-import { zodResolver } from '@hookform/resolvers/zod';
-import { loginFormSchema, type LoginFormValues } from '@/schemas';
 
 export const LoginForm = () => {
-  const loginFormStyle = LoginFormSva();
   const searchParams = useSearchParams();
   const {
     handleSubmit: formHandleSubmit,
@@ -29,64 +26,32 @@ export const LoginForm = () => {
   });
 
   return (
-    <Box className={loginFormStyle.wrapper}>
-      <Box className={loginFormStyle.title}>Login</Box>
-      <form className={loginFormStyle.form} onSubmit={handleSubmit}>
+    <div className="flex flex-col items-center rounded-md shadow-md p-4 w-sm mx-auto">
+      <div className="text-2xl font-bold">Login</div>
+      <form className="w-full mt-4" onSubmit={handleSubmit}>
         <Controller
           control={control}
           name="login"
-          render={({ field }) => <input type="text" {...field} className={loginFormStyle.input} placeholder="email" />}
+          render={({ field }) => (
+            <input type="text" {...field} className="w-full my-2 p-2 rounded-md border" placeholder="email" />
+          )}
         />
-        {formState.errors.login && <Box className={loginFormStyle.error}>{formState.errors.login.message}</Box>}
+        {formState.errors.login && <div className="text-red-500">{formState.errors.login.message}</div>}
         <Controller
           control={control}
           name="password"
           render={({ field }) => (
-            <input type="password" {...field} className={loginFormStyle.input} placeholder="password" />
+            <input type="password" {...field} className="w-full my-2 p-2 rounded-md border" placeholder="password" />
           )}
         />
-        {formState.errors.password && <Box className={loginFormStyle.error}>{formState.errors.password.message}</Box>}
+        {formState.errors.password && <div className="text-red-500">{formState.errors.password.message}</div>}
         <Button type="submit">Submit</Button>
       </form>
       {searchParams.get('error') === 'CredentialsSignin' && (
-        <Box>
-          <Box className={loginFormStyle.error}>Invalid email or password</Box>
-        </Box>
+        <div>
+          <div className="text-red-500">Invalid email or password</div>
+        </div>
       )}
-    </Box>
+    </div>
   );
 };
-
-const LoginFormSva = sva({
-  slots: ['wrapper', 'title', 'form', 'input', 'error'],
-  base: {
-    wrapper: {
-      display: 'flex',
-      flexDirection: 'column',
-      alignItems: 'center',
-      borderRadius: 'md',
-      shadow: 'md',
-      padding: '4',
-      width: 'sm',
-      margin: '0 auto',
-    },
-    title: {
-      fontSize: '2xl',
-      fontWeight: 'bold',
-    },
-    form: {
-      width: 'full',
-      marginTop: '4',
-    },
-    input: {
-      width: 'full',
-      marginY: '2',
-      padding: '2',
-      borderRadius: 'md',
-      border: '1',
-    },
-    error: {
-      color: 'red.500',
-    },
-  },
-});
