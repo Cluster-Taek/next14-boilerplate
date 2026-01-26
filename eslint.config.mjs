@@ -4,6 +4,7 @@
 import nextVitals from 'eslint-config-next/core-web-vitals';
 import nextTs from 'eslint-config-next/typescript';
 import prettier from 'eslint-config-prettier';
+import reactCompiler from 'eslint-plugin-react-compiler';
 import { defineConfig, globalIgnores } from 'eslint/config';
 
 const eslintConfig = defineConfig([
@@ -13,6 +14,16 @@ const eslintConfig = defineConfig([
 
   // Prettier와의 충돌 방지
   prettier,
+
+  // React Compiler
+  {
+    plugins: {
+      'react-compiler': reactCompiler,
+    },
+    rules: {
+      'react-compiler/react-compiler': 'error',
+    },
+  },
 
   // 프로젝트별 커스텀 규칙
   {

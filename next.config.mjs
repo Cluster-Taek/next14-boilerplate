@@ -1,5 +1,8 @@
 /** @type {import('next').NextConfig} */
 const nextConfig = {
+  // React Compiler 활성화
+  reactCompiler: true,
+
   // Turbopack 설정
   experimental: {
     // 배럴 imports 자동 최적화
