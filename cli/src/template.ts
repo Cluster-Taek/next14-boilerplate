@@ -55,7 +55,7 @@ export async function createProject(options: CreateProjectOptions): Promise<void
     const downloadSpinner = ora('Downloading template...').start();
 
     try {
-      const emitter = degit('Cluster-Taek/next14-boilerplate', {
+      const emitter = degit('Cluster-Taek/create-next-fsd', {
         cache: false,
         force: true,
         verbose: false,
@@ -135,10 +135,10 @@ export async function createProject(options: CreateProjectOptions): Promise<void
       }
     }
 
-    // Step 7: Run pnpm prepare (Husky + Panda CSS)
+    // Step 7: Run pnpm prepare (Husky setup)
     if (depsInstalled) {
       console.log();
-      console.log(chalk.cyan('Running setup scripts...'));
+      console.log(chalk.cyan('Setting up git hooks...'));
       console.log();
 
       try {
@@ -148,10 +148,10 @@ export async function createProject(options: CreateProjectOptions): Promise<void
         });
 
         console.log();
-        console.log(chalk.green('✓ Setup scripts completed'));
+        console.log(chalk.green('✓ Git hooks configured'));
       } catch (error) {
         console.log();
-        console.log(chalk.red('✖ Failed to run setup scripts'));
+        console.log(chalk.red('✖ Failed to setup git hooks'));
         if (error instanceof Error) {
           console.log(chalk.red('Error details:', error.message));
         }

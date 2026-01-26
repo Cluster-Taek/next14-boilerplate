@@ -7,6 +7,7 @@ The easiest way to create a new project with this boilerplate:
 ```bash
 npx create-next-fsd my-app
 cd my-app
+pnpm mock
 pnpm dev
 ```
 
@@ -48,7 +49,7 @@ pnpm dev
 (Optional) Run the server to get the data from the json-server:
 
 ```bash
-pnpm server
+pnpm mock
 ```
 
 | Key                 | Description                          | Example                                                       |

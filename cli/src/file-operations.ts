@@ -132,9 +132,6 @@ lerna-debug.log*
 # Typescript
 *.tsbuildinfo
 next-env.d.ts
-
-# Panda CSS
-styled-system
 `;
     await fs.writeFile(gitignorePath, gitignoreContent, 'utf-8');
   }

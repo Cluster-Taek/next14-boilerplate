@@ -54,16 +54,18 @@ Success! Created ${projectName} at ${projectPath}
 Next steps:
   1. cd ${projectName}
   2. pnpm dev
+  3. pnpm mock (in a new terminal for mock API server)
 
 Start developing:
   - Edit app/page.tsx to get started
   - Add features in src/features/
   - Create shared components in src/shared/
+  - Mock API server runs on http://localhost:4001
 
 Documentation:
   - Feature-Sliced Design: https://feature-sliced.design
-  - Next.js 14: https://nextjs.org/docs
-  - Panda CSS: https://panda-css.com
+  - Next.js 16: https://nextjs.org/docs
+  - Tailwind CSS: https://tailwindcss.com
 
 Happy coding!
 `;

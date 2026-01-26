@@ -12,11 +12,14 @@ pnpm dev
 
 ## Features
 
-- **Next.js** with App Router
+- **Next.js 16** with App Router
 - **Feature-Sliced Design** architecture
 - **TypeScript** for type safety
-- **Panda CSS** for styling
+- **Tailwind CSS v4** for styling
+- **React Query** for data fetching
+- **Zustand** for state management
 - **NextAuth.js** for authentication
+- **React Compiler** enabled
 - **ESLint & Prettier** configured
 - **Husky** for git hooks
 - **Automated setup** - everything configured out of the box
@@ -60,20 +63,18 @@ npx create-next-fsd my-app --no-git      # Skip git initialization
 
 ```
 my-app/
-├── app/                    # Next.js App Router
 ├── src/
 │   ├── app/               # Application layer (FSD)
+│   ├── entities/          # Entities layer (FSD)
 │   ├── features/          # Features layer (FSD)
 │   ├── shared/            # Shared layer (FSD)
 │   └── widgets/           # Widgets layer (FSD)
 ├── public/                # Static assets
-├── styled-system/         # Generated Panda CSS
 ├── .env                   # Environment variables (with generated secrets)
 ├── .husky/                # Git hooks
-├── panda.config.ts        # Panda CSS configuration
+├── tailwind.config.ts     # Tailwind CSS configuration
 ├── tsconfig.json          # TypeScript configuration
 └── package.json           # Project dependencies
-
 ```
 
 ## After Creation
@@ -93,10 +94,11 @@ pnpm format       # Format code with Prettier
 
 This template follows **Feature-Sliced Design** methodology:
 
-- **app/** - Application initialization and routing
+- **app/** - Application initialization, providers, and routing
+- **entities/** - Business entities and data models
 - **features/** - User-facing features and business logic
 - **widgets/** - Composite UI blocks
-- **shared/** - Reusable utilities and components
+- **shared/** - Reusable utilities, components, and UI primitives
 
 Learn more: [Feature-Sliced Design](https://feature-sliced.design)
 
@@ -126,9 +128,9 @@ pnpm install
 pnpm prepare
 ```
 
-### Styled-system not generated
+### Git hooks not working
 
-Run Panda CSS codegen:
+Make sure Husky is set up:
 
 ```bash
 pnpm prepare

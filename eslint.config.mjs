@@ -78,7 +78,6 @@ const eslintConfig = defineConfig([
     'node_modules/**',
     'out/**',
     'build/**',
-    'styled-system/**',
     '.pnpm-store/**',
     'next-env.d.ts',
     'commitlint.config.mjs',
