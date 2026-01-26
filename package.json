@@ -71,7 +71,7 @@
   },
   "description": "Bolierplate of Next JS",
   "main": "index.js",
-  "repository": "https://github.com/Cluster-Taek/next14-boilerplate",
+  "repository": "https://github.com/Cluster-Taek/create-next-fsd",
   "author": "Cluster-Taek <yst811@naver.com>",
   "license": "MIT",
   "engines": {

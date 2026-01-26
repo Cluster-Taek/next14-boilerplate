@@ -5,6 +5,15 @@
   "type": "module",
   "author": "Cluster-Taek",
   "license": "MIT",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/Cluster-Taek/create-next-fsd",
+    "directory": "cli"
+  },
+  "homepage": "https://github.com/Cluster-Taek/create-next-fsd#readme",
+  "bugs": {
+    "url": "https://github.com/Cluster-Taek/create-next-fsd/issues"
+  },
   "keywords": [
     "nextjs",
     "next",

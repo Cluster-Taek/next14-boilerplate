@@ -137,7 +137,7 @@ pnpm prepare
 ## Support
 
 For issues and feature requests, visit:
-[https://github.com/Cluster-Taek/next14-boilerplate/issues](https://github.com/Cluster-Taek/next14-boilerplate/issues)
+[https://github.com/Cluster-Taek/create-next-fsd/issues](https://github.com/Cluster-Taek/create-next-fsd/issues)
 
 ## License
 
