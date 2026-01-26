@@ -136,6 +136,100 @@ Make sure Husky is set up:
 pnpm prepare
 ```
 
+## Development
+
+### Release Process
+
+This project uses **semantic-release** for automated version management and publishing. Releases are triggered automatically when changes are merged to the `release` branch.
+
+#### Version Bump Rules
+
+Commits following [Conventional Commits](https://www.conventionalcommits.org/) determine version bumps:
+
+- **Major** (1.0.0 → 2.0.0): `BREAKING CHANGE:` in commit body or `feat!:`/`fix!:`
+- **Minor** (1.0.0 → 1.1.0): `feat:` commits
+- **Patch** (1.0.0 → 1.0.1): `fix:`, `perf:`, `revert:` commits
+- **No Release**: `docs:`, `style:`, `refactor:`, `test:`, `build:`, `ci:`, `chore:`
+
+#### Standard Workflow
+
+1. **Develop on main branch** with conventional commits:
+
+   ```bash
+   git commit -m "feat: add new template option"
+   git commit -m "fix: resolve dependency issue"
+   ```
+
+2. **Create PR from main to release** and merge
+
+3. **Automated release process**:
+   - Analyzes commits since last release
+   - Determines version bump (major/minor/patch)
+   - Updates `package.json` version
+   - Generates/updates `CHANGELOG.md`
+   - Builds and publishes to npm
+   - Creates Git tag (e.g., `v1.1.0`)
+   - Creates GitHub Release with notes
+   - Commits changes back to release branch
+
+#### Hotfix Workflow
+
+For urgent production fixes:
+
+1. Create hotfix branch from `release`:
+
+   ```bash
+   git checkout release
+   git checkout -b hotfix/fix-critical-bug
+   ```
+
+2. Make fix with conventional commit:
+
+   ```bash
+   git commit -m "fix: resolve critical installation error"
+   ```
+
+3. Create PR to `release` and merge
+
+4. Automated patch release (1.2.3 → 1.2.4)
+
+#### Manual Testing Before Release
+
+Test locally before merging to release:
+
+```bash
+# In cli directory
+pnpm build
+pnpm link --global
+
+# Test globally
+create-next-fsd test-app
+cd test-app
+pnpm dev
+
+# Cleanup
+pnpm unlink --global create-next-fsd
+```
+
+#### Commit Message Examples
+
+```bash
+# Feature (minor bump)
+git commit -m "feat: add TypeScript strict mode option"
+
+# Bug fix (patch bump)
+git commit -m "fix: correct package.json template generation"
+
+# Breaking change (major bump)
+git commit -m "feat!: change CLI argument structure
+
+BREAKING CHANGE: --no-install flag renamed to --skip-install"
+
+# No release
+git commit -m "docs: update README examples"
+git commit -m "chore: update dependencies"
+```
+
 ## Support
 
 For issues and feature requests, visit:
