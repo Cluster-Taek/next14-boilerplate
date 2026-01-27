@@ -1,19 +1,19 @@
 import { useMutation, useQuery, useQueryClient } from '@tanstack/react-query';
-import { fetchApi } from '@/shared/api';
-import { type IPageable } from '@/shared/model';
-import { type UserCreateFormValues } from './schemas';
-import { type IUser, type IUsersParams } from './types';
+import { type Pageable } from '@/shared/model';
+import { type User, type UsersParams, type UserCreateFormValues } from './schemas';
+import { createUser, fetchUsers } from '../api/userApi';
 
-export const useUsers = (params: IUsersParams) => {
-  return useQuery<IPageable<IUser>>({
+export const useUsers = (params: UsersParams) => {
+  return useQuery<Pageable<User>>({
     queryKey: [`/api/users`, params],
+    queryFn: () => fetchUsers(params),
   });
 };
 
 export const useCreateUserMutation = () => {
   const queryClient = useQueryClient();
   return useMutation({
-    mutationFn: async (data: UserCreateFormValues) => await fetchApi.post(`/api/users`, data),
+    mutationFn: (data: UserCreateFormValues) => createUser(data),
     onSuccess: async () => {
       await queryClient.invalidateQueries({
         queryKey: ['/api/users'],
