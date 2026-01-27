@@ -2,8 +2,7 @@
 
 import { zodResolver } from '@hookform/resolvers/zod';
 import { Controller, useForm } from 'react-hook-form';
-import { useCreateUserMutation } from '@/entities/user';
-import { type UserCreateFormValues, userCreateFormSchema } from '@/schemas';
+import { type UserCreateFormValues, userCreateFormSchema, useCreateUserMutation } from '@/entities/user';
 import { Button } from '@/shared/ui/button';
 
 interface UserCreateFormModalProps {

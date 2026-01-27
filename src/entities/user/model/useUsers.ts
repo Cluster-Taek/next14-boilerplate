@@ -1,7 +1,7 @@
 import { useMutation, useQuery, useQueryClient } from '@tanstack/react-query';
-import { type UserCreateFormValues } from '@/schemas';
 import { fetchApi } from '@/shared/api';
 import { type IPageable } from '@/shared/model';
+import { type UserCreateFormValues } from './schemas';
 import { type IUser, type IUsersParams } from './types';
 
 export const useUsers = (params: IUsersParams) => {
