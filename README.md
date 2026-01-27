@@ -5,7 +5,7 @@ This is a [Next.js](https://nextjs.org) boilerplate project with Feature-Sliced 
 The easiest way to create a new project with this boilerplate:
 
 ```bash
-npx create-next-fsd my-app
+npx create-next-claude-app my-app
 cd my-app
 pnpm mock
 pnpm dev

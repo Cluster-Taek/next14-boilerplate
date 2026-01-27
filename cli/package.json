@@ -1,5 +1,5 @@
 {
-  "name": "create-next-fsd",
+  "name": "create-next-claude-app",
   "version": "1.0.0",
   "description": "CLI tool to scaffold Next.js projects with Feature-Sliced Design architecture",
   "type": "module",
@@ -7,12 +7,12 @@
   "license": "MIT",
   "repository": {
     "type": "git",
-    "url": "https://github.com/Cluster-Taek/create-next-fsd",
+    "url": "https://github.com/Cluster-Taek/create-next-claude-app",
     "directory": "cli"
   },
-  "homepage": "https://github.com/Cluster-Taek/create-next-fsd#readme",
+  "homepage": "https://github.com/Cluster-Taek/create-next-claude-app#readme",
   "bugs": {
-    "url": "https://github.com/Cluster-Taek/create-next-fsd/issues"
+    "url": "https://github.com/Cluster-Taek/create-next-claude-app/issues"
   },
   "keywords": [
     "nextjs",
@@ -25,7 +25,7 @@
     "template"
   ],
   "bin": {
-    "create-next-fsd": "./dist/index.js"
+    "create-next-claude-app": "./dist/index.js"
   },
   "files": [
     "dist",

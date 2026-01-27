@@ -1,11 +1,11 @@
-# create-next-fsd
+# create-next-claude-app
 
 CLI tool to scaffold new Next.js projects with Feature-Sliced Design architecture.
 
 ## Quick Start
 
 ```bash
-npx create-next-fsd my-app
+npx create-next-claude-app my-app
 cd my-app
 pnpm dev
 ```
@@ -29,7 +29,7 @@ pnpm dev
 ### Interactive Mode
 
 ```bash
-npx create-next-fsd
+npx create-next-claude-app
 ```
 
 You'll be prompted for:
@@ -43,14 +43,14 @@ You'll be prompted for:
 ### With Project Name
 
 ```bash
-npx create-next-fsd my-app
+npx create-next-claude-app my-app
 ```
 
 ### CLI Options
 
 ```bash
-npx create-next-fsd my-app --no-install  # Skip dependency installation
-npx create-next-fsd my-app --no-git      # Skip git initialization
+npx create-next-claude-app my-app --no-install  # Skip dependency installation
+npx create-next-claude-app my-app --no-git      # Skip git initialization
 ```
 
 ## Requirements
@@ -203,12 +203,12 @@ pnpm build
 pnpm link --global
 
 # Test globally
-create-next-fsd test-app
+create-next-claude-app test-app
 cd test-app
 pnpm dev
 
 # Cleanup
-pnpm unlink --global create-next-fsd
+pnpm unlink --global create-next-claude-app
 ```
 
 #### Commit Message Examples
@@ -233,7 +233,7 @@ git commit -m "chore: update dependencies"
 ## Support
 
 For issues and feature requests, visit:
-[https://github.com/Cluster-Taek/create-next-fsd/issues](https://github.com/Cluster-Taek/create-next-fsd/issues)
+[https://github.com/Cluster-Taek/create-next-claude-app/issues](https://github.com/Cluster-Taek/create-next-claude-app/issues)
 
 ## License
 

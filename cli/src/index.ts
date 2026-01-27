@@ -16,7 +16,7 @@ const packageJson = await fs.readJson(packageJsonPath);
 const program = new Command();
 
 program
-  .name('create-next-fsd')
+  .name('create-next-claude-app')
   .description('Create a new Next.js project with Feature-Sliced Design architecture')
   .version(packageJson.version, '-v, --version', 'Output the current version')
   .argument('[project-name]', 'Name of the project to create')
@@ -24,7 +24,7 @@ program
   .option('--no-git', 'Skip git initialization')
   .action(async (projectName: string | undefined, options: any) => {
     console.log();
-    console.log(chalk.bold.cyan('create-next-fsd') + chalk.gray(' v' + packageJson.version));
+    console.log(chalk.bold.cyan('create-next-claude-app') + chalk.gray(' v' + packageJson.version));
     console.log();
 
     try {
@@ -42,9 +42,9 @@ program
 program.on('--help', () => {
   console.log();
   console.log('Examples:');
-  console.log('  $ npx create-next-fsd my-app');
-  console.log('  $ npx create-next-fsd my-app --no-install');
-  console.log('  $ npx create-next-fsd my-app --no-git');
+  console.log('  $ npx create-next-claude-app my-app');
+  console.log('  $ npx create-next-claude-app my-app --no-install');
+  console.log('  $ npx create-next-claude-app my-app --no-git');
   console.log();
 });
 
