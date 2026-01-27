@@ -2,6 +2,12 @@
 
 All notable changes to this project will be documented in this file. See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [1.1.0](https://github.com/Cluster-Taek/create-next-claude-app/compare/v1.0.0...v1.1.0) (2026-01-27)
+
+### Features
+
+* change package name ([ab6fd58](https://github.com/Cluster-Taek/create-next-claude-app/commit/ab6fd58870fbf9387dde6ee536904aa929f8e04b))
+
 ## 1.0.0 (2026-01-26)
 
 ### Features
