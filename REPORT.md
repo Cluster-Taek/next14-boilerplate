@@ -26,7 +26,7 @@ Next.js 14 보일러플레이트를 Vercel의 React Best Practices (45개 규칙
 2. 서버 컴포넌트를 사용하지 않음 - 모든 페이지가 `'use client'`
 3. QueryClient를 useState 내부에서 생성 - 메모리 누수 가능성
 
-**HIGH (개선 권장)** 4. 이미지 최적화 없음 (next/image 미사용) 5. Streaming SSR 활용 안 함 (Suspense 경계 없음) 6. 조건부 렌더링에서 `&&` 연산자 사용 (0 렌더링 위험)
+**HIGH (개선 권장)** 4. Streaming SSR 활용 안 함 (Suspense 경계 없음) 5. 조건부 렌더링에서 `&&` 연산자 사용 (0 렌더링 위험)
 
 ---
 
@@ -353,29 +353,6 @@ openModal: (id, props) =>
 )}
 ```
 
-#### 6.2 이미지 최적화 없음
-
-**파일:** 전체 프로젝트
-
-**문제:**
-
-- `next/image` 사용 흔적이 없음
-- 일반 `<img>` 태그 사용 시 최적화 미적용
-
-**권장 사항:**
-
-```typescript
-import Image from 'next/image';
-
-<Image
-  src="/avatar.png"
-  alt="User avatar"
-  width={40}
-  height={40}
-  priority={false} // LCP 이미지는 true
-/>
-```
-
 ---
 
 ## 7️⃣ JavaScript Performance (LOW-MEDIUM)
@@ -440,19 +417,14 @@ import Image from 'next/image';
    - 영향: 메모리 누수
    - 방법: 컴포넌트 레벨 useEffect로 이동
 
-6. ⚠️ **next/image 도입** (선택적)
-   - 파일: 이미지 사용 컴포넌트
-   - 영향: 이미지 로딩 성능
-   - 방법: 기존 `<img>` → `<Image>` 전환
-
 ### P2 - MEDIUM (개선 고려)
 
-7. ✅ **조건부 렌더링 명시적으로 개선**
+6. ✅ **조건부 렌더링 명시적으로 개선**
    - 파일: `src/views/users/ui/UsersPage.tsx:22`
    - 영향: 예상치 못한 "0" 렌더링 방지
    - 방법: 삼항 연산자 사용
 
-8. ⚠️ **Suspense 경계 추가** (선택적, 서버 컴포넌트 도입 후)
+7. ⚠️ **Suspense 경계 추가** (선택적, 서버 컴포넌트 도입 후)
    - 파일: 페이지 컴포넌트
    - 영향: 초기 페인트 속도
    - 방법: 느린 컴포넌트를 Suspense로 감싸기
@@ -472,7 +444,6 @@ import Image from 'next/image';
 
 5. `app/(main)/page.tsx` - 서버 컴포넌트 전환
 6. `app/users/page.tsx` - 서버 컴포넌트 전환
-7. 이미지 사용 컴포넌트들 - next/image 적용
 
 ---
 
