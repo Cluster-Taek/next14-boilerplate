@@ -55,7 +55,7 @@ export async function createProject(options: CreateProjectOptions): Promise<void
     const downloadSpinner = ora('Downloading template...').start();
 
     try {
-      const emitter = degit('Cluster-Taek/create-next-fsd', {
+      const emitter = degit('Cluster-Taek/create-next-claude-app', {
         cache: false,
         force: true,
         verbose: false,
@@ -169,7 +169,7 @@ export async function createProject(options: CreateProjectOptions): Promise<void
         try {
           await execa('git', ['init'], { cwd: projectPath });
           await execa('git', ['add', '.'], { cwd: projectPath });
-          await execa('git', ['commit', '-m', 'Initial commit from create-next-fsd', '--no-verify'], {
+          await execa('git', ['commit', '-m', 'Initial commit from create-next-claude-app', '--no-verify'], {
             cwd: projectPath,
           });
 

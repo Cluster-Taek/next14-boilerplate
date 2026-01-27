@@ -6,7 +6,7 @@ All notable changes to this project will be documented in this file. See [Conven
 
 ### Features
 
-- Initial release of create-next-fsd
+- Initial release of create-next-claude-app
 - Next.js 16 with App Router support
 - Feature-Sliced Design architecture scaffolding
 - TypeScript configuration
