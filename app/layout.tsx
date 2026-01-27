@@ -1,11 +1,11 @@
 import './globals.css';
-import { Modal } from '@/features/modal';
-import { CoreProvider, MODAL_COMPONENTS } from '@/app';
-import { Footer } from '@/widgets/footer';
-import dayjs from 'dayjs';
 import 'dayjs/locale/ko';
-import type { Metadata } from 'next';
+import dayjs from 'dayjs';
+import { type Metadata } from 'next';
 import localFont from 'next/font/local';
+import { CoreProvider, MODAL_COMPONENTS } from '@/app';
+import { Modal } from '@/features/modal';
+import { Footer } from '@/widgets/footer';
 
 dayjs.locale('ko');
 
@@ -27,11 +27,12 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en">
-      <body className={`${pretendard.className} font-sans`} style={{ display: 'flex', flexDirection: 'column', minHeight: '100vh' }}>
+      <body
+        className={`${pretendard.className} font-sans`}
+        style={{ display: 'flex', flexDirection: 'column', minHeight: '100vh' }}
+      >
         <CoreProvider>
-          <main style={{ flex: 1 }}>
-            {children}
-          </main>
+          <main style={{ flex: 1 }}>{children}</main>
           <Footer />
           <Modal components={MODAL_COMPONENTS} />
         </CoreProvider>

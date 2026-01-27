@@ -1,8 +1,8 @@
-import { tokenRefresh } from '@/entities/account';
 import dayjs from 'dayjs';
 import { jwtDecode } from 'jwt-decode';
 import { type NextAuthOptions, type User } from 'next-auth';
 import CredentialsProvider, { type CredentialsConfig } from 'next-auth/providers/credentials';
+import { tokenRefresh } from '@/entities/account';
 
 const credentialsProviderOption: CredentialsConfig = {
   type: 'credentials',

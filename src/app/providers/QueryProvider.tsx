@@ -1,10 +1,10 @@
 'use client';
 
-import { fetchApi } from '@/shared/api';
-import { getClearObject } from '@/shared/lib/utils';
 import { QueryClient, QueryClientProvider, keepPreviousData } from '@tanstack/react-query';
 import { ReactQueryDevtools } from '@tanstack/react-query-devtools';
 import { useState } from 'react';
+import { fetchApi } from '@/shared/api';
+import { getClearObject } from '@/shared/lib/utils';
 
 export const QueryProvider = ({ children }: { children: React.ReactNode }) => {
   const fetcher = async (url: string, params?: Record<string, unknown>) => {
@@ -29,8 +29,8 @@ export const QueryProvider = ({ children }: { children: React.ReactNode }) => {
 
   return (
     <QueryClientProvider client={queryClient}>
-      <ReactQueryDevtools />
       {children}
+      <ReactQueryDevtools />
     </QueryClientProvider>
   );
 };

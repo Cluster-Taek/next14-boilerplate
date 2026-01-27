@@ -1,11 +1,12 @@
 /**
  * @see https://nextjs.org/docs/app/api-reference/config/eslint
  */
+import { defineConfig, globalIgnores } from 'eslint/config';
 import nextVitals from 'eslint-config-next/core-web-vitals';
 import nextTs from 'eslint-config-next/typescript';
 import prettier from 'eslint-config-prettier';
+import importPlugin from 'eslint-plugin-import';
 import reactCompiler from 'eslint-plugin-react-compiler';
-import { defineConfig, globalIgnores } from 'eslint/config';
 
 const eslintConfig = defineConfig([
   // Next.js 공식 설정 (React, Hooks, Next.js 규칙 포함)
@@ -22,6 +23,68 @@ const eslintConfig = defineConfig([
     },
     rules: {
       'react-compiler/react-compiler': 'error',
+    },
+  },
+
+  // Import Plugin 설정
+  {
+    files: ['**/*.ts', '**/*.tsx', '**/*.js', '**/*.jsx', '**/*.mjs'],
+    plugins: {
+      import: importPlugin,
+    },
+    settings: {
+      'import/resolver': {
+        typescript: {
+          alwaysTryTypes: true,
+          project: './tsconfig.json',
+        },
+        node: {
+          extensions: ['.ts', '.tsx', '.js', '.jsx', '.mjs'],
+        },
+      },
+      'import/parsers': {
+        '@typescript-eslint/parser': ['.ts', '.tsx'],
+      },
+    },
+    rules: {
+      // Import 분석/정확성
+      'import/no-unresolved': 'error',
+      'import/named': 'off', // TypeScript가 체크함
+      'import/default': 'error',
+      'import/export': 'error',
+
+      // Import 경고
+      'import/no-named-as-default': 'warn',
+      'import/no-named-as-default-member': 'warn',
+      'import/no-duplicates': 'warn',
+
+      // Import 순서
+      'import/order': [
+        'warn',
+        {
+          groups: ['builtin', 'external', 'internal', ['parent', 'sibling', 'index'], 'type'],
+          pathGroups: [
+            {
+              pattern: '@/**',
+              group: 'internal',
+              position: 'before',
+            },
+          ],
+          pathGroupsExcludedImportTypes: ['builtin'],
+          'newlines-between': 'never',
+          alphabetize: {
+            order: 'asc',
+            caseInsensitive: true,
+          },
+        },
+      ],
+      'import/newline-after-import': 'warn',
+
+      // TypeScript 관련
+      'import/consistent-type-specifier-style': ['warn', 'prefer-inline'],
+
+      // Next.js 호환성
+      'import/no-default-export': 'off',
     },
   },
 
@@ -54,21 +117,6 @@ const eslintConfig = defineConfig([
       ],
       'prefer-const': 'warn',
       'no-var': 'error',
-    },
-  },
-
-  // CommonJS 파일 설정
-  {
-    files: ['**/*.cjs'],
-    languageOptions: {
-      sourceType: 'commonjs',
-      globals: {
-        module: 'readonly',
-        require: 'readonly',
-      },
-    },
-    rules: {
-      '@typescript-eslint/no-require-imports': 'off',
     },
   },
 

@@ -1,10 +1,10 @@
 'use client';
 
+import { zodResolver } from '@hookform/resolvers/zod';
+import { Controller, useForm } from 'react-hook-form';
 import { useCreateUserMutation } from '@/entities/user';
 import { type UserCreateFormValues, userCreateFormSchema } from '@/schemas';
 import { Button } from '@/shared/ui/button';
-import { zodResolver } from '@hookform/resolvers/zod';
-import { Controller, useForm } from 'react-hook-form';
 
 interface UserCreateFormModalProps {
   onClose: () => void;

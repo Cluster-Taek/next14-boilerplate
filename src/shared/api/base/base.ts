@@ -1,7 +1,7 @@
 import axios, { type AxiosError } from 'axios';
-import { getSession, signOut } from 'next-auth/react';
 import { redirect } from 'next/navigation';
-import type { IApiError } from '@/shared/model';
+import { getSession, signOut } from 'next-auth/react';
+import { type IApiError } from '@/shared/model';
 
 export type Body = Record<string, unknown> | Record<string, unknown>[];
 

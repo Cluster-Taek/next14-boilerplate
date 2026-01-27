@@ -1,9 +1,9 @@
 'use client';
 
+import Link from 'next/link';
+import { signOut } from 'next-auth/react';
 import { useAuth } from '@/features/auth';
 import { Button } from '@/shared/ui/button';
-import { signOut } from 'next-auth/react';
-import Link from 'next/link';
 
 export const HomePage = () => {
   const { session } = useAuth();
