@@ -32,6 +32,17 @@ const getAuthHeaders = async (): Promise<Record<string, string>> => {
   return authToken ? { Authorization: `Bearer ${authToken}` } : {};
 };
 
+/**
+ * /api/* 경로를 실제 API URL로 변환
+ */
+const resolveApiUrl = (url: string): string => {
+  if (url.startsWith('/api/') && !url.startsWith('/api/auth')) {
+    const apiPath = url.replace('/api', '');
+    return `${process.env.NEXT_PUBLIC_API_URL}${apiPath}`;
+  }
+  return url;
+};
+
 const buildUrl = (url: string, params?: Record<string, unknown>): string => {
   if (!params || Object.keys(params).length === 0) return url;
 
@@ -56,7 +67,8 @@ const buildUrl = (url: string, params?: Record<string, unknown>): string => {
 const request = async <T = object>(method: string, url: string, body?: Body, options?: RequestInit): Promise<T> => {
   const isServer = typeof window === 'undefined';
   const isGet = method === 'GET';
-  const requestUrl = isGet ? buildUrl(url, body as Record<string, unknown>) : url;
+  const resolvedUrl = resolveApiUrl(url);
+  const requestUrl = isGet ? buildUrl(resolvedUrl, body as Record<string, unknown>) : resolvedUrl;
   const authHeaders = await getAuthHeaders();
 
   const response = await fetch(requestUrl, {

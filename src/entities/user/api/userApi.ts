@@ -1,13 +1,13 @@
 import { fetchApi } from '@/shared/api';
-import { type Pageable, pageableSchema } from '@/shared/model';
 import { type User, type UsersParams, type UserCreateFormValues, userSchema } from '../model/schemas';
 
 /**
  * 사용자 목록 조회
  */
-export const fetchUsers = async (params: UsersParams): Promise<Pageable<User>> => {
-  const response = await fetchApi.get(`/api/users`, params);
-  return pageableSchema(userSchema).parse(response);
+export const fetchUsers = async (params: UsersParams): Promise<User[]> => {
+  const response = await fetchApi.get<User[]>(`/api/users`, params);
+  // return pageableSchema(userSchema).parse(response);
+  return response;
 };
 
 /**

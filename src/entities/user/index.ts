@@ -6,4 +6,4 @@ export { userSchema, usersParamsSchema, userCreateFormSchema } from './model/sch
 export type { User, UsersParams, UserCreateFormValues } from './model/schemas';
 
 // Model - Hooks
-export { useUsers, useCreateUserMutation } from './model/useUsers';
+export { usersQueryOptions, useSuspenseUsers, useCreateUserMutation } from './model/useUsers';
