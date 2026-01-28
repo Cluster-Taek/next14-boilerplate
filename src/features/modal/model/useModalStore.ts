@@ -30,9 +30,7 @@ export const useModalStore = create<ModalState>((set) => ({
   closeModal: (id) =>
     set((state) => ({
       openedModalIds: state.openedModalIds.filter((modalId) => modalId !== id),
-      modalPropsMap: Object.fromEntries(
-        Object.entries(state.modalPropsMap).filter(([key]) => key !== id)
-      ),
+      modalPropsMap: Object.fromEntries(Object.entries(state.modalPropsMap).filter(([key]) => key !== id)),
     })),
 
   closeAllModals: () =>
@@ -41,15 +39,3 @@ export const useModalStore = create<ModalState>((set) => ({
       modalPropsMap: {},
     }),
 }));
-
-// body overflow 관리를 위한 effect hook (클라이언트 컴포넌트에서 사용)
-if (typeof window !== 'undefined') {
-  useModalStore.subscribe((state) => {
-    document.body.style.overflow = state.openedModalIds.length > 0 ? 'hidden' : 'auto';
-  });
-
-  // 라우트 변경 시 모든 모달 닫기
-  window.addEventListener('popstate', () => {
-    useModalStore.getState().closeAllModals();
-  });
-}

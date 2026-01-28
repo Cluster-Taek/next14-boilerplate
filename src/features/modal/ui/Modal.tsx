@@ -1,6 +1,7 @@
 'use client';
 
 import { motion } from 'motion/react';
+import { useEffect } from 'react';
 import { MOTION } from '@/shared/config';
 import { type ModalComponent } from '../model/types';
 import { useModalStore } from '../model/useModalStore';
@@ -11,6 +12,25 @@ interface ModalProps {
 
 export const Modal = ({ components }: ModalProps) => {
   const { openedModalIds, modalPropsMap, closeModal } = useModalStore();
+
+  // body overflow 관리 및 popstate 이벤트 리스너
+  useEffect(() => {
+    const unsubscribe = useModalStore.subscribe((state) => {
+      document.body.style.overflow = state.openedModalIds.length > 0 ? 'hidden' : 'auto';
+    });
+
+    const handlePopState = () => {
+      useModalStore.getState().closeAllModals();
+    };
+
+    window.addEventListener('popstate', handlePopState);
+
+    return () => {
+      unsubscribe();
+      window.removeEventListener('popstate', handlePopState);
+      document.body.style.overflow = 'auto';
+    };
+  }, []);
 
   return (
     <>
