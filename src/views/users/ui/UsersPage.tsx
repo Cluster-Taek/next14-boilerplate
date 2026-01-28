@@ -1,29 +1,23 @@
-'use client';
+import { dehydrate, HydrationBoundary } from '@tanstack/react-query';
+import { usersQueryOptions } from '@/entities/user';
+import { getQueryClient } from '@/shared/api';
+import { verifySession } from '@/shared/lib/auth';
+import { CreateUserButton } from './CreateUserButton';
+import { UsersList } from './UsersList';
 
-import { useUsers } from '@/entities/user';
-import { MODAL, useModalStore } from '@/features/modal';
-import { Button } from '@/shared/ui/button';
+export async function UsersPage() {
+  await verifySession();
 
-export const UsersPage = () => {
-  const { openModal } = useModalStore();
+  const queryClient = getQueryClient();
 
-  const { data: users } = useUsers({
-    _page: 1,
-    _per_page: 10,
-  });
-
-  const handleClickCreateButton = () => {
-    openModal(MODAL.USER_CREATE);
-  };
+  void queryClient.prefetchQuery(usersQueryOptions({ _page: 1, _per_page: 10 }));
 
   return (
-    <div className="flex w-full flex-col items-center justify-center h-full">
-      <div className="w-full flex flex-wrap gap-4">
-        {users?.data.map((user) => (
-          <div key={user.id}>{user.name}</div>
-        ))}
+    <HydrationBoundary state={dehydrate(queryClient)}>
+      <div className="flex w-full flex-col items-center justify-center h-full">
+        <UsersList />
+        <CreateUserButton />
       </div>
-      <Button onClick={handleClickCreateButton}>Create</Button>
-    </div>
+    </HydrationBoundary>
   );
-};
+}

@@ -1,11 +1,12 @@
 import { fetchApi } from '@/shared/api';
-import type { LoginFormValues } from '@/schemas';
-import type { ILoginResponse } from '../model/types';
+import { type LoginFormValues, type LoginResponse, loginResponseSchema } from '../model/schemas';
 
-export const login: (value: LoginFormValues) => Promise<ILoginResponse> = async (value) => {
-  return fetchApi.post(`/api/account/login`, value);
+export const login: (value: LoginFormValues) => Promise<LoginResponse> = async (value) => {
+  const response = await fetchApi.post(`/api/account/login`, value);
+  return loginResponseSchema.parse(response);
 };
 
-export const tokenRefresh: (refreshToken: string) => Promise<ILoginResponse> = async (refreshToken) => {
-  return fetchApi.post(`/api/account/refresh-token`, { refreshToken });
+export const tokenRefresh: (refreshToken: string) => Promise<LoginResponse> = async (refreshToken) => {
+  const response = await fetchApi.post(`/api/account/refresh-token`, { refreshToken });
+  return loginResponseSchema.parse(response);
 };

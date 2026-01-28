@@ -1,9 +1,9 @@
 'use client';
 
-import type { ModalComponent } from '../model/types';
-import { useModalStore } from '../model/useModalStore';
-import { MOTION } from '@/shared/config';
 import { motion } from 'motion/react';
+import { MOTION } from '@/shared/config';
+import { type ModalComponent } from '../model/types';
+import { useModalStore } from '../model/useModalStore';
 
 interface ModalProps {
   components: Record<string, ModalComponent>;

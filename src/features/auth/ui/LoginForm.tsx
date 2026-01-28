@@ -1,11 +1,11 @@
 'use client';
 
-import { type LoginFormValues, loginFormSchema } from '@/schemas';
-import { Button } from '@/shared/ui/button';
 import { zodResolver } from '@hookform/resolvers/zod';
-import { signIn } from 'next-auth/react';
 import { useSearchParams } from 'next/navigation';
+import { signIn } from 'next-auth/react';
 import { Controller, useForm } from 'react-hook-form';
+import { type LoginFormValues, loginFormSchema } from '@/entities/account';
+import { Button } from '@/shared/ui/button';
 
 export const LoginForm = () => {
   const searchParams = useSearchParams();

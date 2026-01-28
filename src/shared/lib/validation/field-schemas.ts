@@ -11,9 +11,7 @@ export const emailSchema = z
   .min(1, VALIDATION_MESSAGES.required('이메일'))
   .regex(REGEX.EMAIL, VALIDATION_MESSAGES.email.invalid);
 
-export const passwordSchema = z
-  .string()
-  .min(1, VALIDATION_MESSAGES.required('비밀번호'));
+export const passwordSchema = z.string().min(1, VALIDATION_MESSAGES.required('비밀번호'));
 
 export const strictPasswordSchema = z
   .string()

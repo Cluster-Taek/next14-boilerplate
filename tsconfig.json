@@ -19,7 +19,7 @@
     ],
     "paths": {
       "@/*": ["./src/*"],
-      "@/common/*": ["./app/common/*"]
+      "@app/*": ["./app/*"]
     },
     "target": "ES2017"
   },
